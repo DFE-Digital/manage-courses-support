@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801082005) do
+ActiveRecord::Schema.define(version: 20180801085754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,26 @@ ActiveRecord::Schema.define(version: 20180801082005) do
     t.datetime "first_login_date_utc"
     t.datetime "last_login_date_utc"
     t.datetime "welcome_email_date_utc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ucas_institution", force: :cascade do |t|
+    t.string "inst_name"
+    t.string "inst_big"
+    t.string "inst_full"
+    t.string "addr1"
+    t.string "addr2"
+    t.string "addr3"
+    t.string "addr4"
+    t.string "postcode"
+    t.string "scitt"
+    t.string "accrediting_provider"
+    t.string "contact_name"
+    t.string "year_code"
+    t.string "inst_code"
+    t.string "inst_type"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
