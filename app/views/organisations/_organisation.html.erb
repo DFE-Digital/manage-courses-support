@@ -1,0 +1,5 @@
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell"><%= organisation.name %></td>
+  <td class="govuk-table__cell"><%= organisation.users.map {|u| "#{u.first_name} #{u.last_name} <#{u.email}>" }.join(", ") %></td>
+  <td class="govuk-table__cell"><%= organisation.institutions.map {|institution| "#{institution.inst_full} [#{institution.inst_code}]" }.join(", ") %></td>
+</tr>
