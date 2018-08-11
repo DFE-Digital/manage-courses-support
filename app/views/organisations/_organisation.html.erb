@@ -1,5 +1,27 @@
 <tr class="govuk-table__row">
   <td class="govuk-table__cell"><%= organisation.name %></td>
-  <td class="govuk-table__cell"><%= organisation.users.map {|u| "#{u.first_name} #{u.last_name} <#{u.email}>" }.join(", ") %></td>
-  <td class="govuk-table__cell"><%= organisation.institutions.map {|institution| "#{institution.inst_full} [#{institution.inst_code}]" }.join(", ") %></td>
+  <td class="govuk-table__cell">
+    <% users = organisation.users %>
+    <% if users.size == 1 %>
+      <%= users.first.first_name %> <%= users.first.last_name %> &lt;<%= users.first.email %>&gt;
+    <% else %>
+      <ul class="govuk-list govuk-list--bullet">
+        <% users.map do |u| %>
+          <li><%= u.first_name %> <%= u.last_name %> &lt;<%= u.email %>&gt;</li>
+        <% end %>
+      </ul>
+    <% end %>
+  </td>
+  <td class="govuk-table__cell">
+    <% institutions = organisation.institutions %>
+    <% if institutions.size == 1 %>
+      <%= institutions.first.inst_full %> [<%= institutions.first.inst_code %>]
+    <% else %>
+      <ul class="govuk-list govuk-list--bullet">
+        <% institutions.map do |i| %>
+          <li><%= i.inst_full %> [<%= i.inst_code %>]</li>
+        <% end %>
+      </ul>
+    <% end %>
+  </td>
 </tr>
