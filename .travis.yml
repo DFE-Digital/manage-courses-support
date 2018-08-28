@@ -1,0 +1,8 @@
+language: ruby
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+before_script:
+  - psql -c "CREATE USER publish_courses_support WITH PASSWORD 'password1' CREATEDB;" -U postgres
+  - psql -c "CREATE DATABASE publish_courses_support_test OWNER publish_courses_support;" -U postgres
