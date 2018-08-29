@@ -1,4 +1,6 @@
 language: ruby
+git:
+  depth: false
 services:
   - postgresql
 addons:
@@ -12,10 +14,10 @@ env:
     secure: HXIF7aTVICQr2vZBEwwzRs6DJWNmu3lAcn882codaMIA9C+GtY7VfYRNzF1UbGV3qtDpd1thtOcy5fF9l+/I68ulBtopmIdvy6zSbCO5cV/czFvDGz3Td+giJl+cMcZbFjE+uKoPfldKW5UqAVYBHmg6wV+RzsceNSTgpyEHdo3jjwk4iSob3J/qSHM3/C9nbF7CXzpidrGntbUi1uvmeq5Ghy9uU8Hgu7aZHhQpQA2PAO4A7gBE6+KOa1jV/CMqncxXMIIExpxDORmwkBDdg4o2EdmLJARArekgVo+FjP6iA4r4EbEEJb6DcRTNjn8RCl9R57IKVxOtlJz1Ie+E3vhZnN+cjCo12ougAxstK8/uj04+cvq5nWtnZzscyhdBvsr5zSijgYMUc1370ByBN2g9QH/V4AVICwIQW6IXDibEeKsev9EM3b8XzV7DJjhkeqs7E9fp+dyC3oWph6uuhXuHl8jLpmtfiOMCH0iQXmU/NNQIt4B3AiO1iRw4zZzNkcyllun2BKRuqwU8l6g1dXj6OjQQbah0KoKrOeCCYuzHChndaUiubHSN4ycw14RaRE1ri+AGTI5d90jHfxIABu6JK6BjAwDWJRVz9P5MdqXBJ8AQjsUZhzFhJjRtCPigB8DGMoIehD3titYjCLlnDHKY2mzAWs5hZ5QRc80jiYo=
 deploy:
 - provider: script
-  script: git fetch --unshallow && git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-dev-manage-courses-support-app.scm.azurewebsites.net:443/bat-dev-manage-courses-support-app.git HEAD:refs/heads/master
+  script: git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-dev-manage-courses-support-app.scm.azurewebsites.net:443/bat-dev-manage-courses-support-app.git HEAD:refs/heads/master
   on: master
 - provider: script
-  script: git fetch --unshallow && git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-staging-manage-courses-support-app.scm.azurewebsites.net:443/bat-staging-manage-courses-support-app.git HEAD:refs/heads/master
+  script: git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-staging-manage-courses-support-app.scm.azurewebsites.net:443/bat-staging-manage-courses-support-app.git HEAD:refs/heads/master
   on: staging
 - provider: script
-  script: git fetch --unshallow && git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-prod-manage-courses-support-app.scm.azurewebsites.net:443/bat-prod-manage-courses-support-app.git HEAD:refs/heads/master
+  script: git push https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-prod-manage-courses-support-app.scm.azurewebsites.net:443/bat-prod-manage-courses-support-app.git HEAD:refs/heads/master
