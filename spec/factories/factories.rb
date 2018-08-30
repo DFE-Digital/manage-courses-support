@@ -23,4 +23,14 @@ FactoryBot.define do
       status { 0 }
     end
   end
+
+  factory :organisation do
+    name  { 'ACME SCITT' }
+    org_id { rand(1000000).to_s }
+  end
+
+  factory :institution do
+    inst_full { 'ACME SCITT' }
+    inst_code { 'A01' }
+  end
 end
