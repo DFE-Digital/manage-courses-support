@@ -3,11 +3,11 @@
   <td class="govuk-table__cell">
     <% users = organisation.users %>
     <% if users.size == 1 %>
-      <%= users.first.first_name %> <%= users.first.last_name %> &lt;<%= users.first.email %>&gt;
+      <%= user_details(users.first) %>
     <% else %>
       <ul class="govuk-list govuk-list--bullet">
         <% users.map do |u| %>
-          <li><%= u.first_name %> <%= u.last_name %> &lt;<%= u.email %>&gt;</li>
+          <li><%= user_details(u) %></li>
         <% end %>
       </ul>
     <% end %>
@@ -15,11 +15,11 @@
   <td class="govuk-table__cell">
     <% institutions = organisation.institutions %>
     <% if institutions.size == 1 %>
-      <%= institutions.first.inst_full %> [<%= institutions.first.inst_code %>]
+      <%= institution_details(institutions.first) %>
     <% else %>
       <ul class="govuk-list govuk-list--bullet">
         <% institutions.map do |i| %>
-          <li><%= i.inst_full %> [<%= i.inst_code %>]</li>
+          <li><%= institution_details(i) %></li>
         <% end %>
       </ul>
     <% end %>
