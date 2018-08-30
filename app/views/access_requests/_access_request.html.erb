@@ -1,0 +1,10 @@
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell"><%= access_request.id %></td>
+  <td class="govuk-table__cell"><%= access_request.request_date_utc&.to_s(:long) %></td>
+  <td class="govuk-table__cell">
+    <%= access_request.requester.first_name %> <%= access_request.requester.last_name %> &lt;<%= access_request.requester.email %>&gt;
+  </td>
+  <td class="govuk-table__cell">
+    <%= access_request.first_name %> <%= access_request.last_name %> &lt;<%= access_request.email_address %>&gt;
+  </td>
+</tr>
