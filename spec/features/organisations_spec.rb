@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe "Organisations", type: :feature do
+RSpec.describe "Organisations index", type: :feature do
   include_context 'when authenticated'
 
-  it "Index lists all organisations with their associated users and UCAS institutions" do
+  it "lists all organisations with their associated users and UCAS institutions" do
     FactoryBot.create(:organisation,
       name: "Stellar Alliance / Stellar SCITT",
       org_id: '12345',

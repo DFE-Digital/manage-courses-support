@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe "Access requests", type: :feature do
+RSpec.describe "Access requests index", type: :feature do
   include_context 'when authenticated'
 
-  it "Index contains only unapproved requests" do
+  it "contains only unapproved requests" do
     FactoryBot.create(:access_request, :unapproved,
       first_name: "Jane",
       last_name: "Smith")
