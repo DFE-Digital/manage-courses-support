@@ -6,14 +6,10 @@ default: &default
 development:
   <<: *default
   database: publish_courses_support_development
-  username: publish_courses_support
-  password: password1
 
 test:
   <<: *default
   database: publish_courses_support_test
-  username: publish_courses_support
-  password: password1
 
 production:
   <<: *default
