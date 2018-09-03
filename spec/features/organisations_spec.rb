@@ -58,4 +58,22 @@ RSpec.describe "Organisations index", type: :feature do
       expect(page).to have_text("University of Duncree [D07]")
     end
   end
+
+  it "filters out internal DfE admin users who may be added to the org" do
+    FactoryBot.create(:organisation,
+      name: "University of Duncree",
+      org_id: '67890',
+      users: [
+        FactoryBot.create(:user,
+          email: 'johnny.admin@education.gov.uk',
+          first_name: 'Johnny',
+          last_name: 'Admin')
+      ])
+
+    visit "/organisations"
+
+    within "#organisation67890" do
+      expect(page).not_to have_text("Johnny Admin")
+    end
+  end
 end
