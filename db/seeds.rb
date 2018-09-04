@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+admin_user = User.create!(
+  first_name: 'Super',
+  last_name: 'Admin',
+  email: 'super.admin@education.gov.uk',
+)
+
 Organisation.create!(
   name: 'Acme',
   org_id: '12345',
@@ -15,6 +21,7 @@ Organisation.create!(
   ],
   users: [
     User.create!(first_name: 'Jane', last_name: 'Able', email: 'jable@acme-scitt.org'),
+    admin_user,
   ],
 )
 
@@ -28,6 +35,7 @@ Organisation.create!(
     User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
     User.create!(first_name: 'Ben', last_name: 'Dobbs', email: 'bdobbs@big-uni.ac.uk'),
     User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
+    admin_user,
   ],
 )
 
