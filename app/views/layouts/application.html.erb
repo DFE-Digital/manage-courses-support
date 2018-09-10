@@ -55,11 +55,22 @@
             </span>
           </a>
         </div>
-          <div class="govuk-header__content">
-
+        <div class="govuk-header__content">
           <a href="#" class="govuk-header__link govuk-header__link--service-name">
             Support teacher training publishers
           </a>
+
+          <button role="button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+          <nav>
+            <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
+              <li class="govuk-header__navigation-item <%= 'govuk-header__navigation-item--active' if current_page?(access_requests_path) %>">
+                <%= link_to "Access requests", access_requests_path, class: "govuk-header__link" %>
+              </li>
+              <li class="govuk-header__navigation-item <%= 'govuk-header__navigation-item--active' if current_page?(organisations_path) %>">
+                <%= link_to "Organisations", organisations_path, class: "govuk-header__link" %>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </header>
