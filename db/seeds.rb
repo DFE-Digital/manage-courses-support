@@ -12,7 +12,7 @@ admin_user = User.create!(
   email: 'super.admin@education.gov.uk',
 )
 
-Organisation.create!(
+acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
   institutions: [
@@ -25,7 +25,12 @@ Organisation.create!(
   ],
 )
 
-Organisation.create!(
+NctlOrganisation.create!(
+  organisation: acme,
+  nctl_id: '123AAA',
+)
+
+big_uni = Organisation.create!(
   name: 'Big Uni',
   org_id: '67890',
   institutions: [
@@ -37,6 +42,11 @@ Organisation.create!(
     User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
     admin_user,
   ],
+)
+
+NctlOrganisation.create!(
+  organisation: big_uni,
+  nctl_id: '678BBB',
 )
 
 AccessRequest.create!(
