@@ -25,6 +25,21 @@ acme = Organisation.create!(
   ],
 )
 
+UcasCourse.create!(
+  crse_code: '3X1A',
+  institution: Institution.find_by(inst_code: 'A01'),
+)
+
+UcasCourse.create!(
+  crse_code: '3X1B',
+  institution: Institution.find_by(inst_code: 'A01'),
+)
+
+UcasCourse.create!(
+  crse_code: '5W2A',
+  institution: Institution.find_by(inst_code: 'A02'),
+)
+
 NctlOrganisation.create!(
   organisation: acme,
   nctl_id: '123AAA',
@@ -42,6 +57,11 @@ big_uni = Organisation.create!(
     User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
     admin_user,
   ],
+)
+
+UcasCourse.create!(
+  crse_code: '9A5Y',
+  institution: Institution.find_by(inst_code: 'B01'),
 )
 
 NctlOrganisation.create!(
