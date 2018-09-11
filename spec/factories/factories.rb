@@ -3,6 +3,7 @@ FactoryBot.define do
     first_name { "Jane" }
     last_name  { "Smoth" }
     email { "#{first_name}.#{last_name}@acme-scitt.org".downcase }
+    welcome_email_date_utc { rand(100).days.ago }
   end
 
   factory :access_request do
