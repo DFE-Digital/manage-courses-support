@@ -12,4 +12,7 @@ class Institution < ApplicationRecord
 
   has_many :institution_enrichments,
     foreign_key: :inst_code
+
+  has_many :course_enrichments,
+    foreign_key: :inst_code
 end

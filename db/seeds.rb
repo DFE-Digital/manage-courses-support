@@ -55,6 +55,16 @@ InstitutionEnrichment.create!(
   status: :draft,
 )
 
+CourseEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :draft,
+)
+
+CourseEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :published,
+)
+
 NctlOrganisation.create!(
   organisation: acme,
   nctl_id: '123AAA',
