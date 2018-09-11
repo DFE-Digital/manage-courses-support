@@ -55,7 +55,10 @@ RSpec.describe "Organisations index", type: :feature do
 
     within "#organisation67890" do
       expect(page).to have_text("James Brady <jbrady@duncree.ac.uk>")
-      expect(page).to have_text("University of Duncree [D07]")
+      expect(page).to have_link(
+        "University of Duncree [D07]",
+        href: "https://publish-teacher-training-courses.education.gov.uk/organisation/d07"
+      )
     end
   end
 
