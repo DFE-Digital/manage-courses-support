@@ -15,7 +15,8 @@ RSpec.describe "Organisations index", type: :feature do
         FactoryBot.create(:user,
           email: 'bsmith@stellar.org',
           first_name: 'Betty',
-          last_name: 'Smith'),
+          last_name: 'Smith',
+          sign_in_user_id: 'a-uuid'),
       ],
       institutions: [
         FactoryBot.create(:institution,
@@ -45,7 +46,10 @@ RSpec.describe "Organisations index", type: :feature do
 
     within "#organisation12345" do
       expect(page).to have_text("Alice Watson <awatson@stellar.org>")
-      expect(page).to have_text("Betty Smith <bsmith@stellar.org>")
+      expect(page).to have_link(
+        "Betty Smith <bsmith@stellar.org>",
+        href: "https://support.signin.education.gov.uk/users/a-uuid/audit"
+      )
       expect(page).to have_text("Stellar Alliance [S01]")
       expect(page).to have_text("Stellar SCITT [S02]")
 

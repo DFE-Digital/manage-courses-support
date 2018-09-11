@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180801124917) do
     t.string "email"
     t.string "first_name"
     t.string "last_name"
+    t.string "sign_in_user_id"
     t.datetime "first_login_date_utc"
     t.datetime "last_login_date_utc"
     t.datetime "welcome_email_date_utc"

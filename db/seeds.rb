@@ -32,8 +32,8 @@ Organisation.create!(
     Institution.create!(inst_full: 'Big Uni', inst_code: 'B01'),
   ],
   users: [
-    User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
-    User.create!(first_name: 'Ben', last_name: 'Dobbs', email: 'bdobbs@big-uni.ac.uk'),
+    User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk', sign_in_user_id: 'uuid1'),
+    User.create!(first_name: 'Ben', last_name: 'Dobbs', email: 'bdobbs@big-uni.ac.uk', sign_in_user_id: 'uuid2'),
     User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
     admin_user,
   ],
