@@ -45,6 +45,16 @@ UcasCourse.create!(
   institution: Institution.find_by(inst_code: 'A02'),
 )
 
+InstitutionEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :published,
+)
+
+InstitutionEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :draft,
+)
+
 NctlOrganisation.create!(
   organisation: acme,
   nctl_id: '123AAA',
