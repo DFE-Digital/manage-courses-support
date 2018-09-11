@@ -20,7 +20,12 @@ acme = Organisation.create!(
     Institution.create!(inst_full: 'Acme Alliance', inst_code: 'A02'),
   ],
   users: [
-    User.create!(first_name: 'Jane', last_name: 'Able', email: 'jable@acme-scitt.org'),
+    User.create!(
+      first_name: 'Jane',
+      last_name: 'Able',
+      email: 'jable@acme-scitt.org',
+      welcome_email_date_utc: 7.days.ago,
+    ),
     admin_user,
   ],
 )
