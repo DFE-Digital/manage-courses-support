@@ -41,7 +41,19 @@ FactoryBot.define do
 
   factory :institution do
     inst_full { 'ACME SCITT' + rand(1000000).to_s }
-    inst_code { 'A01' }
+    sequence(:inst_code) { |n| "A#{n}" }
+
+    transient do
+      course_count { 2 }
+    end
+
+    after(:create) do |institution, evaluator|
+      create_list(:ucas_course, evaluator.course_count, institution: institution)
+    end
+  end
+
+  factory :ucas_course do
+    sequence(:crse_code) { |n| "C#{n}D3" }
   end
 
   factory :nctl_organisation do
