@@ -29,10 +29,22 @@ FactoryBot.define do
   factory :organisation do
     name  { 'ACME SCITT' }
     org_id { rand(1000000).to_s }
+
+    transient do
+      nctl_organisations_count { 1 }
+    end
+
+    after(:create) do |organisation, evaluator|
+      create_list(:nctl_organisation, evaluator.nctl_organisations_count, organisation: organisation)
+    end
   end
 
   factory :institution do
-    inst_full { 'ACME SCITT' }
+    inst_full { 'ACME SCITT' + rand(1000000).to_s }
     inst_code { 'A01' }
+  end
+
+  factory :nctl_organisation do
+    nctl_id { rand(1000000).to_s }
   end
 end
