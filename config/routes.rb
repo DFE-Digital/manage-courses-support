@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  get '/access-requests' => 'access_requests#index'
-  get '/organisations' => 'organisations#index'
+  root to: redirect('/organisations-engagement-report')
+
+  get '/access-requests', to: 'access_requests#index'
+  get '/organisations', to: 'organisations#index'
+  get '/organisations-engagement-report', to: 'reports#show_organisations_engagement_report', as: :organisations_engagement_report
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -12,7 +12,7 @@ admin_user = User.create!(
   email: 'super.admin@education.gov.uk',
 )
 
-Organisation.create!(
+acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
   institutions: [
@@ -20,12 +20,57 @@ Organisation.create!(
     Institution.create!(inst_full: 'Acme Alliance', inst_code: 'A02'),
   ],
   users: [
-    User.create!(first_name: 'Jane', last_name: 'Able', email: 'jable@acme-scitt.org'),
+    User.create!(
+      first_name: 'Jane',
+      last_name: 'Able',
+      email: 'jable@acme-scitt.org',
+      welcome_email_date_utc: 7.days.ago,
+    ),
     admin_user,
   ],
 )
 
-Organisation.create!(
+UcasCourse.create!(
+  crse_code: '3X1A',
+  institution: Institution.find_by(inst_code: 'A01'),
+)
+
+UcasCourse.create!(
+  crse_code: '3X1B',
+  institution: Institution.find_by(inst_code: 'A01'),
+)
+
+UcasCourse.create!(
+  crse_code: '5W2A',
+  institution: Institution.find_by(inst_code: 'A02'),
+)
+
+InstitutionEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :published,
+)
+
+InstitutionEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :draft,
+)
+
+CourseEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :draft,
+)
+
+CourseEnrichment.create!(
+  institution: Institution.find_by(inst_code: 'A01'),
+  status: :published,
+)
+
+NctlOrganisation.create!(
+  organisation: acme,
+  nctl_id: '123AAA',
+)
+
+big_uni = Organisation.create!(
   name: 'Big Uni',
   org_id: '67890',
   institutions: [
@@ -37,6 +82,16 @@ Organisation.create!(
     User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
     admin_user,
   ],
+)
+
+UcasCourse.create!(
+  crse_code: '9A5Y',
+  institution: Institution.find_by(inst_code: 'B01'),
+)
+
+NctlOrganisation.create!(
+  organisation: big_uni,
+  nctl_id: '678BBB',
 )
 
 AccessRequest.create!(

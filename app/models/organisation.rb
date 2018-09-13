@@ -13,4 +13,7 @@ class Organisation < ApplicationRecord
     join_table: :mc_organisation_institution,
     foreign_key: :org_id,
     association_foreign_key: :institution_code
+
+  has_many :nctl_organisations,
+    foreign_key: :org_id
 end

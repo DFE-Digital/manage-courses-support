@@ -1,0 +1,12 @@
+<h1 class="govuk-heading-xl">Training provider engagement statistics</h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h2 class="govuk-heading-l"><%= number_with_delimiter(@report[:orgs_with_allocations], delimiter: ',') %> organisations with allocations</h2>
+
+    <%= render partial: "stat", locals: { stat_title: "Organisations with UCAS courses", stat_key: :orgs_with_ucas_courses } %>
+
+    <%= render partial: "stat", locals: { stat_title: "Organisations with an active user", stat_key: :orgs_with_active_users } %>
+  </div>
+</div>

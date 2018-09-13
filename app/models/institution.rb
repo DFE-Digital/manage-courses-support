@@ -6,4 +6,13 @@ class Institution < ApplicationRecord
     join_table: :mc_organisation_institution,
     association_foreign_key: :org_id,
     foreign_key: :institution_code
+
+  has_many :ucas_courses,
+    foreign_key: :inst_code
+
+  has_many :institution_enrichments,
+    foreign_key: :inst_code
+
+  has_many :course_enrichments,
+    foreign_key: :inst_code
 end
