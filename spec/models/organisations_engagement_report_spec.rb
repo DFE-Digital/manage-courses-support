@@ -21,4 +21,17 @@ describe OrganisationsEngagementReport, type: :model do
 
     expect(report[:orgs_with_ucas_courses]).to eq(4)
   end
+
+  it "tracks the number of organisations with active, external users" do
+    users = FactoryBot.create_list(:user, 3, :active)
+    god_user = FactoryBot.create(:user, :god_user, :active)
+
+    # attach institutions to orgs
+    @orgs[0..2].zip(users) do |org, user|
+      org.users << user
+      org.users << god_user
+    end
+
+    expect(report[:orgs_with_active_users]).to eq(3)
+  end
 end

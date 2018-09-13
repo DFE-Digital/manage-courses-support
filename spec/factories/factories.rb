@@ -5,6 +5,14 @@ FactoryBot.define do
     email { "#{first_name}.#{last_name}@acme-scitt.org".downcase }
     sign_in_user_id { SecureRandom.uuid }
     welcome_email_date_utc { rand(100).days.ago }
+
+    trait :active do
+      welcome_email_date_utc { rand(100).days.ago }
+    end
+
+    trait :god_user do
+      email { "#{first_name}.#{last_name}@digital.education.gov.uk".downcase }
+    end
   end
 
   factory :access_request do
