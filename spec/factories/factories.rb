@@ -79,4 +79,8 @@ FactoryBot.define do
   factory :institution_enrichment do
     institution
   end
+
+  factory :course_enrichment do
+    institution
+  end
 end
