@@ -23,7 +23,7 @@ describe OrganisationsEngagementReport, type: :model do
     users = FactoryBot.create_list(:user, 3, :active)
     god_user = FactoryBot.create(:user, :god_user, :active)
 
-    # attach institutions to orgs
+    # attach users to orgs
     orgs[0..2].zip(users) do |org, user|
       org.users << user
       org.users << god_user
