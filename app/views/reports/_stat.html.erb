@@ -1,0 +1,7 @@
+<h3 class="govuk-heading-m"><%= stat_title %></h3>
+
+<div class="bar govuk-!-margin-bottom-6">
+  <div class="bar-progress" style="width: <%= @report.percentage_of(stat_key) %>%">
+    <span class="bar-progress-text govuk-body"><%= pluralize(@report[stat_key], "organisation") %> (<%= @report.percentage_of(stat_key) %>%)</span>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 class OrganisationsEngagementReport
+  include ActionView::Helpers::NumberHelper
+
   QUERY = "
   WITH orgs_with_allocations AS (
       SELECT
@@ -41,5 +43,9 @@ class OrganisationsEngagementReport
 
   def [](key)
     @results[key.to_s]
+  end
+
+  def percentage_of(key)
+    ((self[key].to_f * 100) / self[:orgs_with_allocations]).to_i
   end
 end
