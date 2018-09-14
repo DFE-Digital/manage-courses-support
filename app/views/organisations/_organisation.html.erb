@@ -3,7 +3,7 @@
   <td class="govuk-table__cell">
     <% users = organisation.users %>
     <% if users.size == 1 %>
-      <%= user_details(users.first) %>
+      <%= user_details(users.first, dfe_signin_deeplink: true) %>
     <% else %>
       <ul class="govuk-list govuk-list--bullet">
         <% users.map do |u| %>
