@@ -67,4 +67,20 @@ FactoryBot.define do
   factory :nctl_organisation do
     nctl_id { rand(1000000).to_s }
   end
+
+  trait :draft do
+    status { 0 }
+  end
+
+  trait :published do
+    status { 1 }
+  end
+
+  factory :institution_enrichment do
+    institution
+  end
+
+  factory :course_enrichment do
+    institution
+  end
 end
