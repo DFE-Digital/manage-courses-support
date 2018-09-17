@@ -1,4 +1,6 @@
-<h1 class="govuk-heading-xl">Organisations</h1>
+<h1 class="govuk-heading-xl">
+  <%= current_page?(action: "index") ? "Organisations" : "Organisations without active users" %>
+</h1>
 
 <table class="govuk-table">
   <thead class="govuk-table__head">

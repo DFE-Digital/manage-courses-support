@@ -85,4 +85,39 @@ RSpec.describe "Organisations", type: :feature do
       end
     end
   end
+
+  context "when accessing #index_without_active_users" do
+    it "lists only organisations without active users" do
+      FactoryBot.create(:organisation,
+        name: "Stellar Alliance / Stellar SCITT",
+        users: [
+          FactoryBot.create(:user, :inactive),
+          FactoryBot.create(:user, :active)
+        ])
+
+      FactoryBot.create(:organisation,
+        name: "University of Duncree",
+        org_id: '67890',
+        users: [
+          FactoryBot.create(:user, :inactive,
+            email: 'jbrady@duncree.ac.uk',
+            first_name: 'James',
+            last_name: 'Brady')
+        ],
+        institutions: [
+          FactoryBot.create(:institution,
+            inst_full: 'University of Duncree',
+            inst_code: 'D07')
+        ])
+
+      visit "/organisations/without-active-users"
+
+      expect(page).not_to have_text("Stellar Alliance / Stellar SCITT")
+
+      within "#organisation67890" do
+        expect(page).to have_text("James Brady <jbrady@duncree.ac.uk>")
+        expect(page).to have_text("University of Duncree [D07]")
+      end
+    end
+  end
 end
