@@ -2,6 +2,11 @@
   Open access requests (<%= @access_requests.count %>)
 </h1>
 
+<% if flash[:notice] %>
+  <%= render partial: "access_request_api_result_banner_success" if flash[:notice] == "success" %>
+  <%= render partial: "access_request_api_result_banner_error" if flash[:notice] != "success" %>
+<% end %>
+
 <table class="govuk-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
