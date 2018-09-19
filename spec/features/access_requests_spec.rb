@@ -1,6 +1,6 @@
 require "rails_helper"
 
-BASE_API_URL = "https://www.example.com/api/access-request?accessRequestId=".freeze
+BASE_API_URL = "https://www.example.com/api/admin/access-request?accessRequestId=".freeze
 
 RSpec.describe "Access requests index", type: :feature do
   include_context 'when authenticated'

@@ -10,7 +10,7 @@ describe AccessRequest, type: :model do
   end
 
   it "can be approved" do
-    stub_request(:post, "https://www.example.com/api/access-request?accessRequestId=#{request.id}").to_return(status: 200)
+    stub_request(:post, "https://www.example.com/api/admin/access-request?accessRequestId=#{request.id}").to_return(status: 200)
     result = request.approve!
     expect(result).to eq("success")
   end

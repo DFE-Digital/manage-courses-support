@@ -1,11 +1,17 @@
 require 'rails_helper'
 
-API_URL = "https://www.example.com/api/access-request?accessRequestId=1".freeze
+API_URL = "https://www.example.com/api/admin/access-request?accessRequestId=1".freeze
+HEADERS = {
+  'Accept' => 'application/json',
+  'Authorization' => "Bearer 12345",
+}.freeze
 
 RSpec.describe "Manage Courses API Service", type: :request do
   describe "approving access requests" do
     it "handles 200 correctly" do
-      stub_request(:post, API_URL).to_return(status: 200)
+      stub_request(:post, API_URL)
+        .with(headers: HEADERS)
+        .to_return(status: 200)
 
       result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
 
@@ -13,7 +19,9 @@ RSpec.describe "Manage Courses API Service", type: :request do
     end
 
     it "handles 401 correctly" do
-      stub_request(:post, API_URL).to_return(status: 401)
+      stub_request(:post, API_URL)
+        .with(headers: HEADERS)
+        .to_return(status: 401)
 
       result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
 
@@ -21,7 +29,9 @@ RSpec.describe "Manage Courses API Service", type: :request do
     end
 
     it "handles 404 correctly" do
-      stub_request(:post, API_URL).to_return(status: 404)
+      stub_request(:post, API_URL)
+        .with(headers: HEADERS)
+        .to_return(status: 404)
 
       result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
 
@@ -29,7 +39,9 @@ RSpec.describe "Manage Courses API Service", type: :request do
     end
 
     it "handles unknown status code correctly" do
-      stub_request(:post, API_URL).to_return(status: 999)
+      stub_request(:post, API_URL)
+        .with(headers: HEADERS)
+        .to_return(status: 999)
 
       result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
 
