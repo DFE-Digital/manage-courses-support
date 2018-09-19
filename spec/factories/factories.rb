@@ -31,11 +31,11 @@ FactoryBot.define do
     status { 0 }
 
     trait :approved do
-      status { 1 }
+      status { :approved }
     end
 
     trait :unapproved do
-      status { 0 }
+      status { :requested }
     end
   end
 
