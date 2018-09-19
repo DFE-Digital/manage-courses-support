@@ -1,0 +1,14 @@
+// scss-lint:disable PlaceholderInExtend
+.govuk-success-summary {
+  @extend .govuk-error-summary;
+  border-color: $success-green;
+}
+
+.govuk-success-summary__title {
+  @extend .govuk-error-summary__title;
+}
+
+.govuk-success-summary__body {
+  @extend .govuk-error-summary__body;
+}
+// scss-lint:enable PlaceholderInExtend

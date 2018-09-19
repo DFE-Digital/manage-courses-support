@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/organisations', to: 'organisations#index'
   get '/organisations/without-active-users', to: 'organisations#index_without_active_users'
   get '/organisations-engagement-report', to: 'reports#show_organisations_engagement_report', as: :organisations_engagement_report
+  get '/access-requests/:id/approve', to: 'access_requests#approve!', as: :approve_access_request
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

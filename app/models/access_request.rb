@@ -11,4 +11,9 @@ class AccessRequest < ApplicationRecord
       email: self.email_address,
     )
   end
+
+  def approve!
+    api_result = MANAGE_COURSES_API_SERVICE.approve_access_request(id)
+    api_result
+  end
 end
