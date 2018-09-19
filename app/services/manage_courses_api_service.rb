@@ -8,10 +8,10 @@ class ManageCoursesAPIService
 
   # POST /api/admin/access-request
   def approve_access_request(id)
-    uri = URI("#{@api_base_url}/access-request?accessRequestId=#{id}")
+    uri = URI("#{@api_base_url}/api/admin/access-request?accessRequestId=#{id}")
     req = Net::HTTP::Post.new(uri)
     req['Accept'] = 'application/json'
-    req['Authorization'] = @api_key
+    req['Authorization'] = "Bearer #{@api_key}"
 
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(req)
