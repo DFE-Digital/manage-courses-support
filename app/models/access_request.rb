@@ -14,7 +14,10 @@ class AccessRequest < ApplicationRecord
   end
 
   def approve!
-    api_result = MANAGE_COURSES_API_SERVICE.approve_access_request(id)
-    api_result
+    MANAGE_COURSES_API_SERVICE.approve_access_request(id)
+  end
+
+  def self.manually_approve!(data)
+    MANAGE_COURSES_API_SERVICE.manually_approve_access_request(data)
   end
 end
