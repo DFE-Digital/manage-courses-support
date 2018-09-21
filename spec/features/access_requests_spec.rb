@@ -24,12 +24,13 @@ RSpec.describe "Access requests index", type: :feature do
 
   describe "displays notifications when approving access requests" do
     it "for a successful request" do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 200)
+      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 200)
 
       visit "/access-requests"
       click_link "Approve"
 
       expect(page).to have_text("Successfully approved request")
+      expect(manage_courses_api_request).to have_been_made
     end
 
     it "for an unauthorized request" do
@@ -72,7 +73,7 @@ RSpec.describe "Access requests index", type: :feature do
     end
 
     it 'allows submitting access requests' do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
+      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
         .with(query: {
           requesterEmail: 'requester@email.com',
           targetEmail: 'target@email.com',
@@ -99,6 +100,7 @@ RSpec.describe "Access requests index", type: :feature do
       click_button 'Approve'
 
       expect(page).to have_text('Successfully approved request')
+      expect(manage_courses_api_request).to have_been_made
     end
   end
 end
