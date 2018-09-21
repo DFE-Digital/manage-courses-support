@@ -1,5 +1,5 @@
 <div class="govuk-success-summary" aria-labelledby="success-summary-title" role="alert" tabindex="-1" data-module="error-summary">
-  <h2 class="govuk-success-summary__title" id="success-summary-title">
-    Successfully approved request #<%= flash[:access_request_id] %>
+  <h2 class="govuk-success-summary__title govuk-!-margin-bottom-0" id="success-summary-title">
+    Successfully approved request <%= flash[:access_request_id] && "##{flash[:access_request_id]}" %>
   </h2>
 </div>

@@ -1,0 +1,51 @@
+<h1 class="govuk-heading-xl">
+  Preview access request
+</h1>
+
+<%= render partial: "access_request_api_result_banner_error" if flash[:notice] %>
+
+<p class="govuk-body">
+  If you made a mistake, you can <%= link_to "edit this access request",
+    create_access_request_path(
+      requester_email: @requester_email,
+      target_email: @target_email,
+      first_name: @first_name,
+      last_name: @last_name,
+    )
+  %>.
+</p>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <table class="govuk-table">
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Requester email</th>
+          <td class="govuk-table__cell "><%= @requester_email %></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Target email</th>
+          <td class="govuk-table__cell "><%= @target_email %></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">First name</th>
+          <td class="govuk-table__cell "><%= @first_name %></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Last name</th>
+          <td class="govuk-table__cell "><%= @last_name %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<%= form_tag submit_access_request_path, method: "post" do %>
+  <%= hidden_field_tag(:requester_email, @requester_email) %>
+  <%= hidden_field_tag(:target_email, @target_email) %>
+  <%= hidden_field_tag(:first_name, @first_name) %>
+  <%= hidden_field_tag(:last_name, @last_name) %>
+
+  <%= submit_tag "Approve", class: 'govuk-button' %>
+<% end %>
