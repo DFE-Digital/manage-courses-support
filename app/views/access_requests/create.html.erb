@@ -1,0 +1,35 @@
+<%= form_tag preview_access_request_path, method: "get" do %>
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-fieldset__heading">
+        Create access request
+      </h1>
+    </legend>
+
+    <p class="govuk-body">
+      Use this form to create an access request and approve it immediately.
+    </p>
+
+    <div class="govuk-form-group">
+      <%= label_tag :requester_email, "Requester email", class: "govuk-label" %>
+      <%= email_field_tag :requester_email, @requester_email, class: "govuk-input govuk-input--width-20", required: true %>
+    </div class="govuk-form-group">
+
+    <div class="govuk-form-group">
+      <%= label_tag :target_email, "Target email", class: "govuk-label" %>
+      <%= email_field_tag :target_email, @target_email, class: "govuk-input govuk-input--width-20", required: true %>
+    </div class="govuk-form-group">
+
+    <div class="govuk-form-group">
+      <%= label_tag :first_name, "First name", class: "govuk-label" %>
+      <%= text_field_tag :first_name, @first_name, class: "govuk-input govuk-input--width-20", required: true %>
+    </div class="govuk-form-group">
+
+    <div class="govuk-form-group">
+      <%= label_tag :last_name, "Last name", class: "govuk-label" %>
+      <%= text_field_tag :last_name, @last_name, class: "govuk-input govuk-input--width-20", required: true %>
+    </div class="govuk-form-group">
+
+    <%= submit_tag "Preview", class: 'govuk-button' %>
+  </fieldset>
+<% end %>
