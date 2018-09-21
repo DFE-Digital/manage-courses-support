@@ -61,46 +61,37 @@ RSpec.describe "Access requests index", type: :feature do
     end
   end
 
-  describe 'allows submitting manual access requests' do
-    it 'displays link to create manual access requests' do
-      LINK_TEXT = 'Create and approve an access request manually'.freeze
-      visit '/access-requests'
+  it 'allows submitting access requests' do
+    manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
+      .with(query: {
+        requesterEmail: 'requester@email.com',
+        targetEmail: 'target@email.com',
+        firstName: 'first',
+        lastName: 'last'
+      })
+      .to_return(status: 200)
 
-      expect(page).to have_text(LINK_TEXT)
-      click_link LINK_TEXT
+    visit '/access-requests'
 
-      expect(page).to have_text('Create access request')
-    end
+    click_link 'Create and approve an access request manually'
+    expect(page).to have_text('Create access request')
 
-    it 'allows submitting access requests' do
-      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
-        .with(query: {
-          requesterEmail: 'requester@email.com',
-          targetEmail: 'target@email.com',
-          firstName: 'first',
-          lastName: 'last'
-        })
-        .to_return(status: 200)
+    fill_in 'requester_email', with: 'requester@email.com'
+    fill_in 'target_email', with: 'target@email.com'
+    fill_in 'first_name', with: 'first'
+    fill_in 'last_name', with: 'last'
 
-      visit '/access-requests/create'
+    click_button 'Preview'
 
-      fill_in 'requester_email', with: 'requester@email.com'
-      fill_in 'target_email', with: 'target@email.com'
-      fill_in 'first_name', with: 'first'
-      fill_in 'last_name', with: 'last'
+    expect(page).to have_text('Preview access request')
+    expect(page).to have_text('requester@email.com')
+    expect(page).to have_text('target@email.com')
+    expect(page).to have_text('first')
+    expect(page).to have_text('last')
 
-      click_button 'Preview'
+    click_button 'Approve'
 
-      expect(page).to have_text('Preview access request')
-      expect(page).to have_text('requester@email.com')
-      expect(page).to have_text('target@email.com')
-      expect(page).to have_text('first')
-      expect(page).to have_text('last')
-
-      click_button 'Approve'
-
-      expect(page).to have_text('Successfully approved request')
-      expect(manage_courses_api_request).to have_been_made
-    end
+    expect(page).to have_text('Successfully approved request')
+    expect(manage_courses_api_request).to have_been_made
   end
 end
