@@ -5,15 +5,17 @@ BASE_API_URL = "https://www.example.com".freeze
 RSpec.describe "Access requests index", type: :feature do
   include_context 'when authenticated'
 
-  unapproved_request = FactoryBot.create(:access_request, :unapproved,
-    first_name: "Jane",
-    last_name: "Smith")
-
-  FactoryBot.create(:access_request, :approved,
-    first_name: "Leslie",
-    last_name: "Jones")
+  let!(:unapproved_request) {
+    FactoryBot.create(:access_request, :unapproved,
+      first_name: "Jane",
+      last_name: "Smith")
+  }
 
   it "contains only unapproved requests" do
+    FactoryBot.create(:access_request, :approved,
+      first_name: "Leslie",
+      last_name: "Jones")
+
     visit "/access-requests"
 
     expect(page).to have_text("Jane")
