@@ -2,37 +2,42 @@ require "rails_helper"
 
 BASE_API_URL = "https://www.example.com".freeze
 
-RSpec.describe "Access requests index", type: :feature do
+RSpec.describe "Access requests", type: :feature do
   include_context 'when authenticated'
 
-  unapproved_request = FactoryBot.create(:access_request, :unapproved,
-    first_name: "Jane",
-    last_name: "Smith")
+  let!(:unapproved_request) {
+    FactoryBot.create(:access_request, :unapproved,
+      first_name: "Jane",
+      last_name: "Smith")
+  }
 
-  FactoryBot.create(:access_request, :approved,
-    first_name: "Leslie",
-    last_name: "Jones")
+  describe "index" do
+    it "shows only unapproved requests" do
+      FactoryBot.create(:access_request, :approved,
+        first_name: "Leslie",
+        last_name: "Jones")
 
-  it "contains only unapproved requests" do
-    visit "/access-requests"
+      visit "/access-requests"
 
-    expect(page).to have_text("Jane")
-    expect(page).to have_text("Smith")
-    expect(page).not_to have_text("Leslie")
-    expect(page).not_to have_text("Jones")
+      expect(page).to have_text("Jane")
+      expect(page).to have_text("Smith")
+      expect(page).not_to have_text("Leslie")
+      expect(page).not_to have_text("Jones")
+    end
   end
 
-  describe "displays notifications when approving access requests" do
-    it "for a successful request" do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 200)
+  describe "approving form access requests" do
+    it "confirms success when the API call succeeds" do
+      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 200)
 
       visit "/access-requests"
       click_link "Approve"
 
       expect(page).to have_text("Successfully approved request")
+      expect(manage_courses_api_request).to have_been_made
     end
 
-    it "for an unauthorized request" do
+    it "shows an error when the API call returns 401" do
       stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 401)
 
       visit "/access-requests"
@@ -41,7 +46,7 @@ RSpec.describe "Access requests index", type: :feature do
       expect(page).to have_text("unauthorized")
     end
 
-    it "for a not-found request" do
+    it "shows an error when the API call returns 404" do
       stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 404)
 
       visit "/access-requests"
@@ -50,7 +55,7 @@ RSpec.describe "Access requests index", type: :feature do
       expect(page).to have_text("not-found")
     end
 
-    it "for any other kind of request" do
+    it "shows an error when the API call returns an unexpected status code" do
       stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 999)
 
       visit "/access-requests"
@@ -60,19 +65,9 @@ RSpec.describe "Access requests index", type: :feature do
     end
   end
 
-  describe 'allows submitting manual access requests' do
-    it 'displays link to create manual access requests' do
-      LINK_TEXT = 'Create and approve an access request manually'.freeze
-      visit '/access-requests'
-
-      expect(page).to have_text(LINK_TEXT)
-      click_link LINK_TEXT
-
-      expect(page).to have_text('Create access request')
-    end
-
-    it 'allows submitting access requests' do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
+  describe "actioning emailed access requests" do
+    it "confirms success when the API call succeeds" do
+      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
         .with(query: {
           requesterEmail: 'requester@email.com',
           targetEmail: 'target@email.com',
@@ -81,7 +76,10 @@ RSpec.describe "Access requests index", type: :feature do
         })
         .to_return(status: 200)
 
-      visit '/access-requests/create'
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+      expect(page).to have_text('Create access request')
 
       fill_in 'requester_email', with: 'requester@email.com'
       fill_in 'target_email', with: 'target@email.com'
@@ -99,6 +97,7 @@ RSpec.describe "Access requests index", type: :feature do
       click_button 'Approve'
 
       expect(page).to have_text('Successfully approved request')
+      expect(manage_courses_api_request).to have_been_made
     end
   end
 end
