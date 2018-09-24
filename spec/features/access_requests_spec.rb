@@ -81,10 +81,10 @@ RSpec.describe "Access requests", type: :feature do
       click_link 'Create and approve an access request manually'
       expect(page).to have_text('Create access request')
 
-      fill_in 'requester_email', with: 'requester@email.com'
-      fill_in 'target_email', with: 'target@email.com'
-      fill_in 'first_name', with: 'first'
-      fill_in 'last_name', with: 'last'
+      fill_in 'Requester email', with: 'requester@email.com'
+      fill_in 'Target email', with: 'target@email.com'
+      fill_in 'First name', with: 'first'
+      fill_in 'Last name', with: 'last'
 
       click_button 'Preview'
 
