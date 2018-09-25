@@ -14,23 +14,16 @@ class AccessRequestsController < ApplicationController
   end
 
   def create
-    @requester_email = params[:requester_email] || ''
-    @target_email = params[:target_email] || ''
-    @first_name = params[:first_name] || ''
-    @last_name = params[:last_name] || ''
+    @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 
   def preview
-    @requester_email = params[:requester_email] || ''
-    @target_email = params[:target_email] || ''
-    @first_name = params[:first_name] || ''
-    @last_name = params[:last_name] || ''
+    @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 
   def submit
-    keys = %i{requester_email target_email first_name last_name}
-    data = keys.map { |key| [key, params[key]] }.to_h
-    api_result = AccessRequest.manually_approve!(data)
+    @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
+    api_result = @emailed_access_request.manually_approve!
 
     flash[:notice] = api_result
 
@@ -39,5 +32,11 @@ class AccessRequestsController < ApplicationController
     else
       redirect_to action: 'preview', params: data
     end
+  end
+
+private
+
+  def emailed_access_request_params
+    params.fetch(:emailed_access_request, {}).permit(:requester_email, :target_email, :first_name, :last_name)
   end
 end

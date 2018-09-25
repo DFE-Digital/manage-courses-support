@@ -1,4 +1,4 @@
-<%= form_tag preview_access_request_path, method: "get" do %>
+<%= form_for @emailed_access_request, url: {action: "preview"}, method: "get" do |f| %>
   <fieldset class="govuk-fieldset">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
       <h1 class="govuk-fieldset__heading">
@@ -11,25 +11,25 @@
     </p>
 
     <div class="govuk-form-group">
-      <%= label_tag :requester_email, "Requester email", class: "govuk-label" %>
-      <%= email_field_tag :requester_email, @requester_email, class: "govuk-input govuk-input--width-20", required: true %>
+      <%= f.label :requester_email, "Requester email", class: "govuk-label" %>
+      <%= f.email_field :requester_email, class: "govuk-input govuk-input--width-20", required: true %>
     </div class="govuk-form-group">
 
     <div class="govuk-form-group">
-      <%= label_tag :target_email, "Target email", class: "govuk-label" %>
-      <%= email_field_tag :target_email, @target_email, class: "govuk-input govuk-input--width-20", required: true %>
+      <%= f.label :target_email, "Target email", class: "govuk-label" %>
+      <%= f.email_field :target_email, class: "govuk-input govuk-input--width-20", required: true %>
     </div class="govuk-form-group">
 
     <div class="govuk-form-group">
-      <%= label_tag :first_name, "First name", class: "govuk-label" %>
-      <%= text_field_tag :first_name, @first_name, class: "govuk-input govuk-input--width-20", required: true %>
+      <%= f.label :first_name, "First name", class: "govuk-label" %>
+      <%= f.text_field :first_name, class: "govuk-input govuk-input--width-20", required: true %>
     </div class="govuk-form-group">
 
     <div class="govuk-form-group">
-      <%= label_tag :last_name, "Last name", class: "govuk-label" %>
-      <%= text_field_tag :last_name, @last_name, class: "govuk-input govuk-input--width-20", required: true %>
+      <%= f.label :last_name, "Last name", class: "govuk-label" %>
+      <%= f.text_field :last_name, class: "govuk-input govuk-input--width-20", required: true %>
     </div class="govuk-form-group">
 
-    <%= submit_tag "Preview", class: 'govuk-button' %>
+    <%= f.submit "Preview", class: 'govuk-button' %>
   </fieldset>
 <% end %>
