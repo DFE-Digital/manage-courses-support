@@ -41,7 +41,7 @@
 </div>
 
 
-<%= form_for @emailed_access_request, url: {action: "submit"} do |f| %>
+<%= form_for @emailed_access_request, url: {action: "create"} do |f| %>
   <%= f.hidden_field :requester_email %>
   <%= f.hidden_field :target_email %>
   <%= f.hidden_field :first_name %>

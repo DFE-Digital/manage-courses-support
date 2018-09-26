@@ -21,7 +21,7 @@ class AccessRequestsController < ApplicationController
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 
-  def submit
+  def create
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
     api_result = @emailed_access_request.manually_approve!
 
