@@ -20,4 +20,18 @@ describe EmailedAccessRequest, type: :model do
 
     expect(result).to eq("success")
   end
+
+  it "strips whitespace from attributes" do
+    request = EmailedAccessRequest.new(
+      requester_email: '  foo@bar.com  ',
+      target_email: ' baz@qux.com ',
+      first_name: '   baz   ',
+      last_name: '   qux   ',
+    )
+
+    expect(request.requester_email).to eq('foo@bar.com')
+    expect(request.target_email).to eq('baz@qux.com')
+    expect(request.first_name).to eq('baz')
+    expect(request.last_name).to eq('qux')
+  end
 end
