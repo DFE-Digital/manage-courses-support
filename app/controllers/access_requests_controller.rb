@@ -3,7 +3,7 @@ class AccessRequestsController < ApplicationController
     @access_requests = AccessRequest.unapproved.order(request_date_utc: :asc)
   end
 
-  def approve!
+  def approve
     id = params[:id]
     api_result = AccessRequest.find(id).approve!
 
