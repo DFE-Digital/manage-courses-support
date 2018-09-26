@@ -3,7 +3,7 @@ class AccessRequestsController < ApplicationController
     @access_requests = AccessRequest.unapproved.order(request_date_utc: :asc)
   end
 
-  def approve!
+  def approve
     id = params[:id]
     api_result = AccessRequest.find(id).approve!
 
@@ -13,7 +13,7 @@ class AccessRequestsController < ApplicationController
     redirect_to action: 'index'
   end
 
-  def create
+  def new
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 
@@ -21,7 +21,7 @@ class AccessRequestsController < ApplicationController
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 
-  def submit
+  def create
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
     api_result = @emailed_access_request.manually_approve!
 
