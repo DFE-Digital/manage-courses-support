@@ -6,7 +6,7 @@
 
 <p class="govuk-body">
   If you made a mistake, you can <%= link_to "edit this access request",
-    create_access_request_path(
+    new_access_request_path(
       "emailed_access_request[requester_email]" => @emailed_access_request.requester_email,
       "emailed_access_request[target_email]" => @emailed_access_request.target_email,
       "emailed_access_request[first_name]" => @emailed_access_request.first_name,

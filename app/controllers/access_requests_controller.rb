@@ -13,7 +13,7 @@ class AccessRequestsController < ApplicationController
     redirect_to action: 'index'
   end
 
-  def create
+  def new
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
   end
 

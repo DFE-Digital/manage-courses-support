@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/organisations/without-active-users', to: 'organisations#index_without_active_users'
   get '/organisations-engagement-report', to: 'reports#show_organisations_engagement_report', as: :organisations_engagement_report
   get '/access-requests/:id/approve', to: 'access_requests#approve!', as: :approve_access_request
-  get '/access-requests/create', to: 'access_requests#create', as: :create_access_request
+  get '/access-requests/new', to: 'access_requests#new', as: :new_access_request
   get '/access-requests/preview', to: 'access_requests#preview', as: :preview_access_request
   post '/access-requests/submit', to: 'access_requests#submit', as: :submit_access_request
 
