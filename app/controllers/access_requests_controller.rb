@@ -10,7 +10,11 @@ class AccessRequestsController < ApplicationController
     flash[:notice] = api_result
     flash[:access_request_id] = id
 
-    redirect_to action: 'index'
+    redirect_to action: 'inform_publisher', id: id
+  end
+
+  def inform_publisher
+    @recipient_email_address = AccessRequest.find(params[:id]).recipient.email
   end
 
   def new
