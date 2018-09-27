@@ -32,7 +32,8 @@ class AccessRequestsController < ApplicationController
     flash[:notice] = api_result
 
     if api_result == 'success'
-      redirect_to action: 'index'
+      @recipient_email_address = @emailed_access_request.target_email
+      render 'inform_publisher'
     else
       redirect_to action: 'preview', params: data
     end

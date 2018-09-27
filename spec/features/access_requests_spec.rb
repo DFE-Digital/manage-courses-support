@@ -105,6 +105,12 @@ RSpec.describe "Access requests", type: :feature do
 
       expect(page).to have_text('Successfully approved request')
       expect(manage_courses_api_request).to have_been_made
+      expect(page).to have_text("Inform the publisher")
+      expect(page).to have_text("send an email to target@email.com")
+
+      click_link "Return to access requests"
+
+      expect(page).to have_text("Open access requests")
     end
   end
 end
