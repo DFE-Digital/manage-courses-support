@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :access_requests, path: '/access-requests', only: %i{index new create} do
     get 'approve', on: :member
+    get 'inform-publisher', on: :member
     get 'preview', on: :collection
   end
 end
