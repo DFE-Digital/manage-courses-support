@@ -14,6 +14,6 @@ class AccessRequest < ApplicationRecord
   end
 
   def approve!
-    MANAGE_COURSES_API_SERVICE.approve_access_request(id)
+    MANAGE_COURSES_API.approve_access_request(id)
   end
 end

@@ -13,7 +13,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 200)
 
-      result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
+      result = MANAGE_COURSES_API.approve_access_request(1)
 
       expect(result).to eq('success')
     end
@@ -23,7 +23,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 401)
 
-      result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
+      result = MANAGE_COURSES_API.approve_access_request(1)
 
       expect(result).to eq('unauthorized')
     end
@@ -33,7 +33,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 404)
 
-      result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
+      result = MANAGE_COURSES_API.approve_access_request(1)
 
       expect(result).to eq('not-found')
     end
@@ -43,7 +43,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 999)
 
-      result = MANAGE_COURSES_API_SERVICE.approve_access_request(1)
+      result = MANAGE_COURSES_API.approve_access_request(1)
 
       expect(result).to eq('unknown-error')
     end
@@ -61,7 +61,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 200)
 
-      result = MANAGE_COURSES_API_SERVICE.manually_approve_access_request(
+      result = MANAGE_COURSES_API.manually_approve_access_request(
         requester_email: 'foo@bar.com',
         target_email: 'baz@qux.com',
         first_name: 'baz',
