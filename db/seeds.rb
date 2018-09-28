@@ -101,7 +101,7 @@ AccessRequest.create!(
   last_name: 'User',
   requester_email: 'jable@acme-scitt.org',
   request_date_utc: Time.now - 1.week,
-  status: 0,
+  status: :requested,
 )
 
 AccessRequest.create!(
@@ -110,5 +110,5 @@ AccessRequest.create!(
   last_name: 'User',
   requester_email: 'jable@acme-scitt.org',
   request_date_utc: Time.now - 2.weeks,
-  status: 1,
+  status: :actioned,
 )
