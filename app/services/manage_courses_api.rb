@@ -1,6 +1,6 @@
 require 'net/http'
 
-class ManageCoursesAPIService
+class ManageCoursesAPI
   def initialize(api_base_url, api_key)
     @api_base_url = api_base_url
     @api_key = api_key
