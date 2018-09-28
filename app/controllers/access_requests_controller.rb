@@ -35,7 +35,7 @@ class AccessRequestsController < ApplicationController
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
     else
-      redirect_to action: 'preview', params: data
+      render 'preview'
     end
   end
 

@@ -112,5 +112,25 @@ RSpec.describe "Access requests", type: :feature do
 
       expect(page).to have_text("Open access requests")
     end
+
+    it "informs the user when the API call fails" do
+      manage_courses_api_request = stub_request(:post, %r{#{BASE_API_URL}/api/admin/manual-access-request})
+        .to_return(status: 503)
+
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+
+      fill_in 'Requester email', with: 'requester@email.com'
+      fill_in 'Target email', with: 'target@email.com'
+      fill_in 'First name', with: 'first'
+      fill_in 'Last name', with: 'last'
+
+      click_button 'Preview'
+      click_button 'Approve'
+
+      expect(manage_courses_api_request).to have_been_made
+      expect(page).to have_text("Could not approve request")
+    end
   end
 end
