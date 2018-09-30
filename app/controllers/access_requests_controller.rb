@@ -9,11 +9,11 @@ class AccessRequestsController < ApplicationController
 
     if api_result == 'success'
       flash[:notice] = "Successfully approved request"
+      redirect_to action: 'inform_publisher', id: id
     else
       set_flash_on_error_given(api_result)
+      redirect_to action: 'index'
     end
-
-    redirect_to action: 'inform_publisher', id: id
   end
 
   def inform_publisher
