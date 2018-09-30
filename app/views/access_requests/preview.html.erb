@@ -1,6 +1,6 @@
-<h1 class="govuk-heading-xl">
+<% content_for :heading do %>
   Preview access request
-</h1>
+<% end %>
 
 <%= render partial: "access_request_api_result_banner_error" if flash[:notice] %>
 

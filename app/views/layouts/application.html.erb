@@ -75,6 +75,11 @@
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper " id="main-content" role="main">
+        <% if content_for?(:heading) %>
+          <h1 class="govuk-heading-xl">
+            <%= yield :heading %>
+          </h1>
+        <% end %>
         <%= yield %>
       </main>
     </div>

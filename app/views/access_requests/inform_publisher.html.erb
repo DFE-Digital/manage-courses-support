@@ -3,9 +3,9 @@
   <%= render partial: "access_request_api_result_banner_error" if flash[:notice] != "success" %>
 <% end %>
 
-<h1 class="govuk-heading-xl">
+<% content_for :heading do %>
   Inform the publisher
-</h1>
+<% end %>
 
 <p class="govuk-body">
   Inform the publisher about the change to their access:
