@@ -8,8 +8,7 @@ class AccessRequestsController < ApplicationController
     api_result = AccessRequest.find(id).approve!
 
     if api_result == 'success'
-      flash[:notice] = api_result
-      flash[:access_request_id] = id
+      flash[:notice] = "Successfully approved request"
     else
       flash[:error] = api_result
       flash[:access_request_id] = id
@@ -35,7 +34,7 @@ class AccessRequestsController < ApplicationController
     api_result = @emailed_access_request.manually_approve!
 
     if api_result == 'success'
-      flash[:notice] = api_result
+      flash[:notice] = "Successfully approved request"
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
     else

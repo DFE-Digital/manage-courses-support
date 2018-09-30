@@ -79,6 +79,8 @@
           <h1 class="govuk-heading-xl">
             <%= yield :heading %>
           </h1>
+
+          <%= render partial: "success_summary" if flash[:notice].present? %>
         <% end %>
         <%= yield %>
       </main>
