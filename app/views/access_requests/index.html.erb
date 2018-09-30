@@ -2,8 +2,6 @@
   Open access requests (<%= @access_requests.count %>)
 <% end %>
 
-<%= render partial: "access_request_api_result_banner_error" if flash[:error].present? %>
-
 <p class="govuk-body">
   <%= link_to "Create and approve an access request manually", new_access_request_path %>
 </p>

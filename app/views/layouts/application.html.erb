@@ -81,6 +81,7 @@
           </h1>
 
           <%= render partial: "success_summary" if flash[:notice].present? %>
+          <%= render partial: "error_summary" if flash[:errors].present? %>
         <% end %>
         <%= yield %>
       </main>

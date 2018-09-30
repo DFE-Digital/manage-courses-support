@@ -2,8 +2,6 @@
   Preview access request
 <% end %>
 
-<%= render partial: "access_request_api_result_banner_error" if flash[:error].present? %>
-
 <p class="govuk-body">
   If you made a mistake, you can <%= link_to "edit this access request",
     new_access_request_path(

@@ -50,7 +50,7 @@ RSpec.describe "Access requests", type: :feature do
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("unauthorized")
+      expect(page).to have_text("API client is unauthorized")
     end
 
     it "shows an error when the API call returns 404" do
@@ -59,7 +59,7 @@ RSpec.describe "Access requests", type: :feature do
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("not-found")
+      expect(page).to have_text("access request or the requester email not found")
     end
 
     it "shows an error when the API call returns an unexpected status code" do
@@ -68,7 +68,7 @@ RSpec.describe "Access requests", type: :feature do
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("unknown-error")
+      expect(page).to have_text("unexpected error")
     end
   end
 
@@ -130,7 +130,7 @@ RSpec.describe "Access requests", type: :feature do
       click_button 'Approve'
 
       expect(manage_courses_api_request).to have_been_made
-      expect(page).to have_text("Could not approve request")
+      expect(page).to have_text("Problem approving request")
     end
   end
 end

@@ -10,8 +10,7 @@ class AccessRequestsController < ApplicationController
     if api_result == 'success'
       flash[:notice] = "Successfully approved request"
     else
-      flash[:error] = api_result
-      flash[:access_request_id] = id
+      set_flash_on_error_given(api_result)
     end
 
     redirect_to action: 'inform_publisher', id: id
@@ -38,12 +37,30 @@ class AccessRequestsController < ApplicationController
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
     else
-      flash[:error] = api_result
+      set_flash_on_error_given(api_result)
       render 'preview'
     end
   end
 
 private
+
+  def set_flash_on_error_given(api_result)
+    flash[:error_summary] = "Problem approving request"
+    flash[:errors] = [{
+      text: "A technical issue has occurred – #{explanation_of(api_result)}. Please let the technical support team know."
+    }]
+  end
+
+  def explanation_of(api_result)
+    case api_result
+    when 'unauthorized'
+      'API client is unauthorized'
+    when 'not-found'
+      'access request or the requester email not found'
+    else
+      "unexpected error (#{api_result}) from the API"
+    end
+  end
 
   def emailed_access_request_params
     params.fetch(:emailed_access_request, {}).permit(:requester_email, :target_email, :first_name, :last_name)
