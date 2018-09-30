@@ -57,6 +57,8 @@ private
       'API client is unauthorized'
     when 'not-found'
       'access request or the requester email not found'
+    when 'network-failure'
+      'the client couldn\'t connect to the API'
     else
       "unexpected error (#{api_result}) from the API"
     end

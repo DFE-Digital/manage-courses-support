@@ -38,6 +38,16 @@ RSpec.describe "Manage Courses API Service", type: :request do
       expect(result).to eq('not-found')
     end
 
+    it "handles network failure correctly" do
+      stub_request(:post, "#{API_URL}/api/admin/access-request?accessRequestId=1")
+        .with(headers: HEADERS)
+        .to_raise(Errno::ECONNREFUSED)
+
+      result = MANAGE_COURSES_API.approve_access_request(1)
+
+      expect(result).to eq('network-failure')
+    end
+
     it "handles unknown status code correctly" do
       stub_request(:post, "#{API_URL}/api/admin/access-request?accessRequestId=1")
         .with(headers: HEADERS)

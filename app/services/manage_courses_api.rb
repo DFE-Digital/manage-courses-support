@@ -36,6 +36,9 @@ private
     end
 
     parse_response_code(response.code)
+  rescue Timeout::Error, Errno::EINVAL, Errno::ECONNREFUSED, Errno::ECONNRESET, EOFError,
+         Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+    'network-failure'
   end
 
   def parse_response_code(code)
