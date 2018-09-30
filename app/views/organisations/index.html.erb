@@ -1,6 +1,6 @@
-<h1 class="govuk-heading-xl">
+<% content_for :heading do %>
   <%= current_page?(action: "index") ? "Organisations" : "Organisations without active users" %>
-</h1>
+<% end %>
 
 <p class="govuk-body">
   <%= link_to "View all organisations", { action: "index" } unless current_page?(action: "index") %>

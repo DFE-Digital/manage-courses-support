@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <title>Support teacher training publishers</title>
+    <title><%= content_for?(:heading) ? "#{yield(:heading) + '- '}" : "" %>Support teacher training publishers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0b0c0c" />
 
@@ -75,6 +75,14 @@
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper " id="main-content" role="main">
+        <% if content_for?(:heading) %>
+          <h1 class="govuk-heading-xl">
+            <%= yield :heading %>
+          </h1>
+
+          <%= render partial: "success_summary" if flash[:notice].present? %>
+          <%= render partial: "error_summary" if flash[:errors].present? %>
+        <% end %>
         <%= yield %>
       </main>
     </div>

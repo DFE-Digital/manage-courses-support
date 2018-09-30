@@ -1,10 +1,5 @@
-<h1 class="govuk-heading-xl">
+<% content_for :heading do %>
   Open access requests (<%= @access_requests.count %>)
-</h1>
-
-<% if flash[:notice] %>
-  <%= render partial: "access_request_api_result_banner_success" if flash[:notice] == "success" %>
-  <%= render partial: "access_request_api_result_banner_error" if flash[:notice] != "success" %>
 <% end %>
 
 <p class="govuk-body">
