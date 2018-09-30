@@ -9,7 +9,7 @@ class ManageCoursesAPI
   end
 
   # POST /api/admin/access-request
-  def approve_access_request(id)
+  def approve_access_request(id:)
     uri = URI("#{@api_base_url}/api/admin/access-request?accessRequestId=#{id}")
     post_to(uri)
   end

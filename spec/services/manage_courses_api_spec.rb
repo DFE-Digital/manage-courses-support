@@ -13,7 +13,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .with(headers: HEADERS)
         .to_return(status: 200)
 
-      MANAGE_COURSES_API.approve_access_request(1)
+      MANAGE_COURSES_API.approve_access_request(id: 1)
 
       expect(request).to have_been_made
     end
@@ -24,7 +24,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .to_return(status: 401)
 
       expect {
-        MANAGE_COURSES_API.approve_access_request(1)
+        MANAGE_COURSES_API.approve_access_request(id: 1)
       }.to raise_error ManageCoursesAPI::AccessRequestInternalFailure, /unauthorized/
     end
 
@@ -34,7 +34,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .to_return(status: 404)
 
       expect {
-        MANAGE_COURSES_API.approve_access_request(1)
+        MANAGE_COURSES_API.approve_access_request(id: 1)
       }.to raise_error ManageCoursesAPI::AccessRequestInternalFailure, /not found/
     end
 
@@ -44,7 +44,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .to_raise(Errno::ECONNREFUSED)
 
       expect {
-        MANAGE_COURSES_API.approve_access_request(1)
+        MANAGE_COURSES_API.approve_access_request(id: 1)
       }.to raise_error ManageCoursesAPI::AccessRequestInternalFailure, /Connection refused/
     end
 
@@ -54,7 +54,7 @@ RSpec.describe "Manage Courses API Service", type: :request do
         .to_return(status: 999)
 
       expect {
-        MANAGE_COURSES_API.approve_access_request(1)
+        MANAGE_COURSES_API.approve_access_request(id: 1)
       }.to raise_error ManageCoursesAPI::AccessRequestInternalFailure, /unexpected response code 999/
     end
   end
