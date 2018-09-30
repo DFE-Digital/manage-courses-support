@@ -5,7 +5,7 @@
   <div class="govuk-error-summary__body">
     <ul class="govuk-list govuk-error-summary__list">
       <% flash[:errors].each do |error| %>
-        <li><%= error["text"] %></li>
+        <li><%= link_to_if error["link"].present?, error["text"], error["link"] %></li>
       <% end %>
     </ul>
   </div>

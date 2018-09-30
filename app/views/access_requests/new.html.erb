@@ -10,8 +10,13 @@
       Use this form to create an access request and approve it immediately.
     </p>
 
-    <div class="govuk-form-group">
+    <div class="govuk-form-group <%= "govuk-form-group--error" if @emailed_access_request.errors[:requester_email].present? %>">
       <%= f.label :requester_email, "Requester email", class: "govuk-label" %>
+      <% (@emailed_access_request.errors[:requester_email] || []).each.with_index do |error, n| %>
+        <span id="requester-email-error-<%= n %>" class="govuk-error-message">
+          <%= error %>
+        </span>
+      <% end %>
       <%= f.email_field :requester_email, class: "govuk-input govuk-input--width-20", required: true %>
     </div>
 
