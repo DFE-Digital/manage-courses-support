@@ -1,6 +1,8 @@
 require 'net/http'
 
 class ManageCoursesAPI
+  class AccessRequestInternalFailure < RuntimeError; end
+
   def initialize(api_base_url, api_key)
     @api_base_url = api_base_url
     @api_key = api_key
@@ -35,22 +37,19 @@ private
       http.request(req)
     end
 
-    parse_response_code(response.code)
+    raise_exception_if_unsuccessful(response.code)
   rescue Timeout::Error, Errno::EINVAL, Errno::ECONNREFUSED, Errno::ECONNRESET, EOFError,
-         Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
-    'network-failure'
+         Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+    raise AccessRequestInternalFailure, e.message
   end
 
-  def parse_response_code(code)
-    case code
-    when '200'
-      'success'
-    when '401'
-      'unauthorized'
-    when '404'
-      'not-found'
-    else
-      'unknown-error'
+  def raise_exception_if_unsuccessful(code)
+    if code == '401'
+      raise AccessRequestInternalFailure, 'API client is unauthorized'
+    elsif code == '404'
+      raise AccessRequestInternalFailure, 'access request or the requester email not found'
+    elsif code != '200'
+      raise AccessRequestInternalFailure, "unexpected response code #{code}"
     end
   end
 end

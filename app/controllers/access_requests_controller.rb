@@ -5,13 +5,13 @@ class AccessRequestsController < ApplicationController
 
   def approve
     id = params[:id]
-    api_result = AccessRequest.find(id).approve!
 
-    if api_result == 'success'
+    begin
+      AccessRequest.find(id).approve!
       flash[:notice] = "Successfully approved request"
       redirect_to action: 'inform_publisher', id: id
-    else
-      set_flash_on_error_given(api_result)
+    rescue ManageCoursesAPI::AccessRequestInternalFailure => exception
+      set_flash_on_error_given(exception)
       redirect_to action: 'index'
     end
   end
@@ -30,38 +30,24 @@ class AccessRequestsController < ApplicationController
 
   def create
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
-    api_result = @emailed_access_request.manually_approve!
-
-    if api_result == 'success'
+    begin
+      @emailed_access_request.manually_approve!
       flash[:notice] = "Successfully approved request"
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
-    else
-      set_flash_on_error_given(api_result)
+    rescue ManageCoursesAPI::AccessRequestInternalFailure => exception
+      set_flash_on_error_given(exception)
       render 'preview'
     end
   end
 
 private
 
-  def set_flash_on_error_given(api_result)
+  def set_flash_on_error_given(exception)
     flash[:error_summary] = "Problem approving request"
     flash[:errors] = [{
-      text: "A technical issue has occurred – #{explanation_of(api_result)}. Please let the technical support team know."
+      text: "A technical issue has occurred - let the technical support team know: #{exception.message}"
     }]
-  end
-
-  def explanation_of(api_result)
-    case api_result
-    when 'unauthorized'
-      'API client is unauthorized'
-    when 'not-found'
-      'access request or the requester email not found'
-    when 'network-failure'
-      'the client couldn\'t connect to the API'
-    else
-      "unexpected error (#{api_result}) from the API"
-    end
   end
 
   def emailed_access_request_params
