@@ -7,8 +7,13 @@ class AccessRequestsController < ApplicationController
     id = params[:id]
     api_result = AccessRequest.find(id).approve!
 
-    flash[:notice] = api_result
-    flash[:access_request_id] = id
+    if api_result == 'success'
+      flash[:notice] = api_result
+      flash[:access_request_id] = id
+    else
+      flash[:error] = api_result
+      flash[:access_request_id] = id
+    end
 
     redirect_to action: 'inform_publisher', id: id
   end
@@ -29,12 +34,12 @@ class AccessRequestsController < ApplicationController
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
     api_result = @emailed_access_request.manually_approve!
 
-    flash[:notice] = api_result
-
     if api_result == 'success'
+      flash[:notice] = api_result
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
     else
+      flash[:error] = api_result
       render 'preview'
     end
   end

@@ -2,10 +2,8 @@
   Open access requests (<%= @access_requests.count %>)
 <% end %>
 
-<% if flash[:notice] %>
-  <%= render partial: "access_request_api_result_banner_success" if flash[:notice] == "success" %>
-  <%= render partial: "access_request_api_result_banner_error" if flash[:notice] != "success" %>
-<% end %>
+<%= render partial: "access_request_api_result_banner_success" if flash[:notice].present? %>
+<%= render partial: "access_request_api_result_banner_error" if flash[:error].present? %>
 
 <p class="govuk-body">
   <%= link_to "Create and approve an access request manually", new_access_request_path %>

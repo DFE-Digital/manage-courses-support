@@ -1,7 +1,5 @@
-<% if flash[:notice] %>
-  <%= render partial: "access_request_api_result_banner_success" if flash[:notice] == "success" %>
-  <%= render partial: "access_request_api_result_banner_error" if flash[:notice] != "success" %>
-<% end %>
+<%= render partial: "access_request_api_result_banner_success" if flash[:notice].present? %>
+<%= render partial: "access_request_api_result_banner_error" if flash[:error].present? %>
 
 <% content_for :heading do %>
   Inform the publisher
