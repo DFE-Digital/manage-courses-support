@@ -79,10 +79,11 @@
           <h1 class="govuk-heading-xl">
             <%= yield :heading %>
           </h1>
-
-          <%= render partial: "success_summary" if flash[:notice].present? %>
-          <%= render partial: "error_summary" if flash[:errors].present? %>
         <% end %>
+
+        <%= render partial: "success_summary" if flash[:notice].present? %>
+        <%= render partial: "error_summary" if flash[:errors].present? %>
+
         <%= yield %>
       </main>
     </div>
