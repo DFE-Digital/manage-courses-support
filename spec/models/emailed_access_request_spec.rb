@@ -10,6 +10,24 @@ describe EmailedAccessRequest, type: :model do
     )
   }
 
+  it "validates that requester and recipient fields are set" do
+    request = EmailedAccessRequest.new
+
+    expect(request).not_to be_valid
+    expect(request.errors[:requester_email]).to eq([
+      "Enter the email of someone already in the system"
+    ])
+    expect(request.errors[:target_email]).to eq([
+      "Enter the email of the person who needs access"
+    ])
+    expect(request.errors[:first_name]).to eq([
+      "Enter the first name of the person who needs access"
+    ])
+    expect(request.errors[:last_name]).to eq([
+      "Enter the last name of the person who needs access"
+    ])
+  end
+
   it "validates that the requester exists" do
     request = EmailedAccessRequest.new(
       requester_email: 'nonexistent@email.com',

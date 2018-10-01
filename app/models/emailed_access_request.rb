@@ -3,6 +3,11 @@ class EmailedAccessRequest
 
   attr_reader :requester_email, :target_email, :first_name, :last_name
 
+  validates :requester_email, presence: { message: "Enter the email of someone already in the system" }
+  validates :target_email, presence: { message: "Enter the email of the person who needs access" }
+  validates :first_name, presence: { message: "Enter the first name of the person who needs access" }
+  validates :last_name, presence: { message: "Enter the last name of the person who needs access" }
+
   validate :requester_exists,
     unless: Proc.new { |r| r.requester_email.blank? }
 

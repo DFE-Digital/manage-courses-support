@@ -133,6 +133,19 @@ RSpec.describe "Access requests", type: :feature do
       expect(page).to have_text("Enter the email of somebody already in the system")
     end
 
+    it "stops the user support agent from entering blank fields" do
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+      click_button 'Preview'
+
+      expect(page).to have_text("There is a problem")
+      expect(page).to have_text("Enter the email of someone already in the system")
+      expect(page).to have_text("Enter the email of the person who needs access")
+      expect(page).to have_text("Enter the first name of the person who needs access")
+      expect(page).to have_text("Enter the last name of the person who needs access")
+    end
+
     it "informs the user support agent when the API call fails" do
       manage_courses_api_request = stub_request(:post, %r{#{BASE_API_URL}/api/admin/manual-access-request})
         .to_return(status: 503)
