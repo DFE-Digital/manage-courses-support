@@ -1,23 +1,17 @@
 require 'net/http'
 
 class ManageCoursesAPI
+  class AccessRequestInternalFailure < RuntimeError; end
+
   def initialize(api_base_url, api_key)
     @api_base_url = api_base_url
     @api_key = api_key
   end
 
   # POST /api/admin/access-request
-  def approve_access_request(id)
+  def approve_access_request(id:)
     uri = URI("#{@api_base_url}/api/admin/access-request?accessRequestId=#{id}")
-    req = Net::HTTP::Post.new(uri)
-    req['Accept'] = 'application/json'
-    req['Authorization'] = "Bearer #{@api_key}"
-
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
-      http.request(req)
-    end
-
-    parse_response_code(response.code)
+    post_to(uri)
   end
 
   # POST /api/admin/manual-access-request
@@ -29,6 +23,12 @@ class ManageCoursesAPI
       firstName: data[:first_name],
       lastName: data[:last_name]
     )
+    post_to(uri)
+  end
+
+private
+
+  def post_to(uri)
     req = Net::HTTP::Post.new(uri)
     req['Accept'] = 'application/json'
     req['Authorization'] = "Bearer #{@api_key}"
@@ -37,21 +37,19 @@ class ManageCoursesAPI
       http.request(req)
     end
 
-    parse_response_code(response.code)
+    raise_exception_if_unsuccessful(response.code)
+  rescue Timeout::Error, Errno::EINVAL, Errno::ECONNREFUSED, Errno::ECONNRESET, EOFError,
+         Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+    raise AccessRequestInternalFailure, e.message
   end
 
-private
-
-  def parse_response_code(code)
-    case code
-    when '200'
-      'success'
-    when '401'
-      'unauthorized'
-    when '404'
-      'not-found'
-    else
-      'unknown-error'
+  def raise_exception_if_unsuccessful(code)
+    if code == '401'
+      raise AccessRequestInternalFailure, 'API client is unauthorized'
+    elsif code == '404'
+      raise AccessRequestInternalFailure, 'access request or the requester email not found'
+    elsif code != '200'
+      raise AccessRequestInternalFailure, "unexpected response code #{code}"
     end
   end
 end

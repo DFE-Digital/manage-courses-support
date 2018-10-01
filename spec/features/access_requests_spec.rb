@@ -68,7 +68,7 @@ RSpec.describe "Access requests", type: :feature do
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("unexpected error")
+      expect(page).to have_text("unexpected response code 999")
     end
   end
 
