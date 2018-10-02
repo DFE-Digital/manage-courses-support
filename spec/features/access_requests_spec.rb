@@ -101,9 +101,7 @@ RSpec.describe "Access requests", type: :feature do
 
       expect(page).to have_text('Preview access request')
       expect(page).to have_text('requester@email.com')
-      expect(page).to have_text('target@email.com')
-      expect(page).to have_text('first')
-      expect(page).to have_text('last')
+      expect(page).to have_text('first last <target@email.com>')
 
       click_button 'Approve'
 

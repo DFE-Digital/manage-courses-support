@@ -22,16 +22,8 @@
           <td class="govuk-table__cell "><%= @emailed_access_request.requester_email %></td>
         </tr>
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Target email</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.target_email %></td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">First name</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.first_name %></td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Last name</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.last_name %></td>
+          <th class="govuk-table__header" scope="row">Recipient</th>
+          <td class="govuk-table__cell "><%= user_details(@emailed_access_request.recipient) if @emailed_access_request.recipient %></td>
         </tr>
       </tbody>
     </table>
