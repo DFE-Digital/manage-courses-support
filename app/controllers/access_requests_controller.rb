@@ -26,10 +26,19 @@ class AccessRequestsController < ApplicationController
 
   def preview
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
+
+    if @emailed_access_request.invalid?
+      flash.now[:errors] = @emailed_access_request.errors.messages.values.flatten.map do |error|
+        { "text" => error, "link" => '#emailed_access_request_requester_email' }
+      end
+      render action: 'new'
+      return
+    end
   end
 
   def create
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
+
     begin
       @emailed_access_request.manually_approve!
       flash[:notice] = "Successfully approved request"
@@ -46,7 +55,7 @@ private
   def set_flash_on_error_given(exception)
     flash[:error_summary] = "Problem approving request"
     flash[:errors] = [{
-      text: "A technical issue has occurred - let the technical support team know: #{exception.message}"
+      "text" => "A technical issue has occurred - let the technical support team know: #{exception.message}"
     }]
   end
 

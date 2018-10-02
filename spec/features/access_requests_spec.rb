@@ -73,6 +73,10 @@ RSpec.describe "Access requests", type: :feature do
   end
 
   describe "actioning emailed access requests" do
+    before do
+      FactoryBot.create(:user, email: 'requester@email.com')
+    end
+
     it "confirms success when the API call succeeds" do
       manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
         .with(query: {
@@ -113,7 +117,36 @@ RSpec.describe "Access requests", type: :feature do
       expect(page).to have_text("Open access requests")
     end
 
-    it "informs the user when the API call fails" do
+    it "stops the user support agent from proceeding if the requester email doesn't exist" do
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+
+      fill_in 'Requester email', with: 'nonexistent@email.com'
+      fill_in 'Target email', with: 'target@email.com'
+      fill_in 'First name', with: 'first'
+      fill_in 'Last name', with: 'last'
+
+      click_button 'Preview'
+
+      expect(page).to have_text("There is a problem")
+      expect(page).to have_text("Enter the email of somebody already in the system")
+    end
+
+    it "stops the user support agent from entering blank fields" do
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+      click_button 'Preview'
+
+      expect(page).to have_text("There is a problem")
+      expect(page).to have_text("Enter the email of someone already in the system")
+      expect(page).to have_text("Enter the email of the person who needs access")
+      expect(page).to have_text("Enter the first name of the person who needs access")
+      expect(page).to have_text("Enter the last name of the person who needs access")
+    end
+
+    it "informs the user support agent when the API call fails" do
       manage_courses_api_request = stub_request(:post, %r{#{BASE_API_URL}/api/admin/manual-access-request})
         .to_return(status: 503)
 
