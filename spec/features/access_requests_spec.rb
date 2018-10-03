@@ -74,7 +74,12 @@ RSpec.describe "Access requests", type: :feature do
 
   describe "actioning emailed access requests" do
     before do
-      FactoryBot.create(:user, email: 'requester@email.com')
+      FactoryBot.create(:user,
+        email: 'requester@email.com',
+        organisations: [
+          FactoryBot.create(:organisation, name: 'Org A'),
+          FactoryBot.create(:organisation, name: 'Org B'),
+        ])
     end
 
     it "previews the change, calls the API and confirms success when the request is valid" do
@@ -101,6 +106,8 @@ RSpec.describe "Access requests", type: :feature do
 
       expect(page).to have_text('Preview access request')
       expect(page).to have_text('first last <target@email.com>')
+      expect(page).to have_text('Org A')
+      expect(page).to have_text('Org B')
 
       click_button 'Approve'
 

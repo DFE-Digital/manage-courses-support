@@ -85,4 +85,13 @@ describe EmailedAccessRequest, type: :model do
 
     expect(emailed_request.recipient).to be_persisted
   end
+
+  it "calculates which new organisations will be accessible after the request is actioned" do
+    org_a, org_b, org_c = FactoryBot.create_list(:organisation, 3)
+
+    FactoryBot.create(:user, email: 'foo@bar.com', organisations: [org_a, org_c])
+    FactoryBot.create(:user, email: 'baz@qux.com', organisations: [org_a, org_b])
+
+    expect(emailed_request.new_organisations_granted).to eq([org_c])
+  end
 end

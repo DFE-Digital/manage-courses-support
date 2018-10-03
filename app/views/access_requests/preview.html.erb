@@ -21,6 +21,10 @@
           <th class="govuk-table__header" scope="row">Recipient</th>
           <td class="govuk-table__cell "><%= user_details(@emailed_access_request.recipient) if @emailed_access_request.recipient %></td>
         </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Will receive access to</th>
+          <td class="govuk-table__cell "><%= @emailed_access_request.new_organisations_granted.map(&:name).join(", ") %></td>
+        </tr>
       </tbody>
     </table>
   </div>
