@@ -18,10 +18,6 @@
     <table class="govuk-table">
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Requester email</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.requester_email %></td>
-        </tr>
-        <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="row">Recipient</th>
           <td class="govuk-table__cell "><%= user_details(@emailed_access_request.recipient) if @emailed_access_request.recipient %></td>
         </tr>
@@ -29,7 +25,6 @@
     </table>
   </div>
 </div>
-
 
 <%= form_for @emailed_access_request, url: {action: "create"} do |f| %>
   <%= f.hidden_field :requester_email %>
