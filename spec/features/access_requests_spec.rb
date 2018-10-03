@@ -77,7 +77,7 @@ RSpec.describe "Access requests", type: :feature do
       FactoryBot.create(:user, email: 'requester@email.com')
     end
 
-    it "confirms success when the API call succeeds" do
+    it "previews the change, calls the API and confirms success when the request is valid" do
       manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
         .with(query: {
           requesterEmail: 'requester@email.com',
