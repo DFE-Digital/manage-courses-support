@@ -6,4 +6,8 @@ class User < ApplicationRecord
     join_table: :mc_organisation_user,
     association_foreign_key: :org_id,
     foreign_key: :email
+
+  def full_name
+    [first_name, last_name].join(" ")
+  end
 end

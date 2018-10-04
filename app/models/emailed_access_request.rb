@@ -31,6 +31,16 @@ class EmailedAccessRequest
     User.find_by(email: requester_email)
   end
 
+  def recipient
+    User.
+      where(email: target_email).
+      first_or_initialize(first_name: first_name, last_name: last_name)
+  end
+
+  def new_organisations_granted
+    requester.organisations - recipient.organisations
+  end
+
   def manually_approve!
     MANAGE_COURSES_API.manually_approve_access_request(
       requester_email: requester_email,

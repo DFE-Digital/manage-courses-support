@@ -1,5 +1,5 @@
 <% content_for :heading do %>
-  Preview access request
+  Approve new access for <%= @emailed_access_request.recipient.full_name %>
 <% end %>
 
 <p class="govuk-body">
@@ -18,26 +18,17 @@
     <table class="govuk-table">
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Requester email</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.requester_email %></td>
+          <th class="govuk-table__header" scope="row">Recipient</th>
+          <td class="govuk-table__cell "><%= user_details(@emailed_access_request.recipient) if @emailed_access_request.recipient %></td>
         </tr>
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Target email</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.target_email %></td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">First name</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.first_name %></td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">Last name</th>
-          <td class="govuk-table__cell "><%= @emailed_access_request.last_name %></td>
+          <th class="govuk-table__header" scope="row">Will receive access to</th>
+          <td class="govuk-table__cell "><%= @emailed_access_request.new_organisations_granted.map(&:name).join(", ") %></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
 
 <%= form_for @emailed_access_request, url: {action: "create"} do |f| %>
   <%= f.hidden_field :requester_email %>

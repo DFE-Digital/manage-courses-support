@@ -74,10 +74,15 @@ RSpec.describe "Access requests", type: :feature do
 
   describe "actioning emailed access requests" do
     before do
-      FactoryBot.create(:user, email: 'requester@email.com')
+      FactoryBot.create(:user,
+        email: 'requester@email.com',
+        organisations: [
+          FactoryBot.create(:organisation, name: 'Org A'),
+          FactoryBot.create(:organisation, name: 'Org B'),
+        ])
     end
 
-    it "confirms success when the API call succeeds" do
+    it "previews the change, calls the API and confirms success when the request is valid" do
       manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
         .with(query: {
           requesterEmail: 'requester@email.com',
@@ -99,11 +104,10 @@ RSpec.describe "Access requests", type: :feature do
 
       click_button 'Preview'
 
-      expect(page).to have_text('Preview access request')
-      expect(page).to have_text('requester@email.com')
-      expect(page).to have_text('target@email.com')
-      expect(page).to have_text('first')
-      expect(page).to have_text('last')
+      expect(page).to have_text('Approve new access for first last')
+      expect(page).to have_text('first last <target@email.com>')
+      expect(page).to have_text('Org A')
+      expect(page).to have_text('Org B')
 
       click_button 'Approve'
 
