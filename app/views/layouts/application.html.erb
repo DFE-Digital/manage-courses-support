@@ -62,7 +62,9 @@
           <nav>
             <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
               <li class="govuk-header__navigation-item <%= 'govuk-header__navigation-item--active' if current_page?(access_requests_path) %>">
-                <%= link_to "Access requests", access_requests_path, class: "govuk-header__link" %>
+                <%= link_to access_requests_path, class: "govuk-header__link" do %>
+                  Access requests <%= "(#{count_of_unapproved_access_requests})" if count_of_unapproved_access_requests > 0 %>
+                <% end %>
               </li>
               <li class="govuk-header__navigation-item <%= 'govuk-header__navigation-item--active' if current_page?(organisations_path) %>">
                 <%= link_to "Organisations", organisations_path, class: "govuk-header__link" %>
