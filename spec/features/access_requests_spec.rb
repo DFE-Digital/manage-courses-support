@@ -20,6 +20,12 @@ RSpec.describe "Access requests", type: :feature do
 
       visit "/access-requests"
 
+      within("header") do
+        expect(page).to have_text("Access requests (1)")
+      end
+
+      expect(page).to have_text("Open access requests (1)")
+
       expect(page).to have_text("Jane")
       expect(page).to have_text("Smith")
       expect(page).not_to have_text("Leslie")
