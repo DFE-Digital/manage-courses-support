@@ -16,7 +16,7 @@ class EmailedAccessRequest
   end
 
   def target_email=(new_value)
-    @target_email = new_value.strip
+    @target_email = new_value.strip.downcase
   end
 
   def first_name=(new_value)

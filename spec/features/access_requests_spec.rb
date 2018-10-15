@@ -127,6 +127,33 @@ RSpec.describe "Access requests", type: :feature do
       expect(page).to have_text("Open access requests")
     end
 
+    it "lower-cases the recipient email because the API is case-sensitive" do
+      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
+        .with(query: {
+          requesterEmail: 'requester@email.com',
+          targetEmail: 'target.email@email.com',
+          firstName: 'first',
+          lastName: 'last'
+        })
+        .to_return(status: 200)
+
+      visit '/access-requests'
+
+      click_link 'Create and approve an access request manually'
+
+      fill_in 'Requester email', with: 'requester@email.com'
+      fill_in 'Target email', with: 'Target.Email@email.com'
+      fill_in 'First name', with: 'first'
+      fill_in 'Last name', with: 'last'
+
+      click_button 'Preview'
+      expect(page).to have_text('first last <target.email@email.com>')
+
+      click_button 'Approve'
+
+      expect(manage_courses_api_request).to have_been_made
+    end
+
     it "stops the user support agent from proceeding if the requester email doesn't exist" do
       visit '/access-requests'
 
