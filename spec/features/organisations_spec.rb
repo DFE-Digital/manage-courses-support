@@ -8,6 +8,7 @@ RSpec.describe "Organisations", type: :feature do
       FactoryBot.create(:organisation,
         name: "Stellar Alliance / Stellar SCITT",
         org_id: '12345',
+        nctl_organisations_count: 0,
         users: [
           FactoryBot.create(:user,
             email: 'awatson@stellar.org',
@@ -28,6 +29,13 @@ RSpec.describe "Organisations", type: :feature do
             inst_code: 'S02'),
         ])
 
+      FactoryBot.create(:nctl_organisation,
+        nctl_id: '1357',
+        organisation: Organisation.find_by(org_id: '12345'))
+      FactoryBot.create(:nctl_organisation,
+        nctl_id: '2468',
+        organisation: Organisation.find_by(org_id: '12345'))
+
       FactoryBot.create(:organisation,
         name: "University of Duncree",
         org_id: '67890',
@@ -46,6 +54,8 @@ RSpec.describe "Organisations", type: :feature do
       visit "/organisations"
 
       within "#organisation12345" do
+        expect(page).to have_text("Stellar Alliance / Stellar SCITT")
+        expect(page).to have_text("NCTL IDs: 1357, 2468")
         expect(page).to have_text("Alice Watson <awatson@stellar.org>")
         expect(page).to have_link(
           "Betty Smith <bsmith@stellar.org>",
