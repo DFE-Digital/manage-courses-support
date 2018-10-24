@@ -16,4 +16,8 @@ class Organisation < ApplicationRecord
 
   has_many :nctl_organisations,
     foreign_key: :org_id
+
+  def nctl_ids
+    nctl_organisations.map(&:nctl_id)
+  end
 end
