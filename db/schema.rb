@@ -38,22 +38,22 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.integer "status"
   end
 
-  create_table "mc_organisation", force: :cascade do |t|
+  create_table "organisation", force: :cascade do |t|
     t.string "name"
     t.string "org_id"
   end
 
-  create_table "mc_organisation_institution", force: :cascade do |t|
-    t.string "institution_code"
-    t.string "org_id"
+  create_table "organisation_institution", force: :cascade do |t|
+    t.integer "institution_id"
+    t.integer "organisation_id"
   end
 
-  create_table "mc_organisation_user", force: :cascade do |t|
-    t.string "org_id"
-    t.string "email"
+  create_table "organisation_user", force: :cascade do |t|
+    t.integer "organisation_id"
+    t.integer "user_id"
   end
 
-  create_table "mc_user", force: :cascade do |t|
+  create_table "user", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
     t.string "last_name"
@@ -64,26 +64,23 @@ ActiveRecord::Schema.define(version: 20180910210753) do
   end
 
   create_table "nctl_organisation", force: :cascade do |t|
-    t.string "org_id"
+    t.integer "organisation_id"
     t.string "nctl_id"
   end
 
-  create_table "ucas_course", force: :cascade do |t|
-    t.string "inst_code"
-    t.string "crse_code"
+  create_table "course", force: :cascade do |t|
+    t.integer "institution_id"
+    t.string "course_code"
   end
 
-  create_table "ucas_institution", force: :cascade do |t|
+  create_table "institution", force: :cascade do |t|
     t.string "inst_name"
-    t.string "inst_big"
-    t.string "inst_full"
     t.string "addr1"
     t.string "addr2"
     t.string "addr3"
     t.string "addr4"
     t.string "postcode"
     t.string "scitt"
-    t.string "accrediting_provider"
     t.string "contact_name"
     t.string "year_code"
     t.string "inst_code"
