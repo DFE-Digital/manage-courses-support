@@ -61,11 +61,11 @@ FactoryBot.define do
     end
 
     after(:create) do |institution, evaluator|
-      create_list(:ucas_course, evaluator.course_count, institution: institution)
+      create_list(:course, evaluator.course_count, institution: institution)
     end
   end
 
-  factory :ucas_course do
+  factory :course do
     sequence(:course_code) { |n| "C#{n}D3" }
   end
 
