@@ -25,8 +25,6 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.integer "status"
     t.string "requester_email"
     t.datetime "request_date_utc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "course_enrichment", force: :cascade do |t|
@@ -43,8 +41,6 @@ ActiveRecord::Schema.define(version: 20180910210753) do
   create_table "mc_organisation", force: :cascade do |t|
     t.string "name"
     t.string "org_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "mc_organisation_institution", force: :cascade do |t|
@@ -65,8 +61,6 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.datetime "first_login_date_utc"
     t.datetime "last_login_date_utc"
     t.datetime "welcome_email_date_utc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "nctl_organisation", force: :cascade do |t|
