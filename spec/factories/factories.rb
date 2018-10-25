@@ -53,7 +53,7 @@ FactoryBot.define do
   end
 
   factory :institution do
-    inst_full { 'ACME SCITT' + rand(1000000).to_s }
+    inst_name { 'ACME SCITT' + rand(1000000).to_s }
     sequence(:inst_code) { |n| "A#{n}" }
 
     transient do
@@ -61,12 +61,12 @@ FactoryBot.define do
     end
 
     after(:create) do |institution, evaluator|
-      create_list(:ucas_course, evaluator.course_count, institution: institution)
+      create_list(:course, evaluator.course_count, institution: institution)
     end
   end
 
-  factory :ucas_course do
-    sequence(:crse_code) { |n| "C#{n}D3" }
+  factory :course do
+    sequence(:course_code) { |n| "C#{n}D3" }
   end
 
   factory :nctl_organisation do

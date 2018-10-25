@@ -16,8 +16,8 @@ acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
   institutions: [
-    Institution.create!(inst_full: 'Acme SCITT', inst_code: 'A01'),
-    Institution.create!(inst_full: 'Acme Alliance', inst_code: 'A02'),
+    Institution.create!(inst_name: 'Acme SCITT', inst_code: 'A01'),
+    Institution.create!(inst_name: 'Acme Alliance', inst_code: 'A02'),
   ],
   users: [
     User.create!(
@@ -31,18 +31,18 @@ acme = Organisation.create!(
   ],
 )
 
-UcasCourse.create!(
-  crse_code: '3X1A',
+Course.create!(
+  course_code: '3X1A',
   institution: Institution.find_by(inst_code: 'A01'),
 )
 
-UcasCourse.create!(
-  crse_code: '3X1B',
+Course.create!(
+  course_code: '3X1B',
   institution: Institution.find_by(inst_code: 'A01'),
 )
 
-UcasCourse.create!(
-  crse_code: '5W2A',
+Course.create!(
+  course_code: '5W2A',
   institution: Institution.find_by(inst_code: 'A02'),
 )
 
@@ -75,7 +75,7 @@ big_uni = Organisation.create!(
   name: 'Big Uni',
   org_id: '67890',
   institutions: [
-    Institution.create!(inst_full: 'Big Uni', inst_code: 'B01'),
+    Institution.create!(inst_name: 'Big Uni', inst_code: 'B01'),
   ],
   users: [
     User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
@@ -85,8 +85,8 @@ big_uni = Organisation.create!(
   ],
 )
 
-UcasCourse.create!(
-  crse_code: '9A5Y',
+Course.create!(
+  course_code: '9A5Y',
   institution: Institution.find_by(inst_code: 'B01'),
 )
 

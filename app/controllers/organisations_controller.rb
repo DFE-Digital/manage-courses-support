@@ -7,8 +7,8 @@ class OrganisationsController < ApplicationController
     @organisations = Organisation.
       includes(:institutions, :users).
       left_outer_joins(:users).
-      group('mc_organisation.id').
-      having('count(mc_user.welcome_email_date_utc) = 0')
+      group('organisation.id').
+      having('count("user".welcome_email_date_utc) = 0')
 
     render :index
   end

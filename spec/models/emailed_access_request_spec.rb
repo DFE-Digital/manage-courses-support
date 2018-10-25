@@ -73,8 +73,10 @@ describe EmailedAccessRequest, type: :model do
   end
 
   it "instantiates a new recipient if they aren't a user in the system" do
-    expect(emailed_request.recipient).to eq(
-      User.new(email: 'baz@qux.com', first_name: 'baz', last_name: 'qux')
+    expect(emailed_request.recipient.attributes.slice("email", "first_name", "last_name")).to eq(
+      "email" => 'baz@qux.com',
+      "first_name" => 'baz',
+      "last_name" => 'qux',
     )
     expect(emailed_request.recipient).not_to be_persisted
   end

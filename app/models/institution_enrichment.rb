@@ -5,5 +5,6 @@ class InstitutionEnrichment < ApplicationRecord
   enum status: { draft: 0, published: 1 }
 
   belongs_to :institution,
-    foreign_key: :inst_code
+    foreign_key: :inst_code,
+    primary_key: :inst_code
 end

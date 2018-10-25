@@ -4,52 +4,54 @@ class OrganisationsEngagementReport
   QUERY = "
   WITH orgs_with_allocations AS (
       SELECT
-          DISTINCT org_id
+          DISTINCT organisation_id
       FROM
           nctl_organisation
   ),
   orgs_with_ucas_courses AS (
       SELECT
-          oi.org_id,
-          count(DISTINCT c.crse_code) number_of_courses
+          oi.organisation_id,
+          count(DISTINCT c.course_code) number_of_courses
       FROM
-          mc_organisation_institution oi
-          LEFT OUTER JOIN ucas_course c ON oi.institution_code = c.inst_code
+          organisation_institution oi
+          LEFT OUTER JOIN course c ON oi.institution_id = c.institution_id
       GROUP BY
-          oi.org_id
+          oi.organisation_id
   ),
   orgs_with_active_users AS (
       SELECT
-          ou.org_id,
+          ou.organisation_id,
           sum(CASE WHEN u.welcome_email_date_utc IS NOT NULL THEN 1 ELSE 0 END) active_users
       FROM
-          mc_organisation_user ou
-          JOIN mc_user u ON ou.email = u.email
+          organisation_user ou
+          JOIN \"user\" u ON ou.user_id = u.id
       WHERE u.email NOT LIKE '%education.gov.uk'
-      GROUP BY ou.org_id
+      GROUP BY ou.organisation_id
   ),
   orgs_with_inst_enrichments AS (
       SELECT
-          oi.org_id,
+          oi.organisation_id,
           sum(CASE WHEN e.status = 1 THEN 1 ELSE 0 end) number_of_published_org_enrichments,
           sum(1) number_of_org_enrichments
       FROM
           institution_enrichment e
-          JOIN mc_organisation_institution oi ON oi.institution_code = e.inst_code
-      GROUP BY oi.org_id
+          JOIN institution i ON e.inst_code = i.inst_code
+          JOIN organisation_institution oi ON oi.institution_id = i.id
+      GROUP BY oi.organisation_id
   ),
   orgs_with_course_enrichments AS (
       SELECT
-          oi.org_id,
+          oi.organisation_id,
           sum(CASE WHEN e.status = 1 THEN 1 ELSE 0 end) number_of_published_course_enrichments,
           sum(1) number_of_course_enrichments
       FROM
           course_enrichment e
-          JOIN mc_organisation_institution oi ON oi.institution_code = e.inst_code
-      GROUP BY oi.org_id
+          JOIN institution i ON e.inst_code = i.inst_code
+          JOIN organisation_institution oi ON oi.institution_id = i.id
+      GROUP BY oi.organisation_id
   )
   SELECT
-      SUM(CASE WHEN oa.org_id IS NOT NULL THEN 1 ELSE 0 end) AS orgs_with_allocations,
+      SUM(CASE WHEN oa.organisation_id IS NOT NULL THEN 1 ELSE 0 end) AS orgs_with_allocations,
       SUM(CASE WHEN ouc.number_of_courses > 0 THEN 1 ELSE 0 end) AS orgs_with_ucas_courses,
       SUM(CASE WHEN owu.active_users > 0 THEN 1 ELSE 0 end) AS orgs_with_active_users,
       SUM(CASE WHEN oie.number_of_org_enrichments > 0 THEN 1 ELSE 0 end) AS orgs_with_started_inst_enrichments,
@@ -58,10 +60,10 @@ class OrganisationsEngagementReport
       SUM(CASE WHEN oce.number_of_published_course_enrichments > 0 THEN 1 ELSE 0 end) AS orgs_with_published_course_enrichments
   FROM
       orgs_with_allocations oa
-      FULL OUTER JOIN orgs_with_ucas_courses ouc ON oa.org_id = ouc.org_id
-      FULL OUTER JOIN orgs_with_active_users owu ON oa.org_id = owu.org_id
-      FULL OUTER JOIN orgs_with_inst_enrichments oie ON oa.org_id = oie.org_id
-      FULL OUTER JOIN orgs_with_course_enrichments oce ON oa.org_id = oce.org_id".freeze
+      FULL OUTER JOIN orgs_with_ucas_courses ouc ON oa.organisation_id = ouc.organisation_id
+      FULL OUTER JOIN orgs_with_active_users owu ON oa.organisation_id = owu.organisation_id
+      FULL OUTER JOIN orgs_with_inst_enrichments oie ON oa.organisation_id = oie.organisation_id
+      FULL OUTER JOIN orgs_with_course_enrichments oce ON oa.organisation_id = oce.organisation_id".freeze
 
   def run
     @results = ActiveRecord::Base.connection.execute(QUERY)[0]
