@@ -9,7 +9,7 @@ module OrganisationHelper
   end
 
   def institution_details(institution)
-    link_to "#{institution.inst_full} [#{institution.inst_code}]",
+    link_to "#{institution.inst_name} [#{institution.inst_code}]",
       institution_url_on_publish_teacher_training_courses(institution)
   end
 

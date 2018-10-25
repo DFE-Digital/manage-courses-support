@@ -1,11 +1,8 @@
 class User < ApplicationRecord
-  self.table_name = "mc_user"
-  self.primary_key = "email"
+  self.table_name = "user"
 
   has_and_belongs_to_many :organisations,
-    join_table: :mc_organisation_user,
-    association_foreign_key: :org_id,
-    foreign_key: :email
+    join_table: :organisation_user
 
   def full_name
     [first_name, last_name].join(" ")

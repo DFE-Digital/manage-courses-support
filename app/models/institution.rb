@@ -1,6 +1,5 @@
 class Institution < ApplicationRecord
-  self.table_name = "ucas_institution"
-  self.primary_key = "inst_code"
+  self.table_name = "institution"
 
   has_and_belongs_to_many :organisations,
     join_table: :mc_organisation_institution,

@@ -22,10 +22,10 @@ RSpec.describe "Organisations", type: :feature do
         ],
         institutions: [
           FactoryBot.create(:institution,
-            inst_full: 'Stellar Alliance',
+            inst_name: 'Stellar Alliance',
             inst_code: 'S01'),
           FactoryBot.create(:institution,
-            inst_full: 'Stellar SCITT',
+            inst_name: 'Stellar SCITT',
             inst_code: 'S02'),
         ])
 
@@ -47,7 +47,7 @@ RSpec.describe "Organisations", type: :feature do
         ],
         institutions: [
           FactoryBot.create(:institution,
-            inst_full: 'University of Duncree',
+            inst_name: 'University of Duncree',
             inst_code: 'D07')
         ])
 
@@ -116,7 +116,7 @@ RSpec.describe "Organisations", type: :feature do
         ],
         institutions: [
           FactoryBot.create(:institution,
-            inst_full: 'University of Duncree',
+            inst_name: 'University of Duncree',
             inst_code: 'D07')
         ])
 

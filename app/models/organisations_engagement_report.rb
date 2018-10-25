@@ -11,7 +11,7 @@ class OrganisationsEngagementReport
   orgs_with_ucas_courses AS (
       SELECT
           oi.org_id,
-          count(DISTINCT c.crse_code) number_of_courses
+          count(DISTINCT c.course_code) number_of_courses
       FROM
           mc_organisation_institution oi
           LEFT OUTER JOIN ucas_course c ON oi.institution_code = c.inst_code
