@@ -15,7 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'jbuilder', '~> 2.5'
-gem 'json', '1.8.6'
+gem 'json'
 gem 'pkg-config','~> 1.1'
 gem 'rake'
 
