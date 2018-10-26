@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.3'
+gem 'rails'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -15,9 +15,10 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'jbuilder', '~> 2.5'
-gem 'json', '1.8.6'
-gem 'pkg-config','~> 1.1'
+gem 'json'
+gem 'pkg-config', '~> 1.1'
 gem 'rake'
+gem 'bootsnap', '>= 1.1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
