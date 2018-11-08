@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'jbuilder', '~> 2.8'
 gem 'json'
-gem 'pkg-config', '~> 1.1'
+gem 'pkg-config', '~> 1.3'
 gem 'rake'
 gem 'bootsnap', '>= 1.1.0'
 
