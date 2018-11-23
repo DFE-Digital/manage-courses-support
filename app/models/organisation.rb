@@ -6,8 +6,8 @@ class Organisation < ApplicationRecord
   has_and_belongs_to_many :users, -> { where('"user".email not like ?', "%#{ADMIN_EMAIL_DOMAIN}") },
     join_table: :organisation_user
 
-  has_and_belongs_to_many :institutions,
-    join_table: :organisation_institution
+  has_and_belongs_to_many :providers,
+    join_table: :organisation_provider
 
   has_many :nctl_organisations
 

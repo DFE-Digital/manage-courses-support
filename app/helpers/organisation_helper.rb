@@ -8,12 +8,12 @@ module OrganisationHelper
     end
   end
 
-  def institution_details(institution)
-    link_to "#{institution.inst_name} [#{institution.inst_code}]",
-      institution_url_on_publish_teacher_training_courses(institution)
+  def provider_details(provider)
+    link_to "#{provider.provider_name} [#{provider.provider_code}]",
+      provider_url_on_publish_teacher_training_courses(provider)
   end
 
-  def institution_url_on_publish_teacher_training_courses(institution)
-    "https://publish-teacher-training-courses.education.gov.uk/organisation/#{institution.inst_code.downcase}"
+  def provider_url_on_publish_teacher_training_courses(provider)
+    "https://publish-teacher-training-courses.education.gov.uk/organisation/#{provider.provider_code.downcase}"
   end
 end

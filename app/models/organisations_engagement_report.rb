@@ -13,8 +13,8 @@ class OrganisationsEngagementReport
           oi.organisation_id,
           count(DISTINCT c.course_code) number_of_courses
       FROM
-          organisation_institution oi
-          LEFT OUTER JOIN course c ON oi.institution_id = c.institution_id
+          organisation_provider oi
+          LEFT OUTER JOIN course c ON oi.provider_id = c.provider_id
       GROUP BY
           oi.organisation_id
   ),
@@ -34,9 +34,9 @@ class OrganisationsEngagementReport
           sum(CASE WHEN e.status = 1 THEN 1 ELSE 0 end) number_of_published_org_enrichments,
           sum(1) number_of_org_enrichments
       FROM
-          institution_enrichment e
-          JOIN institution i ON e.inst_code = i.inst_code
-          JOIN organisation_institution oi ON oi.institution_id = i.id
+          provider_enrichment e
+          JOIN provider i ON e.provider_code = i.provider_code
+          JOIN organisation_provider oi ON oi.provider_id = i.id
       GROUP BY oi.organisation_id
   ),
   orgs_with_course_enrichments AS (
@@ -46,8 +46,8 @@ class OrganisationsEngagementReport
           sum(1) number_of_course_enrichments
       FROM
           course_enrichment e
-          JOIN institution i ON e.inst_code = i.inst_code
-          JOIN organisation_institution oi ON oi.institution_id = i.id
+          JOIN provider i ON e.provider_code = i.provider_code
+          JOIN organisation_provider oi ON oi.provider_id = i.id
       GROUP BY oi.organisation_id
   )
   SELECT

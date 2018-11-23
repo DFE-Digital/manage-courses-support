@@ -16,13 +16,13 @@
     <% end %>
   </td>
   <td class="govuk-table__cell">
-    <% institutions = organisation.institutions %>
-    <% if institutions.size == 1 %>
-      <%= institution_details(institutions.first) %>
+    <% providers = organisation.providers %>
+    <% if providers.size == 1 %>
+      <%= provider_details(providers.first) %>
     <% else %>
       <ul class="govuk-list govuk-list--bullet">
-        <% institutions.map do |i| %>
-          <li><%= institution_details(i) %></li>
+        <% providers.map do |i| %>
+          <li><%= provider_details(i) %></li>
         <% end %>
       </ul>
     <% end %>

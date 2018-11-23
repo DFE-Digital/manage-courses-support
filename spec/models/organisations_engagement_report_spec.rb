@@ -9,11 +9,11 @@ describe OrganisationsEngagementReport, type: :model do
   end
 
   it "tracks the number of organisations with UCAS courses" do
-    institutions = FactoryBot.create_list(:institution, 4, course_count: 2)
+    providers = FactoryBot.create_list(:provider, 4, course_count: 2)
 
-    # attach institutions to orgs
-    orgs[0..3].zip(institutions) do |org, institution|
-      org.institutions << institution
+    # attach providers to orgs
+    orgs[0..3].zip(providers) do |org, provider|
+      org.providers << provider
     end
 
     expect(report[:orgs_with_ucas_courses]).to eq(4)
@@ -32,33 +32,33 @@ describe OrganisationsEngagementReport, type: :model do
     expect(report[:orgs_with_active_users]).to eq(3)
   end
 
-  it "tracks the number of organisations with started and published institution enrichments" do
-    institutions = FactoryBot.create_list(:institution, 2, course_count: 1)
+  it "tracks the number of organisations with started and published provider enrichments" do
+    providers = FactoryBot.create_list(:provider, 2, course_count: 1)
 
-    # attach institutions to orgs
-    orgs[0..1].zip(institutions) do |org, institution|
-      org.institutions << institution
+    # attach providers to orgs
+    orgs[0..1].zip(providers) do |org, provider|
+      org.providers << provider
     end
 
-    FactoryBot.create(:institution_enrichment, :draft, institution: institutions[0])
-    FactoryBot.create(:institution_enrichment, :published, institution: institutions[0])
-    FactoryBot.create(:institution_enrichment, :draft, institution: institutions[1])
+    FactoryBot.create(:provider_enrichment, :draft, provider: providers[0])
+    FactoryBot.create(:provider_enrichment, :published, provider: providers[0])
+    FactoryBot.create(:provider_enrichment, :draft, provider: providers[1])
 
     expect(report[:orgs_with_started_inst_enrichments]).to eq(2)
     expect(report[:orgs_with_published_inst_enrichments]).to eq(1)
   end
 
   it "tracks the number of organisations with started and published course enrichments" do
-    institutions = FactoryBot.create_list(:institution, 2, course_count: 1)
+    providers = FactoryBot.create_list(:provider, 2, course_count: 1)
 
-    # attach institutions to orgs
-    orgs[0..1].zip(institutions) do |org, institution|
-      org.institutions << institution
+    # attach providers to orgs
+    orgs[0..1].zip(providers) do |org, provider|
+      org.providers << provider
     end
 
-    FactoryBot.create(:course_enrichment, :draft, institution: institutions[0])
-    FactoryBot.create(:course_enrichment, :published, institution: institutions[0])
-    FactoryBot.create(:course_enrichment, :draft, institution: institutions[1])
+    FactoryBot.create(:course_enrichment, :draft, provider: providers[0])
+    FactoryBot.create(:course_enrichment, :published, provider: providers[0])
+    FactoryBot.create(:course_enrichment, :draft, provider: providers[1])
 
     expect(report[:orgs_with_started_course_enrichments]).to eq(2)
     expect(report[:orgs_with_published_course_enrichments]).to eq(1)
