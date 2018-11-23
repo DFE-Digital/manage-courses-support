@@ -15,9 +15,9 @@ admin_user = User.create!(
 acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
-  institutions: [
-    Institution.create!(inst_name: 'Acme SCITT', inst_code: 'A01'),
-    Institution.create!(inst_name: 'Acme Alliance', inst_code: 'A02'),
+  providers: [
+    Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01'),
+    Provider.create!(provider_name: 'Acme Alliance', provider_code: 'A02'),
   ],
   users: [
     User.create!(
@@ -33,36 +33,36 @@ acme = Organisation.create!(
 
 Course.create!(
   course_code: '3X1A',
-  institution: Institution.find_by(inst_code: 'A01'),
+  provider: Provider.find_by(provider_code: 'A01'),
 )
 
 Course.create!(
   course_code: '3X1B',
-  institution: Institution.find_by(inst_code: 'A01'),
+  provider: Provider.find_by(provider_code: 'A01'),
 )
 
 Course.create!(
   course_code: '5W2A',
-  institution: Institution.find_by(inst_code: 'A02'),
+  provider: Provider.find_by(provider_code: 'A02'),
 )
 
-InstitutionEnrichment.create!(
-  institution: Institution.find_by(inst_code: 'A01'),
+ProviderEnrichment.create!(
+  provider: Provider.find_by(provider_code: 'A01'),
   status: :published,
 )
 
-InstitutionEnrichment.create!(
-  institution: Institution.find_by(inst_code: 'A01'),
+ProviderEnrichment.create!(
+  provider: Provider.find_by(provider_code: 'A01'),
   status: :draft,
 )
 
 CourseEnrichment.create!(
-  institution: Institution.find_by(inst_code: 'A01'),
+  provider: Provider.find_by(provider_code: 'A01'),
   status: :draft,
 )
 
 CourseEnrichment.create!(
-  institution: Institution.find_by(inst_code: 'A01'),
+  provider: Provider.find_by(provider_code: 'A01'),
   status: :published,
 )
 
@@ -74,8 +74,8 @@ NctlOrganisation.create!(
 big_uni = Organisation.create!(
   name: 'Big Uni',
   org_id: '67890',
-  institutions: [
-    Institution.create!(inst_name: 'Big Uni', inst_code: 'B01'),
+  providers: [
+    Provider.create!(provider_name: 'Big Uni', provider_code: 'B01'),
   ],
   users: [
     User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
@@ -87,7 +87,7 @@ big_uni = Organisation.create!(
 
 Course.create!(
   course_code: '9A5Y',
-  institution: Institution.find_by(inst_code: 'B01'),
+  provider: Provider.find_by(provider_code: 'B01'),
 )
 
 NctlOrganisation.create!(

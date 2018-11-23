@@ -52,16 +52,16 @@ FactoryBot.define do
     end
   end
 
-  factory :institution do
-    inst_name { 'ACME SCITT' + rand(1000000).to_s }
-    sequence(:inst_code) { |n| "A#{n}" }
+  factory :provider do
+    provider_name { 'ACME SCITT' + rand(1000000).to_s }
+    sequence(:provider_code) { |n| "A#{n}" }
 
     transient do
       course_count { 2 }
     end
 
-    after(:create) do |institution, evaluator|
-      create_list(:course, evaluator.course_count, institution: institution)
+    after(:create) do |provider, evaluator|
+      create_list(:course, evaluator.course_count, provider: provider)
     end
   end
 
@@ -81,11 +81,11 @@ FactoryBot.define do
     status { 1 }
   end
 
-  factory :institution_enrichment do
-    institution
+  factory :provider_enrichment do
+    provider
   end
 
   factory :course_enrichment do
-    institution
+    provider
   end
 end

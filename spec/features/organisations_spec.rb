@@ -4,7 +4,7 @@ RSpec.describe "Organisations", type: :feature do
   include_context 'when authenticated'
 
   context "when accessing #index" do
-    it "lists all organisations with their associated users and UCAS institutions" do
+    it "lists all organisations with their associated users and UCAS providers" do
       FactoryBot.create(:organisation,
         name: "Stellar Alliance / Stellar SCITT",
         org_id: '12345',
@@ -20,13 +20,13 @@ RSpec.describe "Organisations", type: :feature do
             last_name: 'Smith',
             sign_in_user_id: 'a-uuid'),
         ],
-        institutions: [
-          FactoryBot.create(:institution,
-            inst_name: 'Stellar Alliance',
-            inst_code: 'S01'),
-          FactoryBot.create(:institution,
-            inst_name: 'Stellar SCITT',
-            inst_code: 'S02'),
+        providers: [
+          FactoryBot.create(:provider,
+            provider_name: 'Stellar Alliance',
+            provider_code: 'S01'),
+          FactoryBot.create(:provider,
+            provider_name: 'Stellar SCITT',
+            provider_code: 'S02'),
         ])
 
       FactoryBot.create(:nctl_organisation,
@@ -45,10 +45,10 @@ RSpec.describe "Organisations", type: :feature do
             first_name: 'James',
             last_name: 'Brady')
         ],
-        institutions: [
-          FactoryBot.create(:institution,
-            inst_name: 'University of Duncree',
-            inst_code: 'D07')
+        providers: [
+          FactoryBot.create(:provider,
+            provider_name: 'University of Duncree',
+            provider_code: 'D07')
         ])
 
       visit "/organisations"
@@ -114,10 +114,10 @@ RSpec.describe "Organisations", type: :feature do
             first_name: 'James',
             last_name: 'Brady')
         ],
-        institutions: [
-          FactoryBot.create(:institution,
-            inst_name: 'University of Duncree',
-            inst_code: 'D07')
+        providers: [
+          FactoryBot.create(:provider,
+            provider_name: 'University of Duncree',
+            provider_code: 'D07')
         ])
 
       visit "/organisations/without-active-users"

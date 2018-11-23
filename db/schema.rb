@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(version: 20180910210753) do
   end
 
   create_table "course_enrichment", force: :cascade do |t|
-    t.string "inst_code"
+    t.string "provider_code"
     t.string "ucas_course_code"
     t.integer "status"
   end
 
-  create_table "institution_enrichment", force: :cascade do |t|
-    t.string "inst_code"
+  create_table "provider_enrichment", force: :cascade do |t|
+    t.string "provider_code"
     t.integer "status"
   end
 
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "org_id"
   end
 
-  create_table "organisation_institution", force: :cascade do |t|
-    t.integer "institution_id"
+  create_table "organisation_provider", force: :cascade do |t|
+    t.integer "provider_id"
     t.integer "organisation_id"
   end
 
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20180910210753) do
   end
 
   create_table "course", force: :cascade do |t|
-    t.integer "institution_id"
+    t.integer "provider_id"
     t.string "course_code"
   end
 
-  create_table "institution", force: :cascade do |t|
-    t.string "inst_name"
+  create_table "provider", force: :cascade do |t|
+    t.string "provider_name"
     t.string "addr1"
     t.string "addr2"
     t.string "addr3"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "scitt"
     t.string "contact_name"
     t.string "year_code"
-    t.string "inst_code"
-    t.string "inst_type"
+    t.string "provider_code"
+    t.string "provider_type"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
