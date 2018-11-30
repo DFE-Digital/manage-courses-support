@@ -1,5 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :course_code, :course_month, :name, :study_mode
+  attributes :course_code, :course_month, :name, :study_mode, :copy_form_required
   attributes :modular, :english, :maths, :science
   has_many :site_statuses, key: :campuses
   has_one :provider
@@ -24,5 +24,9 @@ class CourseSerializer < ActiveModel::Serializer
 
   def science
     # TODO: pull in from UCAS, possible values 1, 2, 3 or 9
+  end
+
+  def copy_form_required
+    "Y" # we want to always create PDFs for applications coming in
   end
 end
