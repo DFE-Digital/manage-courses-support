@@ -20,6 +20,8 @@ gem 'pkg-config', '~> 1.3'
 gem 'rake'
 gem 'bootsnap', '>= 1.1.0'
 
+gem 'active_model_serializers'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
