@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
 
   create_table "course", force: :cascade do |t|
     t.integer "provider_id"
+    t.integer "accrediting_provider_id"
     t.string "course_code"
     t.string "study_mode"
     t.string "name"

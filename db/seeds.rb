@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+accrediting_provider = Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01')
+
 admin_user = User.create!(
   first_name: 'Super',
   last_name: 'Admin',
@@ -16,7 +18,7 @@ acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
   providers: [
-    Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01'),
+    accrediting_provider,
     Provider.create!(provider_name: 'Acme Alliance', provider_code: 'A02'),
   ],
   users: [
@@ -43,7 +45,7 @@ school = Site.create!(
 course1 = Course.create!(
   name: "Mathematics",
   course_code: '3X1A',
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
 )
 
 SiteStatus.create!(
@@ -56,9 +58,8 @@ SiteStatus.create!(
 
 course2 = Course.create!(
   name: "Biology",
-
   course_code: '3X1B',
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
 )
 
 SiteStatus.create!(
@@ -73,25 +74,26 @@ Course.create!(
   name: "Primary",
   course_code: '5W2A',
   provider: Provider.find_by(provider_code: 'A02'),
+  accrediting_provider: accrediting_provider,
 )
 
 ProviderEnrichment.create!(
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
   status: :published,
 )
 
 ProviderEnrichment.create!(
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
   status: :draft,
 )
 
 CourseEnrichment.create!(
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
   status: :draft,
 )
 
 CourseEnrichment.create!(
-  provider: Provider.find_by(provider_code: 'A01'),
+  provider: accrediting_provider,
   status: :published,
 )
 
