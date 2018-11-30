@@ -1,6 +1,6 @@
 class CourseSerializer < ActiveModel::Serializer
   attributes :course_code, :course_month, :name, :study_mode, :copy_form_required, :profpost_flag, :program_type
-  attributes :modular, :english, :maths, :science
+  attributes :modular, :english, :maths, :science, :has_been_published
   has_many :site_statuses, key: :campuses
   has_one :provider
   has_one :accrediting_provider
@@ -11,7 +11,10 @@ class CourseSerializer < ActiveModel::Serializer
 
   def modular
     # TODO: pull in from UCAS, possible values "M" or nil
-    nil
+  end
+
+  def has_been_published
+    # TODO: pull in from UCAS, possible values "M" or nil
   end
 
   def english
