@@ -1,5 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :course_code, :institution_code, :modular
+  attributes :course_code, :institution_code, :modular, :study_mode
 
   def institution_code
     object.provider.provider_code
