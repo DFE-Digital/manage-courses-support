@@ -108,5 +108,6 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.integer "site_id"
     t.string "vac_status"
     t.string "publish"
+    t.string "status"
   end
 end

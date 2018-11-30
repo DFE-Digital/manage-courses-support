@@ -51,6 +51,7 @@ SiteStatus.create!(
   vac_status: 'F',
   publish: 'Y',
   course: course1,
+  status: 'R',
 )
 
 course2 = Course.create!(
@@ -65,6 +66,7 @@ SiteStatus.create!(
   vac_status: 'B',
   publish: 'Y',
   course: course2,
+  status: 'N',
 )
 
 Course.create!(
