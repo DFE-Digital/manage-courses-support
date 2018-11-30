@@ -41,18 +41,21 @@ school = Site.create!(
 )
 
 Course.create!(
+  name: "Mathematics",
   course_code: '3X1A',
   provider: Provider.find_by(provider_code: 'A01'),
   sites: [school],
 )
 
 Course.create!(
+  name: "Biology",
   course_code: '3X1B',
   provider: Provider.find_by(provider_code: 'A01'),
   sites: [school],
 )
 
 Course.create!(
+  name: "Primary",
   course_code: '5W2A',
   provider: Provider.find_by(provider_code: 'A02'),
 )
@@ -97,6 +100,7 @@ big_uni = Organisation.create!(
 )
 
 Course.create!(
+  name: "Russian",
   course_code: '9A5Y',
   provider: Provider.find_by(provider_code: 'B01'),
 )
