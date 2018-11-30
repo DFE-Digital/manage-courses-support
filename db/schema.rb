@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "study_mode"
     t.string "name"
     t.datetime "start_date"
+    t.string "profpost_flag"
   end
 
   create_table "provider", force: :cascade do |t|

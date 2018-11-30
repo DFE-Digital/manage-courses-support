@@ -1,5 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :course_code, :course_month, :name, :study_mode, :copy_form_required
+  attributes :course_code, :course_month, :name, :study_mode, :copy_form_required, :profpost_flag
   attributes :modular, :english, :maths, :science
   has_many :site_statuses, key: :campuses
   has_one :provider
