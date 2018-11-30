@@ -46,6 +46,7 @@ course1 = Course.create!(
   name: "Mathematics",
   course_code: '3X1A',
   provider: accrediting_provider,
+  start_date: Date.new(2019, 9, 1),
 )
 
 SiteStatus.create!(
@@ -60,6 +61,7 @@ course2 = Course.create!(
   name: "Biology",
   course_code: '3X1B',
   provider: accrediting_provider,
+  start_date: Date.new(2019, 9, 1),
 )
 
 SiteStatus.create!(
