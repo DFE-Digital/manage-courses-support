@@ -1,5 +1,6 @@
 class CourseSerializer < ActiveModel::Serializer
   attributes :course_code, :institution_code, :modular, :study_mode
+  has_many :sites
 
   def institution_code
     object.provider.provider_code
