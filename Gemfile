@@ -21,6 +21,8 @@ gem 'rake'
 gem 'bootsnap', '>= 1.1.0'
 
 gem 'active_model_serializers'
+gem 'api-pagination'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
