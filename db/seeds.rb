@@ -40,18 +40,31 @@ school = Site.create!(
   address4: '',
 )
 
-Course.create!(
+course1 = Course.create!(
   name: "Mathematics",
   course_code: '3X1A',
   provider: Provider.find_by(provider_code: 'A01'),
-  sites: [school],
 )
 
-Course.create!(
+SiteStatus.create!(
+  site: school,
+  vac_status: 'F',
+  publish: 'Y',
+  course: course1,
+)
+
+course2 = Course.create!(
   name: "Biology",
+
   course_code: '3X1B',
   provider: Provider.find_by(provider_code: 'A01'),
-  sites: [school],
+)
+
+SiteStatus.create!(
+  site: school,
+  vac_status: 'B',
+  publish: 'Y',
+  course: course2,
 )
 
 Course.create!(

@@ -106,5 +106,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
   create_table "course_site", force: :cascade do |t|
     t.integer "course_id"
     t.integer "site_id"
+    t.string "vac_status"
+    t.string "publish"
   end
 end
