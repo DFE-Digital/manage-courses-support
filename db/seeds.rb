@@ -48,6 +48,7 @@ course1 = Course.create!(
   provider: accrediting_provider,
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'PG',
+  program_type: 'SD',
 )
 
 SiteStatus.create!(
@@ -65,6 +66,7 @@ course2 = Course.create!(
   provider: accrediting_provider,
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'BO',
+  program_type: 'HE',
 )
 
 SiteStatus.create!(

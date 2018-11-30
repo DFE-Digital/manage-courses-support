@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "name"
     t.datetime "start_date"
     t.string "profpost_flag"
+    t.string "program_type"
   end
 
   create_table "provider", force: :cascade do |t|
