@@ -55,6 +55,7 @@ SiteStatus.create!(
   publish: 'Y',
   course: course1,
   status: 'R',
+  applications_accepted_from: Date.new(2018, 10, 23),
 )
 
 course2 = Course.create!(
@@ -70,6 +71,7 @@ SiteStatus.create!(
   publish: 'Y',
   course: course2,
   status: 'N',
+  applications_accepted_from: Date.new(2018, 10, 2),
 )
 
 Course.create!(

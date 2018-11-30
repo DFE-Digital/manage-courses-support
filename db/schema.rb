@@ -111,5 +111,6 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "vac_status"
     t.string "publish"
     t.string "status"
+    t.datetime "applications_accepted_from"
   end
 end
