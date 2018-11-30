@@ -91,4 +91,19 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "site", force: :cascade do |t|
+    t.integer "provider_id"
+    t.string "address1"
+    t.string "address2"
+    t.string "address3"
+    t.string "address4"
+    t.string "postcode"
+    t.string "code"
+    t.string "location_name"
+  end
+
+  create_table "course_site", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "site_id"
+  end
 end

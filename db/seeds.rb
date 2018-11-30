@@ -31,14 +31,25 @@ acme = Organisation.create!(
   ],
 )
 
+school = Site.create!(
+  code: '8',
+  location_name: 'Pool Hayes',
+  address1: 'Boundary Road',
+  address2: 'West Bridgford',
+  address3: 'Nottingham',
+  address4: '',
+)
+
 Course.create!(
   course_code: '3X1A',
   provider: Provider.find_by(provider_code: 'A01'),
+  sites: [school],
 )
 
 Course.create!(
   course_code: '3X1B',
   provider: Provider.find_by(provider_code: 'A01'),
+  sites: [school],
 )
 
 Course.create!(
