@@ -120,4 +120,9 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "subject_name"
     t.string "subject_code"
   end
+
+  create_table "course_subject", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "subject_id"
+  end
 end

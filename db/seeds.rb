@@ -8,6 +8,20 @@
 
 accrediting_provider = Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01')
 
+{
+  "Primary" => "00",
+  "Secondary" => "05",
+  "Chinese" => "T1",
+  "English" => "Q3",
+  "Mathematics" => "G1",
+  "Biology" => "C1",
+}.each do |name, code|
+  Subject.create!(
+    subject_name: name,
+    subject_code: code,
+  )
+end
+
 admin_user = User.create!(
   first_name: 'Super',
   last_name: 'Admin',
@@ -49,6 +63,10 @@ course1 = Course.create!(
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'PG',
   program_type: 'SD',
+  subjects: [
+    Subject.find_by(subject_name: "Secondary"),
+    Subject.find_by(subject_name: "Mathematics"),
+  ],
 )
 
 SiteStatus.create!(
@@ -67,6 +85,10 @@ course2 = Course.create!(
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'BO',
   program_type: 'HE',
+  subjects: [
+    Subject.find_by(subject_name: "Secondary"),
+    Subject.find_by(subject_name: "Biology"),
+  ],
 )
 
 SiteStatus.create!(
@@ -83,6 +105,9 @@ Course.create!(
   course_code: '5W2A',
   provider: Provider.find_by(provider_code: 'A02'),
   accrediting_provider: accrediting_provider,
+  subjects: [
+    Subject.find_by(subject_name: "Primary"),
+  ],
 )
 
 ProviderEnrichment.create!(
@@ -152,15 +177,3 @@ AccessRequest.create!(
   request_date_utc: Time.now - 2.weeks,
   status: :actioned,
 )
-
-{
-  "Primary" => "00",
-  "Chinese" => "T1",
-  "English" => "Q3",
-  "Mathematics" => "G1",
-}.each do |name, code|
-  Subject.create!(
-    subject_name: name,
-    subject_code: code,
-  )
-end
