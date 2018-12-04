@@ -152,3 +152,15 @@ AccessRequest.create!(
   request_date_utc: Time.now - 2.weeks,
   status: :actioned,
 )
+
+{
+  "Primary" => "00",
+  "Chinese" => "T1",
+  "English" => "Q3",
+  "Mathematics" => "G1",
+}.each do |name, code|
+  Subject.create!(
+    subject_name: name,
+    subject_code: code,
+  )
+end

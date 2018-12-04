@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/courses', to: 'courses#index'
   get '/providers', to: 'providers#index'
+  get '/subjects', to: 'subjects#index'
   get '/organisations', to: 'organisations#index'
   get '/organisations/without-active-users', to: 'organisations#index_without_active_users'
   get '/organisations-engagement-report', to: 'reports#show_organisations_engagement_report', as: :organisations_engagement_report

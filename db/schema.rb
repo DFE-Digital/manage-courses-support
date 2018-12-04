@@ -115,4 +115,9 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "status"
     t.datetime "applications_accepted_from"
   end
+
+  create_table "subject", force: :cascade do |t|
+    t.string "subject_name"
+    t.string "subject_code"
+  end
 end
