@@ -7,7 +7,7 @@ class CourseSerializer < ActiveModel::Serializer
   has_one :accrediting_provider
 
   def start_month
-    object.start_date
+    object.start_date.iso8601 if object.start_date
   end
 
   def modular
