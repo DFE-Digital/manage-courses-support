@@ -26,5 +26,7 @@ deploy:
   script: git push --force https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-staging-manage-courses-support-app.scm.azurewebsites.net:443/bat-staging-manage-courses-support-app.git HEAD:refs/heads/master
   on: staging
 - provider: script
-  script: git push --force https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-prod-manage-courses-support-app.scm.azurewebsites.net:443/bat-prod-manage-courses-support-app.git HEAD:refs/heads/master
+  script: 
+  - git push --force https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-prod-manage-courses-support-app.scm.azurewebsites.net:443/bat-prod-manage-courses-support-app.git HEAD:refs/heads/master
+  - git push --force https://govuk-dfe-bat-deployment-user:$AZURE_WA_PASSWORD@bat-prod3-manage-courses-support-app.scm.azurewebsites.net:443/bat-prod3-manage-courses-support-app.git HEAD:refs/heads/master
   on: production
