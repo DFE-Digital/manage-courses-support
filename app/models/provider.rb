@@ -3,4 +3,6 @@ class Provider < ApplicationRecord
 
   has_and_belongs_to_many :organisations,
     join_table: :organisation_provider
+
+  has_many :sites
 end

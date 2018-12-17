@@ -48,6 +48,7 @@ acme = Organisation.create!(
 )
 
 school = Site.create!(
+  provider: accrediting_provider,
   code: '8',
   location_name: 'Pool Hayes',
   address1: 'Boundary Road',
