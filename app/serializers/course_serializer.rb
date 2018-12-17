@@ -1,7 +1,7 @@
 class CourseSerializer < ActiveModel::Serializer
   attributes :course_code, :start_month, :name, :study_mode, :copy_form_required, :profpost_flag, :program_type
   attributes :modular, :english, :maths, :science, :has_been_published
-  has_many :site_statuses, key: :campuses
+  has_many :site_statuses, key: :campus_statuses
   has_many :subjects
   has_one :provider
   has_one :accrediting_provider
