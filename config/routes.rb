@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   root to: redirect('/organisations-engagement-report')
 
-  get '/courses', to: 'courses#index'
-  get '/providers', to: 'providers#index'
-  get '/subjects', to: 'subjects#index'
-  get '/organisations', to: 'organisations#index'
+  scope '/api/v1' do
+    get '/courses', to: 'courses#index'
+    get '/providers', to: 'providers#index'
+    get '/subjects', to: 'subjects#index'
+    get '/organisations', to: 'organisations#index'
+  end
 
   # TODO: version the API
   # TODO: add year parameter
