@@ -18,18 +18,6 @@ class CourseSerializer < ActiveModel::Serializer
     # TODO: pull in from UCAS, possible values "M" or nil
   end
 
-  def english
-    # TODO: pull in from UCAS, possible values 1, 2, 3 or 9
-  end
-
-  def maths
-    # TODO: pull in from UCAS, possible values 1, 2, 3 or 9
-  end
-
-  def science
-    # TODO: pull in from UCAS, possible values 1, 2, 3 or 9
-  end
-
   def copy_form_required
     "Y" # we want to always create PDFs for applications coming in
   end

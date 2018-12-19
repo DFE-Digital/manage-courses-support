@@ -64,6 +64,9 @@ course1 = Course.create!(
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'PG',
   program_type: 'SD',
+  maths: 1,
+  english: 9,
+  science: nil,
   subjects: [
     Subject.find_by(subject_name: "Secondary"),
     Subject.find_by(subject_name: "Mathematics"),
@@ -86,6 +89,9 @@ course2 = Course.create!(
   start_date: Date.new(2019, 9, 1),
   profpost_flag: 'BO',
   program_type: 'HE',
+  maths: 3,
+  english: 9,
+  science: nil,
   subjects: [
     Subject.find_by(subject_name: "Secondary"),
     Subject.find_by(subject_name: "Biology"),
