@@ -6,7 +6,8 @@ class SiteStatusSerializer < ActiveModel::Serializer
   end
 
   def course_open_date
-    object.applications_accepted_from.iso8601
+    # TODO applications_accepted_from should be a timestamp, not a string
+    DateTime.parse(object.applications_accepted_from).iso8601 if object.applications_accepted_from
   end
 
   def name
