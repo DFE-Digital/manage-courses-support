@@ -67,6 +67,7 @@ course1 = Course.create!(
   maths: 1,
   english: 9,
   science: nil,
+  modular: "M",
   subjects: [
     Subject.find_by(subject_name: "Secondary"),
     Subject.find_by(subject_name: "Mathematics"),
@@ -92,6 +93,7 @@ course2 = Course.create!(
   maths: 3,
   english: 9,
   science: nil,
+  modular: "",
   subjects: [
     Subject.find_by(subject_name: "Secondary"),
     Subject.find_by(subject_name: "Biology"),

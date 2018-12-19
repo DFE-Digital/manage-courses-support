@@ -10,10 +10,6 @@ class CourseSerializer < ActiveModel::Serializer
     object.start_date.iso8601 if object.start_date
   end
 
-  def modular
-    # TODO: pull in from UCAS, possible values "M" or nil
-  end
-
   def copy_form_required
     "Y" # we want to always create PDFs for applications coming in
   end
