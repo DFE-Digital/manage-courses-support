@@ -17,4 +17,6 @@ class CourseSerializer < ActiveModel::Serializer
   def copy_form_required
     "Y" # we want to always create PDFs for applications coming in
   end
+
+  # TODO: add year parameter
 end
