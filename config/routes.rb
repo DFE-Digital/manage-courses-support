@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   root to: redirect('/organisations-engagement-report')
 
+  get '/organisations', to: 'organisations#index'
+
   scope '/api/v1' do
     get '/courses', to: 'courses#index'
     get '/providers', to: 'providers#index'
     get '/subjects', to: 'subjects#index'
-    get '/organisations', to: 'organisations#index'
   end
 
   get '/organisations/without-active-users', to: 'organisations#index_without_active_users'
