@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    application_insights (0.5.6)
     arel (9.0.0)
     ast (2.4.0)
     bindex (0.5.0)
@@ -230,6 +231,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  application_insights
   bootsnap (>= 1.1.0)
   byebug
   capybara
@@ -251,4 +253,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.3
+   1.17.1
