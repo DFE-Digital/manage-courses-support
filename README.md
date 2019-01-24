@@ -4,8 +4,10 @@ This app is used by the user support team to help publishers with the Pubish tea
 
 ## Setting up the app in development
 
-1. Run `bin/rails db:setup` to set up the database development and test schemas, and seed with test data.
-2. Run `bin/rails s` to launch the app on http://localhost:3000.
+1. Run `yarn` to install node dependencies
+2. Run `bundle install` to install the gem dependencies
+3. Run `rake db:setup` to set up the database development and test schemas, and seed with test data
+4. Run `bundle exec foreman start -f Procfile.dev` to launch the app on http://localhost:5000
 
 ## Testing features that depend on the Manage Courses API
 

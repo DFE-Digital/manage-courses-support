@@ -1,7 +1,0 @@
-{
-  "name": "publish-courses-support",
-  "private": true,
-  "dependencies": {
-    "govuk-frontend": "1.2.0"
-  }
-}
