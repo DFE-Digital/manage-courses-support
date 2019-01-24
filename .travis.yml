@@ -24,11 +24,11 @@ env:
     - secure: "ZlwwT8IkqybO1RDoCz/jeiQfpR5krO6oEKNPlpFJTMNH0P3Y1gUsn2++0CSm+xTGqEDPFAtdzvyk15AbGhO4z1WGUlkpornGsRlPNKfG/e0I+IH1DcmB+zTuhMq9koUqYvVL4yZjncad3pC+GFAAz1PKn6SdE8Ag70WxKi1JHlPP9gezo/ycbC4wDiwcCa4Bu6czIu9jh5zbIHjpjEeHm5utYM+jGZWi2Jqv0BKnCoIvwSxdgMToVI4p6z6RDEOEpeb+mnZ6+hma8O1ELXCgIaF8rJWOVoABobLoYA+3ge5NzE29nPeqX+47HvNeBrpCkAkz7c89/cQfNNtDtSWZDq21j11CnqYWcl/WBky9tpHGfT5hRxYp21vlJ9jFiqIi0DCKOaEPSa/5cwHCDXfFTC2VF5+4djt2n/5dqKNhTfaU19qoHH6Uul1r+IwnmYmw20NlRWc8lXpw6qErcP/VgpiMB9vMrG+P3dChErEGup5abbem6KLL082Cp6XAb74es80QTgB2N12+auWfebo9abg4x/HWzecrNaOxw0jSjJmaQQM3gYKbTXy0sHSPfXZ253Y0X5gmYpbBuNGdageBJkrX2/g4tYBY5PWoVQWY/qCIvcMp/djQVDcxk1Qi1/4ywybzM7n6tpEXtRpXLkDjITwMACemfHu0c+hssSDhI0w="
 deploy:
 - provider: script
-  script: bash scripts/deploy_dev.sh
+  script: bash scripts/deploy.sh dev
   on: master
 - provider: script
-  script: bash scripts/deploy_staging.sh
+  script: bash scripts/deploy.sh staging
   on: staging
 - provider: script
-  script: bash scripts/deploy_prod.sh
+  script: bash scripts/deploy.sh prod
   on: production
