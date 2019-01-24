@@ -1,34 +1,27 @@
-language: ruby
-cache: bundler
+language: minimal
 git:
   depth: false
 services:
-  - postgresql
-addons:
-  postgresql: "9.6"
+- docker
 before_script:
-  - bundle exec rake db:setup
-before_install:
-  - gem update --system
+- source ./config.sh
+- "./docker-login.sh"
+- docker-compose pull
+- docker-compose build
+- docker-compose up --no-build -d
+- sleep 15
+- docker-compose exec web /bin/sh -c "bundle exec rails db:setup"
 script:
-  - bundle exec rake spec
-  - bundle exec govuk-lint-ruby app config db lib spec --format clang
-  - bundle exec govuk-lint-sass app/assets/stylesheets
+- docker-compose exec web /bin/sh -c "bundle exec rake spec"
+- docker-compose exec web /bin/sh -c "bundle exec govuk-lint-ruby app config db lib
+  spec --format clang"
+deploy:
+  provider: script
+  script: bash docker-push.sh
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^(master|staging|production)$"
 env:
   global:
-    # APP_CREDENTIALS_DEV_PWD
-    - secure: "AGzr5PlioR1iT+gtt3kKCy7nfz3C5X321WrNW5xFffHQdK06wrUrhns6KUQwgoxzYVuxgdf2ay4FVMReD4frsRDybLQm5WWwKMOtEzkV3zfDuUrHF9657jtkXZXGLglDW/tgtv/L2nLsn8fQNlgdxeOzjjDl9d5gkpwO6cC08NnCfdY6Hayomx95+m8YMeJocaLGdwOVnznzyKR4gaLpOnp/DIWALgv2+E6yM+ls5Fw60PS7PhvSl6St9n6BXcMFq/J4rK3HU3hTqr0qA1q6+7JSUh5VroDlFrIRt7QOLz5zN4ibHoD19DieZTo4L6JVIHtcz3VeawEJXuf3TWSYECBSEzTu7d/M5vhS484P6mqLx4IBK+F6NJp6C8LZZgaa0GDnbFzYAMCLVy7MKe5/Jpg4DKRQHWFiBP45EIeU61vrF7xwD113+N6yXAYYgwpI07sjeBbTZFAmRxcnR6FEG6GDW8oAfdiIU4HxFBSX3SqRYoEZSZCX2/a6dG4FwUcj0wilBR4hrvDiiny7bfezQFgu4PSHUPHYisxCdlbdf0veYeksLCSHuR21DEjrnoEdwdakHivce3PJmIQ7SHlpSEheA7TTvJBt/g2+qjdIiMILO0lpqj2weIZQJlfwotDxJegeOpYj800riUqprtgg2kwu5yQXZbbsyY5yNjgBPlY="
-    # APP_CREDENTIALS_STAGING_PWD
-    - secure: "CJkwymhXCVJrKgcu4/NXGePGzbw90N3kiC/0CVcuAjp+A6m860dcgKOsbpPCAMVuEcjyE8Lc3ieavAvTIydFNYa9vb5Wqxq367YTp/sltC71X3QmvHLwM+jV4/RWi+38Y9d5EcHv5Pndj/mo1iza3fK/Dq5NOSh3dUOjbdnNtb9eDlimBO2D/cVX5driLCuDbfkKnejZZDJetSlRI5HX1GQq4oQdG+7gFFatwSxcc8wonU5VHd9Y2+LsI+6+ACljIuLV6lwF6uUhsQfZtTG7RqjrpOkh/uNomHwxpng8ye2+eau65Bo9NXGO2DRa1mSwRhOmxoHZoQTdVDtfVCLNJCYpfydLGq4pGUHtBa9GufVKlSkY/3bI5AWpXlD5wHnKn+bpBjLkaICUAL81QAqjIG7WrH1QYABK+LgIK4nTcbD5Al1mIgwzgeUxBkS2vby0GowKpzd+kePh+gGkdfFJjMCGxG4BQT4vP2vBrXbOO6QouWs5VlRA2UI0N2r7k3huYNLGg7Nv0Yp0/4qxU8ycR2bdFIQSf5PiCQS24X9DtFS4Tf4QCKN+XbicF0XU/hcRkFE/PAk5v6T+UmclvvkBxf0PbLyeI4jvMbtsNSAskjCOEqYFC0jnkft35Tvng83o6VhgYIeIMaFNEmLn49WQfZuFENgaLA21r/K/w58HrMI="
-    # APP_CREDENTIALS_PROD_PWD
-    - secure: "ZlwwT8IkqybO1RDoCz/jeiQfpR5krO6oEKNPlpFJTMNH0P3Y1gUsn2++0CSm+xTGqEDPFAtdzvyk15AbGhO4z1WGUlkpornGsRlPNKfG/e0I+IH1DcmB+zTuhMq9koUqYvVL4yZjncad3pC+GFAAz1PKn6SdE8Ag70WxKi1JHlPP9gezo/ycbC4wDiwcCa4Bu6czIu9jh5zbIHjpjEeHm5utYM+jGZWi2Jqv0BKnCoIvwSxdgMToVI4p6z6RDEOEpeb+mnZ6+hma8O1ELXCgIaF8rJWOVoABobLoYA+3ge5NzE29nPeqX+47HvNeBrpCkAkz7c89/cQfNNtDtSWZDq21j11CnqYWcl/WBky9tpHGfT5hRxYp21vlJ9jFiqIi0DCKOaEPSa/5cwHCDXfFTC2VF5+4djt2n/5dqKNhTfaU19qoHH6Uul1r+IwnmYmw20NlRWc8lXpw6qErcP/VgpiMB9vMrG+P3dChErEGup5abbem6KLL082Cp6XAb74es80QTgB2N12+auWfebo9abg4x/HWzecrNaOxw0jSjJmaQQM3gYKbTXy0sHSPfXZ253Y0X5gmYpbBuNGdageBJkrX2/g4tYBY5PWoVQWY/qCIvcMp/djQVDcxk1Qi1/4ywybzM7n6tpEXtRpXLkDjITwMACemfHu0c+hssSDhI0w="
-deploy:
-- provider: script
-  script: bash deploy.sh dev
-  on: master
-- provider: script
-  script: bash deploy.sh staging
-  on: staging
-- provider: script
-  script: bash deploy.sh prod
-  on: production
+    secure: XUqFVqQur5ZoCCyAx7EF9VUEbDhUGd643Jki1FoYuDHLGRYZ275gX4EFqmqVuiAhsNIqcC+o4Ml66/0DeJ6kMEAQZNHT63KXLGPzi6LKDJ5qgxyh/0jr5Wwp1RwUPdxw73aZEBS8Fkg47xcwmY9Vx9BfHGA6pw/9DkxcbDI4fo3rlNXsxSkjg0uPosfD8XBbmoCtzCEu3J4EUVR7kZLfSmast62ID43xjOhf+xHyBe0uMV0cTLazRhvwayx8jfNJ4XMlMNzwWBj62uResGN6KA57x9h3UH31XckxeyUpjGVRdgQ0limAGqPa9eLPX4jTuH6I8oeRfd7WtaThf6db8/z+CIOHGdRy4HaMQs65ImjLh05mhujNBWNRyYdGm71IEHdfXOSFJqLsyXiCLTFCaONIUkCOA9/aiV+LN2hyyml9fAf6WqQGMCPWZDs7qrSZgIZ72q2mcRiY4GhNYP22kc+sDIGRSlomwO6fc8JtgCR62sXY19bj5fpXjNjzuH5plbg+m5VeA0bu5sRnj4Oo53MbtPaAYCRgQrmKZg2s6wE5W32goZxb/pRWtsE5/xAJ5ByhVql6sesA+8+NFwoDhfxMLH2GDV8lbtclkFQ/kUvgqH0LvRUV3uo0ftTkgSEyfmPrdG5xdXRra3sPjsB/V6SWW+rcYwfsNqtzjOemnLk=
