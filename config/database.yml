@@ -2,19 +2,21 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+  username: <%= ENV['DB_USERNAME'] || 'publish_courses_support' %>
+  password: <%= ENV['DB_PASSWORD'] || 'publish_courses_support' %>
+  host: <%= ENV['DB_HOSTNAME'] || 'localhost' %>
+  port: <%= ENV['DB_PORT'] || '5432' %>
 
 development:
   <<: *default
-  database: publish_courses_support_development
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_development' %>
 
 test:
   <<: *default
-  database: publish_courses_support_test
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_test' %>
 
 production:
   <<: *default
   database: <%= ENV['DB_DATABASE'] %>
-  username: <%= ENV['DB_USERNAME'] %>
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
   password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOSTNAME'] %>
-  port: <%= ENV['DB_PORT'] || '5432' %>

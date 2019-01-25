@@ -6,6 +6,6 @@ $govuk-global-styles: true;
 // This variable is temporary and can be removed in the future if this is addressed.
 $success-green: #00823b;
 
-@import "../node_modules/govuk-frontend/all";
+@import "../../../node_modules/govuk-frontend/all";
 @import "bar";
 @import "success_summary";
