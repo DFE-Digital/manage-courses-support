@@ -25,12 +25,12 @@ services:
     environment:
       - DB_HOSTNAME=db
       - DB_USERNAME=postgres
-  # webpack:
-  #   build: .
-  #   volumes:
-  #     - ".:/app"
-  #   ports:
-  #     - "3035:3035"
-  #   command: ./bin/webpack-dev-server --inline true
-  #   environment:
-  #     - WEBPACKER_DEV_SERVER_HOST=webpack
+  webpack:
+    build: .
+    volumes:
+      - ".:/app"
+    ports:
+      - "3035:3035"
+    command: ./bin/webpack-dev-server --inline true
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack
