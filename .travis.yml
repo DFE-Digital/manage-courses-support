@@ -2,19 +2,19 @@ language: minimal
 git:
   depth: false
 services:
-- docker
+  - docker
 before_script:
-- source ./config.sh
-- "./docker-login.sh"
-- docker-compose pull
-- docker-compose build
-- docker-compose up --no-build -d
-- sleep 15
-- docker-compose exec web /bin/sh -c "bundle exec rails db:setup"
+  - source ./config.sh
+  - "./docker-login.sh"
+  - docker-compose pull
+  - docker-compose build
+  - docker-compose up --no-build -d
+  - docker-compose exec web /bin/sh -c "./wait-for-it.sh db:5432"
+  - docker-compose exec web /bin/sh -c "bundle exec rails db:setup"
+  - docker-compose exec web /bin/sh -c "bundle exec rake assets:precompile"
 script:
-- docker-compose exec web /bin/sh -c "bundle exec rake spec"
-- docker-compose exec web /bin/sh -c "bundle exec govuk-lint-ruby app config db lib
-  spec --format clang"
+  - docker-compose exec web /bin/sh -c "bundle exec rake spec"
+  - docker-compose exec web /bin/sh -c "bundle exec govuk-lint-ruby app config db lib spec --format clang"
 deploy:
   provider: script
   script: bash docker-push.sh
