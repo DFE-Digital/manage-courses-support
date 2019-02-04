@@ -1,0 +1,38 @@
+name: '0.1.0-$(Rev:r)'
+trigger:
+  batch: true
+  branches:
+    include:
+      - vsts_build_and_deploy
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  imageName: 'manage-courses-support-poc:$(build.buildNumber)'
+  tag: 'govukdfe/$(imageName)'
+
+steps:
+- script: |
+    docker build -f Dockerfile -t $(tag) .
+  displayName: 'Build image'
+
+- script: |
+    echo $password | docker login --username $(dockerHubUsername) --password-stdin
+    docker push "$(tag)"
+  displayName: 'Push image'
+  env:
+    password: $(dockerHubPassword)
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    Contents: |
+     azure/**
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
