@@ -2,6 +2,11 @@
 
 This app is used by the user support team to help publishers with the Pubish teacher training courses service.
 
+## Prerequisites
+
+- Ruby 2.6.1
+- postgresql-9.6 postgresql-contrib-9.6
+
 ## Setting up the app in development
 
 1. Run `yarn` to install node dependencies
