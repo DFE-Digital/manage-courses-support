@@ -179,6 +179,10 @@
                                 "value": "[parameters('secretKeyBase')]"
                             },
                             {
+                                "name": "SECRET_KEY_BASE",
+                                "value": "[parameters('secretKeyBase')]"
+                            },
+                            {
                                 "name": "MANAGE_API_BASE_URL",
                                 "value": "[parameters('manageAPIBaseUrl')]"
                             },
