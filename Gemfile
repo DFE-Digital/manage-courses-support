@@ -39,7 +39,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'govuk-lint', '~> 3.10'
+  gem 'govuk-lint', '~> 3.11'
 end
 
 group :test do
