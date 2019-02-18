@@ -33,6 +33,13 @@
                 "description": "Precompile assets."
             }
         },
+        "serveStaticFiles": {
+            "type": "string",
+            "defaultValue": "true",
+            "metadata": {
+                "description": "Serve static files."
+            }
+        },
         "authenticationCredentials": {
             "type": "string",
             "metadata": {
@@ -246,7 +253,11 @@
                             {
                                 "name": "ASSETS_PRECOMPILE",
                                 "value": "[parameters('assetsPrecompile')]"
-                            }
+                            },
+                                                        {
+                                "name": "RAILS_SERVE_STATIC_FILES",
+                                "value": "[parameters('serveStaticFiles')]"
+                            }            
                         ]
                     },
                     "customHostName": {
