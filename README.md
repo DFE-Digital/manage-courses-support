@@ -1,3 +1,5 @@
+[![Build Status](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_apis/build/status/Find/manage-courses-support?branchName=master)](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_build/latest?definitionId=47&branchName=master)
+
 # Support teacher training publishers
 
 This app is used by the user support team to help publishers with the Pubish teacher training courses service.
