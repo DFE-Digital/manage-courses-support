@@ -23,9 +23,9 @@ steps:
 - script: |
     $DOCKER_OVERRIDE build
     $DOCKER_OVERRIDE up --no-build -d
-    $DOCKER_OVERRIDE exec web /bin/sh -c "./wait-for-it.sh db:5432"
-    $DOCKER_OVERRIDE exec web /bin/sh -c "bundle exec rails db:setup"
-    $DOCKER_OVERRIDE exec web /bin/sh -c "bundle exec rake assets:precompile"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "./wait-for-it.sh db:5432"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rails db:setup"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake assets:precompile"
   displayName: 'Build image'
   env:
     DOCKER_OVERRIDE: $(dockerOverride)
