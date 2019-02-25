@@ -12,7 +12,6 @@ variables:
   # Support multiple docker-compose files to allow travis and az pipelines to co exist: https://docs.docker.com/compose/extends/#multiple-compose-files
   dockerOverride: 'docker-compose -f docker-compose.yaml -f docker-compose.az.yml'
 
-
 steps:
 - script: |
     GIT_SHORT_SHA=$(echo $(Build.SourceVersion) | cut -c 1-7)
