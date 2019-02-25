@@ -1,4 +1,4 @@
-[![Build Status](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_apis/build/status/Find/manage-courses-support?branchName=vsts_build_and_deploy)](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_build/latest?definitionId=47&branchName=vsts_build_and_deploy)
+[![Build Status](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_apis/build/status/Find/manage-courses-support?branchName=master)](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_build/latest?definitionId=47&branchName=master)
 
 # Support teacher training publishers
 
