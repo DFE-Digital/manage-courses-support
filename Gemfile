@@ -21,7 +21,7 @@ gem 'sassc-rails'
 gem 'autoprefixer-rails'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 3.5'
+gem 'webpacker', '~> 4.0'
 
 # Manage multiple processes i.e. web server and webpack
 gem 'foreman'
