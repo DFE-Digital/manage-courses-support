@@ -15,6 +15,14 @@ test:
   <<: *default
   database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_test' %>
 
+qa:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_qa' %>
+
+staging:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_staging' %>
+
 production:
   <<: *default
   database: <%= ENV['DB_DATABASE'] %>
