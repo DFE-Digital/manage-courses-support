@@ -1,4 +1,4 @@
-[![Build Status](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_apis/build/status/Find/manage-courses-support?branchName=master)](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_build/latest?definitionId=47&branchName=master)
+[![Build Status](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_apis/build/status/Find/manage-courses-support?branchName=master)](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_build/latest?definitionId=47&branchName=master) [![Greenkeeper badge](https://badges.greenkeeper.io/DFE-Digital/manage-courses-support.svg)](https://greenkeeper.io/)
 
 # Support teacher training publishers
 
