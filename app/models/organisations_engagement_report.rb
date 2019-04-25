@@ -18,6 +18,18 @@ class OrganisationsEngagementReport
       GROUP BY
           oi.organisation_id
   ),
+  orgs_transitioned AS (
+      SELECT
+          ot.organisation_id,
+          count(DISTINCT p) number_of_transitioned_orgs
+      FROM
+          organisation_provider ot
+          LEFT OUTER JOIN provider p ON ot.provider_id = p.id
+      WHERE
+          p.opted_in = true
+      GROUP BY
+          ot.organisation_id
+  ),
   orgs_with_active_users AS (
       SELECT
           ou.organisation_id,
@@ -53,6 +65,7 @@ class OrganisationsEngagementReport
   SELECT
       SUM(CASE WHEN oa.organisation_id IS NOT NULL THEN 1 ELSE 0 end) AS orgs_with_allocations,
       SUM(CASE WHEN ouc.number_of_courses > 0 THEN 1 ELSE 0 end) AS orgs_with_ucas_courses,
+      SUM(CASE WHEN ot.number_of_transitioned_orgs > 0 THEN 1 ELSE 0 end) AS orgs_transitioned,
       SUM(CASE WHEN owu.active_users > 0 THEN 1 ELSE 0 end) AS orgs_with_active_users,
       SUM(CASE WHEN oie.number_of_org_enrichments > 0 THEN 1 ELSE 0 end) AS orgs_with_started_inst_enrichments,
       SUM(CASE WHEN oie.number_of_published_org_enrichments > 0 THEN 1 ELSE 0 end) AS orgs_with_published_inst_enrichments,
@@ -61,6 +74,7 @@ class OrganisationsEngagementReport
   FROM
       orgs_with_allocations oa
       FULL OUTER JOIN orgs_with_ucas_courses ouc ON oa.organisation_id = ouc.organisation_id
+      FULL OUTER JOIN orgs_transitioned ot ON oa.organisation_id = ot.organisation_id
       FULL OUTER JOIN orgs_with_active_users owu ON oa.organisation_id = owu.organisation_id
       FULL OUTER JOIN orgs_with_inst_enrichments oie ON oa.organisation_id = oie.organisation_id
       FULL OUTER JOIN orgs_with_course_enrichments oce ON oa.organisation_id = oce.organisation_id".freeze

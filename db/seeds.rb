@@ -16,8 +16,8 @@ acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
   providers: [
-    Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01'),
-    Provider.create!(provider_name: 'Acme Alliance', provider_code: 'A02'),
+    Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01', opted_in: true),
+    Provider.create!(provider_name: 'Acme Alliance', provider_code: 'A02', opted_in: false),
   ],
   users: [
     User.create!(

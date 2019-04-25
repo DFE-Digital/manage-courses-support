@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.string "provider_code"
     t.string "provider_type"
     t.string "url"
+    t.boolean "opted_in", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
