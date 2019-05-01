@@ -6,6 +6,7 @@ This app is used by the user support team to help publishers with the Pubish tea
 
 ## Prerequisites
 
+- yarn - `npm install -g yarn`
 - Ruby 2.6.1
 - postgresql-9.6 postgresql-contrib-9.6
 
