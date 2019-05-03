@@ -9,7 +9,7 @@ class EmailedAccessRequest
   validates :last_name, presence: { message: "Enter the last name of the person who needs access" }
 
   validate :requester_exists,
-    unless: Proc.new { |r| r.requester_email.blank? }
+           unless: Proc.new { |r| r.requester_email.blank? }
 
   def requester_email=(new_value)
     @requester_email = new_value.strip

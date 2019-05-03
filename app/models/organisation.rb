@@ -4,10 +4,10 @@ class Organisation < ApplicationRecord
   ADMIN_EMAIL_DOMAIN = "education.gov.uk".freeze
 
   has_and_belongs_to_many :users, -> { where('"user".email not like ?', "%#{ADMIN_EMAIL_DOMAIN}") },
-    join_table: :organisation_user
+                          join_table: :organisation_user
 
   has_and_belongs_to_many :providers,
-    join_table: :organisation_provider
+                          join_table: :organisation_provider
 
   has_many :nctl_organisations
 

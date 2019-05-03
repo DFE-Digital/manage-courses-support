@@ -7,16 +7,16 @@ RSpec.describe "Access requests", type: :feature do
 
   let!(:unapproved_request) {
     FactoryBot.create(:access_request, :unapproved,
-      first_name: "Jane",
-      last_name: "Smith",
-      email_address: 'jane.smith@acme-scitt.org')
+                      first_name: "Jane",
+                      last_name: "Smith",
+                      email_address: 'jane.smith@acme-scitt.org')
   }
 
   describe "index" do
     it "shows only unapproved requests" do
       FactoryBot.create(:access_request, :approved,
-        first_name: "Leslie",
-        last_name: "Jones")
+                        first_name: "Leslie",
+                        last_name: "Jones")
 
       visit "/access-requests"
 
@@ -81,11 +81,11 @@ RSpec.describe "Access requests", type: :feature do
   describe "actioning emailed access requests" do
     before do
       FactoryBot.create(:user,
-        email: 'requester@email.com',
-        organisations: [
-          FactoryBot.create(:organisation, name: 'Org A'),
-          FactoryBot.create(:organisation, name: 'Org B'),
-        ])
+                        email: 'requester@email.com',
+                        organisations: [
+                          FactoryBot.create(:organisation, name: 'Org A'),
+                          FactoryBot.create(:organisation, name: 'Org B'),
+                        ])
     end
 
     it "previews the change, calls the API and confirms success when the request is valid" do

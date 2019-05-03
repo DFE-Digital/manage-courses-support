@@ -6,50 +6,50 @@ RSpec.describe "Organisations", type: :feature do
   context "when accessing #index" do
     it "lists all organisations with their associated users and UCAS providers" do
       FactoryBot.create(:organisation,
-        name: "Stellar Alliance / Stellar SCITT",
-        org_id: '12345',
-        nctl_organisations_count: 0,
-        users: [
-          FactoryBot.create(:user,
-            email: 'awatson@stellar.org',
-            first_name: 'Alice',
-            last_name: 'Watson'),
-          FactoryBot.create(:user,
-            email: 'bsmith@stellar.org',
-            first_name: 'Betty',
-            last_name: 'Smith',
-            sign_in_user_id: 'a-uuid'),
-        ],
-        providers: [
-          FactoryBot.create(:provider,
-            provider_name: 'Stellar Alliance',
-            provider_code: 'S01'),
-          FactoryBot.create(:provider,
-            provider_name: 'Stellar SCITT',
-            provider_code: 'S02'),
-        ])
+                        name: "Stellar Alliance / Stellar SCITT",
+                        org_id: '12345',
+                        nctl_organisations_count: 0,
+                        users: [
+                          FactoryBot.create(:user,
+                                            email: 'awatson@stellar.org',
+                                            first_name: 'Alice',
+                                            last_name: 'Watson'),
+                          FactoryBot.create(:user,
+                                            email: 'bsmith@stellar.org',
+                                            first_name: 'Betty',
+                                            last_name: 'Smith',
+                                            sign_in_user_id: 'a-uuid'),
+                        ],
+                        providers: [
+                          FactoryBot.create(:provider,
+                                            provider_name: 'Stellar Alliance',
+                                            provider_code: 'S01'),
+                          FactoryBot.create(:provider,
+                                            provider_name: 'Stellar SCITT',
+                                            provider_code: 'S02'),
+                        ])
 
       FactoryBot.create(:nctl_organisation,
-        nctl_id: '1357',
-        organisation: Organisation.find_by(org_id: '12345'))
+                        nctl_id: '1357',
+                        organisation: Organisation.find_by(org_id: '12345'))
       FactoryBot.create(:nctl_organisation,
-        nctl_id: '2468',
-        organisation: Organisation.find_by(org_id: '12345'))
+                        nctl_id: '2468',
+                        organisation: Organisation.find_by(org_id: '12345'))
 
       FactoryBot.create(:organisation,
-        name: "University of Duncree",
-        org_id: '67890',
-        users: [
-          FactoryBot.create(:user,
-            email: 'jbrady@duncree.ac.uk',
-            first_name: 'James',
-            last_name: 'Brady')
-        ],
-        providers: [
-          FactoryBot.create(:provider,
-            provider_name: 'University of Duncree',
-            provider_code: 'D07')
-        ])
+                        name: "University of Duncree",
+                        org_id: '67890',
+                        users: [
+                          FactoryBot.create(:user,
+                                            email: 'jbrady@duncree.ac.uk',
+                                            first_name: 'James',
+                                            last_name: 'Brady')
+                        ],
+                        providers: [
+                          FactoryBot.create(:provider,
+                                            provider_name: 'University of Duncree',
+                                            provider_code: 'D07')
+                        ])
 
       visit "/organisations"
 
@@ -79,14 +79,14 @@ RSpec.describe "Organisations", type: :feature do
 
     it "filters out internal DfE admin users who may be added to the org" do
       FactoryBot.create(:organisation,
-        name: "University of Duncree",
-        org_id: '67890',
-        users: [
-          FactoryBot.create(:user,
-            email: 'johnny.admin@education.gov.uk',
-            first_name: 'Johnny',
-            last_name: 'Admin')
-        ])
+                        name: "University of Duncree",
+                        org_id: '67890',
+                        users: [
+                          FactoryBot.create(:user,
+                                            email: 'johnny.admin@education.gov.uk',
+                                            first_name: 'Johnny',
+                                            last_name: 'Admin')
+                        ])
 
       visit "/organisations"
 
@@ -99,26 +99,26 @@ RSpec.describe "Organisations", type: :feature do
   context "when accessing #index_without_active_users" do
     it "lists only organisations without active users" do
       FactoryBot.create(:organisation,
-        name: "Stellar Alliance / Stellar SCITT",
-        users: [
-          FactoryBot.create(:user, :inactive),
-          FactoryBot.create(:user, :active)
-        ])
+                        name: "Stellar Alliance / Stellar SCITT",
+                        users: [
+                          FactoryBot.create(:user, :inactive),
+                          FactoryBot.create(:user, :active)
+                        ])
 
       FactoryBot.create(:organisation,
-        name: "University of Duncree",
-        org_id: '67890',
-        users: [
-          FactoryBot.create(:user, :inactive,
-            email: 'jbrady@duncree.ac.uk',
-            first_name: 'James',
-            last_name: 'Brady')
-        ],
-        providers: [
-          FactoryBot.create(:provider,
-            provider_name: 'University of Duncree',
-            provider_code: 'D07')
-        ])
+                        name: "University of Duncree",
+                        org_id: '67890',
+                        users: [
+                          FactoryBot.create(:user, :inactive,
+                                            email: 'jbrady@duncree.ac.uk',
+                                            first_name: 'James',
+                                            last_name: 'Brady')
+                        ],
+                        providers: [
+                          FactoryBot.create(:provider,
+                                            provider_name: 'University of Duncree',
+                                            provider_code: 'D07')
+                        ])
 
       visit "/organisations/without-active-users"
 
