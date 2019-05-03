@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrganisationsEngagementReport
   include ActionView::Helpers::NumberHelper
 
@@ -63,7 +65,7 @@ class OrganisationsEngagementReport
       FULL OUTER JOIN orgs_with_ucas_courses ouc ON oa.organisation_id = ouc.organisation_id
       FULL OUTER JOIN orgs_with_active_users owu ON oa.organisation_id = owu.organisation_id
       FULL OUTER JOIN orgs_with_inst_enrichments oie ON oa.organisation_id = oie.organisation_id
-      FULL OUTER JOIN orgs_with_course_enrichments oce ON oa.organisation_id = oce.organisation_id".freeze
+      FULL OUTER JOIN orgs_with_course_enrichments oce ON oa.organisation_id = oce.organisation_id"
 
   def run
     @results = ActiveRecord::Base.connection.execute(QUERY)[0]

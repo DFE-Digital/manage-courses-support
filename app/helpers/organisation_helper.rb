@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrganisationHelper
   def user_details(user, dfe_signin_deeplink: false)
     if dfe_signin_deeplink && user.sign_in_user_id.present?

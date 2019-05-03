@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
 # Add GOVUK image asset path
-Rails.application.config.assets.paths << Rails.root.join("node_modules", "govuk-frontend", "assets", "images")
+Rails.application.config.assets.paths << Rails.root.join('node_modules', 'govuk-frontend', 'assets', 'images')
 
 # Add GOVUK font asset path
-Rails.application.config.assets.paths << Rails.root.join("node_modules", "govuk-frontend", "assets", "fonts")
+Rails.application.config.assets.paths << Rails.root.join('node_modules', 'govuk-frontend', 'assets', 'fonts')
 
 Rails.application.config.assets.precompile += %w[
   favicon.ico

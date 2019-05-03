@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe OrganisationsEngagementReport, type: :model do
   let!(:orgs) { FactoryBot.create_list(:organisation, 5, nctl_organisations_count: 1) }
   let(:report) { OrganisationsEngagementReport.new.tap(&:run) }
 
-  it "tracks the number of organisations with allocations" do
+  it 'tracks the number of organisations with allocations' do
     expect(report[:orgs_with_allocations]).to eq(5)
   end
 
-  it "tracks the number of organisations with UCAS courses" do
+  it 'tracks the number of organisations with UCAS courses' do
     providers = FactoryBot.create_list(:provider, 4, course_count: 2)
 
     # attach providers to orgs
@@ -19,7 +21,7 @@ describe OrganisationsEngagementReport, type: :model do
     expect(report[:orgs_with_ucas_courses]).to eq(4)
   end
 
-  it "tracks the number of organisations with active, external users" do
+  it 'tracks the number of organisations with active, external users' do
     users = FactoryBot.create_list(:user, 3, :active)
     god_user = FactoryBot.create(:user, :god_user, :active)
 
@@ -32,7 +34,7 @@ describe OrganisationsEngagementReport, type: :model do
     expect(report[:orgs_with_active_users]).to eq(3)
   end
 
-  it "tracks the number of organisations with started and published provider enrichments" do
+  it 'tracks the number of organisations with started and published provider enrichments' do
     providers = FactoryBot.create_list(:provider, 2, course_count: 1)
 
     # attach providers to orgs
@@ -48,7 +50,7 @@ describe OrganisationsEngagementReport, type: :model do
     expect(report[:orgs_with_published_inst_enrichments]).to eq(1)
   end
 
-  it "tracks the number of organisations with started and published course enrichments" do
+  it 'tracks the number of organisations with started and published course enrichments' do
     providers = FactoryBot.create_list(:provider, 2, course_count: 1)
 
     # attach providers to orgs

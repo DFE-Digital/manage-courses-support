@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 class ManageCoursesAPI
@@ -26,7 +28,7 @@ class ManageCoursesAPI
     post_to(uri)
   end
 
-private
+  private
 
   def post_to(uri)
     req = Net::HTTP::Post.new(uri)

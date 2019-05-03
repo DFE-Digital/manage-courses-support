@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
-    first_name { "Jane" }
-    last_name  { "Smoth" }
+    first_name { 'Jane' }
+    last_name  { 'Smoth' }
     email { "#{first_name}.#{last_name}@acme-scitt.org".downcase }
     sign_in_user_id { SecureRandom.uuid }
     welcome_email_date_utc { rand(100).days.ago }
@@ -21,13 +23,13 @@ FactoryBot.define do
   end
 
   factory :access_request do
-    first_name { "Jane" }
-    last_name  { "Smoth" }
+    first_name { 'Jane' }
+    last_name  { 'Smoth' }
     email_address { "#{first_name}.#{last_name}@acme-scitt.org".downcase }
     organisation { 'Acme SCITT' }
     association :requester, factory: :user
     request_date_utc { Time.parse('12 July 2018 12:00:00') }
-    reason { "Jane Smith is the ITT course administrator" }
+    reason { 'Jane Smith is the ITT course administrator' }
     status { 0 }
 
     trait :approved do
@@ -41,7 +43,7 @@ FactoryBot.define do
 
   factory :organisation do
     name  { 'ACME SCITT' }
-    org_id { rand(1000000).to_s }
+    org_id { rand(1_000_000).to_s }
 
     transient do
       nctl_organisations_count { 1 }
@@ -53,7 +55,7 @@ FactoryBot.define do
   end
 
   factory :provider do
-    provider_name { 'ACME SCITT' + rand(1000000).to_s }
+    provider_name { 'ACME SCITT' + rand(1_000_000).to_s }
     sequence(:provider_code) { |n| "A#{n}" }
 
     transient do
@@ -70,7 +72,7 @@ FactoryBot.define do
   end
 
   factory :nctl_organisation do
-    nctl_id { rand(1000000).to_s }
+    nctl_id { rand(1_000_000).to_s }
   end
 
   trait :draft do

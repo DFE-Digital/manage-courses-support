@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module NotifyHelper
   def notify_service_link
-    "https://www.notifications.service.gov.uk/services/022acc23-c40a-4077-bbd6-fc98b2155534"
+    'https://www.notifications.service.gov.uk/services/022acc23-c40a-4077-bbd6-fc98b2155534'
   end
 
   def unregistered_user_template

@@ -1,6 +1,8 @@
-desc "Create user for dev environments"
+# frozen_string_literal: true
+
+desc 'Create user for dev environments'
 namespace :db do
-  def run_sql sql
+  def run_sql(sql)
     case RUBY_PLATFORM
     when /darwin/
       system('psql', '-U', 'postgres', '-c', sql)

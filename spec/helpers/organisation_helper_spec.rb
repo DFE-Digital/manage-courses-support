@@ -1,8 +1,10 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 describe OrganisationHelper do
-  describe "#user_details" do
-    it "returns the name and email" do
+  describe '#user_details' do
+    it 'returns the name and email' do
       user = FactoryBot.create(:user,
                                first_name: 'Jane',
                                last_name: 'Smith',
@@ -11,7 +13,7 @@ describe OrganisationHelper do
       expect(helper.user_details(user)).to eq('Jane Smith <jsmith@acme-scitt.org>')
     end
 
-    it "deep-links to DfE Sign-in if the sign_in_user_id is set" do
+    it 'deep-links to DfE Sign-in if the sign_in_user_id is set' do
       user = FactoryBot.create(:user,
                                first_name: 'Jane',
                                last_name: 'Smith',

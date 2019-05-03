@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccessRequestsController < ApplicationController
   def index
     @access_requests = AccessRequest.unapproved.order(request_date_utc: :asc)
@@ -8,7 +10,7 @@ class AccessRequestsController < ApplicationController
 
     begin
       AccessRequest.find(id).approve!
-      flash[:notice] = "Successfully approved request"
+      flash[:notice] = 'Successfully approved request'
       redirect_to action: 'inform_publisher', id: id
     rescue ManageCoursesAPI::AccessRequestInternalFailure => e
       set_flash_on_error_given(e)
@@ -29,7 +31,7 @@ class AccessRequestsController < ApplicationController
 
     if @emailed_access_request.invalid?
       flash.now[:errors] = @emailed_access_request.errors.messages.values.flatten.map do |error|
-        { "text" => error, "link" => '#emailed_access_request_requester_email' }
+        { 'text' => error, 'link' => '#emailed_access_request_requester_email' }
       end
       render action: 'new'
       return
@@ -41,7 +43,7 @@ class AccessRequestsController < ApplicationController
 
     begin
       @emailed_access_request.manually_approve!
-      flash[:notice] = "Successfully approved request"
+      flash[:notice] = 'Successfully approved request'
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
     rescue ManageCoursesAPI::AccessRequestInternalFailure => e
@@ -50,12 +52,12 @@ class AccessRequestsController < ApplicationController
     end
   end
 
-private
+  private
 
   def set_flash_on_error_given(exception)
-    flash[:error_summary] = "Problem approving request"
+    flash[:error_summary] = 'Problem approving request'
     flash[:errors] = [{
-      "text" => "A technical issue has occurred - let the technical support team know: #{exception.message}"
+      'text' => "A technical issue has occurred - let the technical support team know: #{exception.message}"
     }]
   end
 

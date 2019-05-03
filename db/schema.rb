@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,84 +12,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910210753) do
-
+ActiveRecord::Schema.define(version: 20_180_910_210_753) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "access_request", force: :cascade do |t|
-    t.string "email_address"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "organisation"
-    t.string "reason"
-    t.integer "requester_id"
-    t.integer "status"
-    t.string "requester_email"
-    t.datetime "request_date_utc"
+  create_table 'access_request', force: :cascade do |t|
+    t.string 'email_address'
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'organisation'
+    t.string 'reason'
+    t.integer 'requester_id'
+    t.integer 'status'
+    t.string 'requester_email'
+    t.datetime 'request_date_utc'
   end
 
-  create_table "course_enrichment", force: :cascade do |t|
-    t.string "provider_code"
-    t.string "ucas_course_code"
-    t.integer "status"
+  create_table 'course_enrichment', force: :cascade do |t|
+    t.string 'provider_code'
+    t.string 'ucas_course_code'
+    t.integer 'status'
   end
 
-  create_table "provider_enrichment", force: :cascade do |t|
-    t.string "provider_code"
-    t.integer "status"
+  create_table 'provider_enrichment', force: :cascade do |t|
+    t.string 'provider_code'
+    t.integer 'status'
   end
 
-  create_table "organisation", force: :cascade do |t|
-    t.string "name"
-    t.string "org_id"
+  create_table 'organisation', force: :cascade do |t|
+    t.string 'name'
+    t.string 'org_id'
   end
 
-  create_table "organisation_provider", force: :cascade do |t|
-    t.integer "provider_id"
-    t.integer "organisation_id"
+  create_table 'organisation_provider', force: :cascade do |t|
+    t.integer 'provider_id'
+    t.integer 'organisation_id'
   end
 
-  create_table "organisation_user", force: :cascade do |t|
-    t.integer "organisation_id"
-    t.integer "user_id"
+  create_table 'organisation_user', force: :cascade do |t|
+    t.integer 'organisation_id'
+    t.integer 'user_id'
   end
 
-  create_table "user", force: :cascade do |t|
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "sign_in_user_id"
-    t.datetime "first_login_date_utc"
-    t.datetime "last_login_date_utc"
-    t.datetime "welcome_email_date_utc"
+  create_table 'user', force: :cascade do |t|
+    t.string 'email'
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'sign_in_user_id'
+    t.datetime 'first_login_date_utc'
+    t.datetime 'last_login_date_utc'
+    t.datetime 'welcome_email_date_utc'
   end
 
-  create_table "nctl_organisation", force: :cascade do |t|
-    t.integer "organisation_id"
-    t.string "nctl_id"
+  create_table 'nctl_organisation', force: :cascade do |t|
+    t.integer 'organisation_id'
+    t.string 'nctl_id'
   end
 
-  create_table "course", force: :cascade do |t|
-    t.integer "provider_id"
-    t.string "course_code"
+  create_table 'course', force: :cascade do |t|
+    t.integer 'provider_id'
+    t.string 'course_code'
   end
 
-  create_table "provider", force: :cascade do |t|
-    t.string "provider_name"
-    t.string "addr1"
-    t.string "addr2"
-    t.string "addr3"
-    t.string "addr4"
-    t.string "postcode"
-    t.string "scitt"
-    t.string "contact_name"
-    t.string "year_code"
-    t.string "provider_code"
-    t.string "provider_type"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'provider', force: :cascade do |t|
+    t.string 'provider_name'
+    t.string 'addr1'
+    t.string 'addr2'
+    t.string 'addr3'
+    t.string 'addr4'
+    t.string 'postcode'
+    t.string 'scitt'
+    t.string 'contact_name'
+    t.string 'year_code'
+    t.string 'provider_code'
+    t.string 'provider_type'
+    t.string 'url'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
-
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CourseEnrichment < ApplicationRecord
-  self.table_name = "course_enrichment"
-  self.primary_key = "provider_code"
+  self.table_name = 'course_enrichment'
+  self.primary_key = 'provider_code'
 
   enum status: { draft: 0, published: 1 }
 
