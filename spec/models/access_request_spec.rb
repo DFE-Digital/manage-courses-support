@@ -11,7 +11,7 @@ describe AccessRequest, type: :model do
 
   it "can be approved" do
     network_request = stub_request(:post,
-      "https://www.example.com/api/admin/access-request?accessRequestId=#{request.id}").to_return(status: 200)
+                                   "https://www.example.com/api/admin/access-request?accessRequestId=#{request.id}").to_return(status: 200)
     request.approve!
     expect(network_request).to have_been_made
   end

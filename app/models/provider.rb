@@ -2,5 +2,5 @@ class Provider < ApplicationRecord
   self.table_name = "provider"
 
   has_and_belongs_to_many :organisations,
-    join_table: :organisation_provider
+                          join_table: :organisation_provider
 end

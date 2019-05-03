@@ -10,8 +10,8 @@ class AccessRequestsController < ApplicationController
       AccessRequest.find(id).approve!
       flash[:notice] = "Successfully approved request"
       redirect_to action: 'inform_publisher', id: id
-    rescue ManageCoursesAPI::AccessRequestInternalFailure => exception
-      set_flash_on_error_given(exception)
+    rescue ManageCoursesAPI::AccessRequestInternalFailure => e
+      set_flash_on_error_given(e)
       redirect_to action: 'index'
     end
   end
@@ -44,8 +44,8 @@ class AccessRequestsController < ApplicationController
       flash[:notice] = "Successfully approved request"
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
-    rescue ManageCoursesAPI::AccessRequestInternalFailure => exception
-      set_flash_on_error_given(exception)
+    rescue ManageCoursesAPI::AccessRequestInternalFailure => e
+      set_flash_on_error_given(e)
       render 'preview'
     end
   end

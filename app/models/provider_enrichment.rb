@@ -5,6 +5,6 @@ class ProviderEnrichment < ApplicationRecord
   enum status: { draft: 0, published: 1 }
 
   belongs_to :provider,
-    foreign_key: :provider_code,
-    primary_key: :provider_code
+             foreign_key: :provider_code,
+             primary_key: :provider_code
 end

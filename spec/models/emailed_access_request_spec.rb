@@ -83,7 +83,7 @@ describe EmailedAccessRequest, type: :model do
 
   it "fetches the existing recipient if they are already a user in the system" do
     FactoryBot.create(:user,
-      email: 'baz@qux.com', first_name: 'baz', last_name: 'qux')
+                      email: 'baz@qux.com', first_name: 'baz', last_name: 'qux')
 
     expect(emailed_request.recipient).to be_persisted
   end
