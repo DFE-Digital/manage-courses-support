@@ -129,10 +129,10 @@
                 "description": "API key for the manage courses api"
             }
         },
-        "settingsAuthenticationSecret": {
+        "settingsManageBackendSecret": {
             "type": "string",
             "metadata": {
-              "description": "Auth secret for manage back-end."
+              "description": "Auth secret for manage backend."
             }
         },
         "sentryDSN": {
@@ -274,8 +274,8 @@
                                 "value": "[parameters('serveStaticFiles')]"
                             },
                             {
-                                "name": "SETTINGS__AUTHENTICATION__SECRET",
-                                "value": "[parameters('settingsAuthenticationSecret')]"
+                                "name": "SETTINGS__MANAGE_BACKEND__SECRET",
+                                "value": "[parameters('settingsManageBackendSecret')]"
                             },
                             {
                                 "name": "SENTRY_DSN",
