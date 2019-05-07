@@ -19,6 +19,10 @@ qa:
   <<: *default
   database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_qa' %>
 
+new_qa:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_qa' %>
+
 staging:
   <<: *default
   database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_staging' %>
