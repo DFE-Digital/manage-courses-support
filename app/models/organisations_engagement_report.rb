@@ -74,6 +74,8 @@ class OrganisationsEngagementReport
   end
 
   def percentage_of(key)
+    return 0 if self[:orgs_with_allocations].zero?
+
     ((self[key].to_f * 100) / self[:orgs_with_allocations]).to_i
   end
 end
