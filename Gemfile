@@ -17,8 +17,8 @@ gem 'pg'
 gem 'puma', '~> 3.12'
 
 # Use SCSS for stylesheets
-gem 'sassc-rails'
 gem 'autoprefixer-rails'
+gem 'sassc-rails'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
@@ -26,11 +26,11 @@ gem 'webpacker', '~> 4.0'
 # Manage multiple processes i.e. web server and webpack
 gem 'foreman'
 
+gem 'bootsnap', '>= 1.1.0'
 gem 'jbuilder', '~> 2.8'
 gem 'json'
 gem 'pkg-config', '~> 1.3'
 gem 'rake'
-gem 'bootsnap', '>= 1.1.0'
 
 # App Insights for Azure
 gem 'application_insights'
@@ -39,11 +39,11 @@ gem 'application_insights'
 gem 'sentry-raven'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'pry-byebug'
-  gem 'rspec-rails'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'govuk-lint', '~> 3.11'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
 end
 
 group :test do
@@ -54,8 +54,8 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end

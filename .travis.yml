@@ -14,7 +14,7 @@ before_script:
   - docker-compose exec web /bin/sh -c "bundle exec rake assets:precompile"
 script:
   - docker-compose exec web /bin/sh -c "bundle exec rake spec"
-  - docker-compose exec web /bin/sh -c "bundle exec govuk-lint-ruby app config db lib spec --format clang"
+  - docker-compose exec web /bin/sh -c "bundle exec rake lint:ruby"
 deploy:
   provider: script
   script: bash docker-push.sh

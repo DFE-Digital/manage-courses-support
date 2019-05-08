@@ -1,6 +1,10 @@
-require: rubocop-rspec
+inherit_gem:
+  govuk-lint: configs/rubocop/all.yml
 
-RSpec/ExampleLength:
-  Enabled: false
-RSpec/MultipleExpectations:
-  Enabled: false
+AllCops:
+  Exclude:
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/setup'
+    - 'bin/update'
+    - 'db/schema.rb'
