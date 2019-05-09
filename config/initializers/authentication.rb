@@ -1,5 +1,5 @@
 if Rails.env.development? || Rails.env.test?
-  AUTHENTICATION = { 'bat' => 'beta' }.freeze
+  AUTHENTICATION = { 'super.admin@education.gov.uk' => 'beta' }.freeze # email matches seeds.rb
 elsif Rails.env.production? && ENV['AUTHENTICATION_CREDENTIALS'].present?
   AUTHENTICATION = JSON.parse(ENV['AUTHENTICATION_CREDENTIALS'])
 else

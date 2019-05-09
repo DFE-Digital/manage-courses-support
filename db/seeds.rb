@@ -9,7 +9,8 @@
 admin_user = User.create!(
   first_name: 'Super',
   last_name: 'Admin',
-  email: 'super.admin@education.gov.uk',
+  accept_terms_date_utc: Time.now.utc,
+  email: 'super.admin@education.gov.uk', # matches authentication.rb
 )
 
 acme = Organisation.create!(

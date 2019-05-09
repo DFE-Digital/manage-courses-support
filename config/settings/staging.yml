@@ -1,0 +1,2 @@
+manage_backend:
+  base_url: https://bat-staging-manage-courses-backend-app.azurewebsites.net/

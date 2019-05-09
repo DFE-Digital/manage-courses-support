@@ -32,6 +32,15 @@ gem 'json'
 gem 'pkg-config', '~> 1.3'
 gem 'rake'
 
+# Parsing JSON from an API
+gem 'json_api_client'
+
+# For encoding/decoding web token used for authentication
+gem 'jwt'
+
+# Settings for the app
+gem 'config'
+
 # App Insights for Azure
 gem 'application_insights'
 

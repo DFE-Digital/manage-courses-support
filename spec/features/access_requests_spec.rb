@@ -1,6 +1,7 @@
 require "rails_helper"
 
 BASE_API_URL = "https://www.example.com".freeze
+BASE_BACKEND_URL = "http://localhost:3001/".freeze
 
 RSpec.describe "Access requests", type: :feature do
   include_context 'when authenticated'
@@ -35,13 +36,13 @@ RSpec.describe "Access requests", type: :feature do
 
   describe "approving form access requests" do
     it "confirms success when the API call succeeds" do
-      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 200)
+      manage_backend_request = stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post
 
       visit "/access-requests"
       click_link "Approve"
 
       expect(page).to have_text("Successfully approved request")
-      expect(manage_courses_api_request).to have_been_made
+      expect(manage_backend_request).to have_been_made
       expect(page).to have_text("Inform the publisher")
       expect(page).to have_text("send an email to jane.smith@acme-scitt.org")
 
@@ -51,30 +52,30 @@ RSpec.describe "Access requests", type: :feature do
     end
 
     it "shows an error when the API call returns 401" do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 401)
+      stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 401
 
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("API client is unauthorized")
+      expect(page).to have_text("JsonApiClient::Errors::NotAuthorized")
     end
 
     it "shows an error when the API call returns 404" do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 404)
+      stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 404
 
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("access request or the requester email not found")
+      expect(page).to have_text("Couldn't find resource at")
     end
 
     it "shows an error when the API call returns an unexpected status code" do
-      stub_request(:post, "#{BASE_API_URL}/api/admin/access-request?accessRequestId=#{unapproved_request.id}").to_return(status: 999)
+      stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 999
 
       visit "/access-requests"
       click_link "Approve"
 
-      expect(page).to have_text("unexpected response code 999")
+      expect(page).to have_text("Unexpected response status: 999")
     end
   end
 

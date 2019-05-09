@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20180910210753) do
     t.datetime "first_login_date_utc"
     t.datetime "last_login_date_utc"
     t.datetime "welcome_email_date_utc"
+    t.datetime "accept_terms_date_utc"
   end
 
   create_table "nctl_organisation", force: :cascade do |t|

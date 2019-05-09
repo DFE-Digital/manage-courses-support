@@ -8,12 +8,6 @@ class ManageCoursesAPI
     @api_key = api_key
   end
 
-  # POST /api/admin/access-request
-  def approve_access_request(id:)
-    uri = URI("#{@api_base_url}/api/admin/access-request?accessRequestId=#{id}")
-    post_to(uri)
-  end
-
   # POST /api/admin/manual-access-request
   def manually_approve_access_request(data)
     uri = URI("#{@api_base_url}/api/admin/manual-access-request")

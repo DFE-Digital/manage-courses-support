@@ -8,11 +8,4 @@ describe AccessRequest, type: :model do
   it "is associated with a requester user via email" do
     expect(request.requester).to eq(requester)
   end
-
-  it "can be approved" do
-    network_request = stub_request(:post,
-                                   "https://www.example.com/api/admin/access-request?accessRequestId=#{request.id}").to_return(status: 200)
-    request.approve!
-    expect(network_request).to have_been_made
-  end
 end
