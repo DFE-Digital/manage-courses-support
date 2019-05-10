@@ -12,6 +12,7 @@ class AccessRequestsController < ApplicationController
       flash[:notice] = "Successfully approved request"
       redirect_to action: 'inform_publisher', id: id
     rescue StandardError => e
+      Raven.capture(e)
       set_flash_on_error_given(e)
       redirect_to action: 'index'
     end
