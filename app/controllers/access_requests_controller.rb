@@ -8,7 +8,7 @@ class AccessRequestsController < ApplicationController
 
     begin
       access_request = AccessRequestAPI.new(id: id)
-      access_request.approve(id: id)
+      access_request.approve
       flash[:notice] = "Successfully approved request"
       redirect_to action: 'inform_publisher', id: id
     rescue StandardError => e
