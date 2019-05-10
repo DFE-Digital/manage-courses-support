@@ -4,8 +4,6 @@
   <td class="govuk-table__cell"><%= user_details(access_request.requester) %></td>
   <td class="govuk-table__cell"><%= user_details(access_request.recipient) %></td>
   <td class="govuk-table__cell">
-    <%= link_to approve_access_request_path(access_request.id) do %>
-      <button type="submit" class="govuk-button govuk-!-margin-bottom-0">Approve</button>
-    <% end %>
+    <%= button_to "Approve", approve_access_request_path(access_request.id), :class => "govuk-button govuk-!-margin-bottom-0" %>
   </td>
 </tr>

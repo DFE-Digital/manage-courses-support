@@ -39,7 +39,7 @@ RSpec.describe "Access requests", type: :feature do
       manage_backend_request = stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post
 
       visit "/access-requests"
-      click_link "Approve"
+      click_button "Approve"
 
       expect(page).to have_text("Successfully approved request")
       expect(manage_backend_request).to have_been_made
@@ -55,7 +55,7 @@ RSpec.describe "Access requests", type: :feature do
       stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 401
 
       visit "/access-requests"
-      click_link "Approve"
+      click_button "Approve"
 
       expect(page).to have_text("JsonApiClient::Errors::NotAuthorized")
     end
@@ -64,7 +64,7 @@ RSpec.describe "Access requests", type: :feature do
       stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 404
 
       visit "/access-requests"
-      click_link "Approve"
+      click_button "Approve"
 
       expect(page).to have_text("Couldn't find resource at")
     end
@@ -73,7 +73,7 @@ RSpec.describe "Access requests", type: :feature do
       stub_api_v2_request "/access_requests/#{unapproved_request.id}/approve", nil, :post, 999
 
       visit "/access-requests"
-      click_link "Approve"
+      click_button "Approve"
 
       expect(page).to have_text("Unexpected response status: 999")
     end
