@@ -1,7 +1,6 @@
 require "rails_helper"
 
 BASE_API_URL = "https://www.example.com".freeze
-BASE_BACKEND_URL = "http://localhost:3001/".freeze
 
 RSpec.describe "Access requests", type: :feature do
   include_context 'when authenticated'
