@@ -12,8 +12,4 @@ class AccessRequest < ApplicationRecord
       email: self.email_address,
     )
   end
-
-  def approve!
-    MANAGE_COURSES_API.approve_access_request(id: id)
-  end
 end
