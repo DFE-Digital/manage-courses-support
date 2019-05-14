@@ -27,7 +27,7 @@ gem 'webpacker', '~> 4.0'
 gem 'foreman'
 
 gem 'bootsnap', '>= 1.1.0'
-gem 'jbuilder', '~> 2.8'
+gem 'jbuilder', '~> 2.9'
 gem 'json'
 gem 'pkg-config', '~> 1.3'
 gem 'rake'
