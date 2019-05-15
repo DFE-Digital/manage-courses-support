@@ -13,6 +13,20 @@ admin_user = User.create!(
   email: 'super.admin@education.gov.uk', # matches authentication.rb
 )
 
+requester_user = User.create!(
+  first_name: 'Bob',
+  last_name: 'Smith',
+  accept_terms_date_utc: Time.now.utc,
+  email: 'bob.smith@small-scitt.org.uk',
+)
+
+requester_user2 = User.create!(
+  first_name: 'Sally',
+  last_name: 'Jones',
+  accept_terms_date_utc: Time.now.utc,
+  email: 'sally.jones@big-scitt.org.uk',
+)
+
 acme = Organisation.create!(
   name: 'Acme',
   org_id: '12345',
@@ -100,7 +114,8 @@ AccessRequest.create!(
   email_address: 'new.user@acme-scitt.org',
   first_name: 'New',
   last_name: 'User',
-  requester_email: 'jable@acme-scitt.org',
+  requester_id: requester_user.id,
+  requester_email: requester_user.email,
   request_date_utc: Time.now - 1.week,
   status: :requested,
 )
@@ -109,7 +124,8 @@ AccessRequest.create!(
   email_address: 'another.new.user@acme-scitt.org',
   first_name: 'Another new',
   last_name: 'User',
-  requester_email: 'jable@acme-scitt.org',
+  requester_id: requester_user2.id,
+  requester_email: requester_user2.email,
   request_date_utc: Time.now - 2.weeks,
   status: :actioned,
 )
