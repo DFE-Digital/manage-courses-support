@@ -2,3 +2,7 @@
 require_relative '../config/boot'
 require 'rake'
 Rake.application.run
+
+task lint_ruby: ['lint:ruby']
+task lint_scss: ['lint:scss']
+task default: %i[spec lint_ruby lint_scss]

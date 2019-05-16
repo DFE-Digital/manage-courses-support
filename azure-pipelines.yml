@@ -39,7 +39,8 @@ steps:
     DOCKER_OVERRIDE: $(dockerOverride)
 
 - script: |
-    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec govuk-lint-ruby app config db lib spec --format clang"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint:ruby"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint:scss"
   displayName: 'Execute linters'
   env:
     DOCKER_OVERRIDE: $(dockerOverride)

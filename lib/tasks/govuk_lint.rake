@@ -4,4 +4,9 @@ namespace :lint do
     puts 'Linting ruby...'
     system 'bundle exec rubocop app config db lib spec Gemfile --format clang -a'
   end
+
+  task :scss do
+    puts 'Linting scss...'
+    system 'bundle exec govuk-lint-sass app/assets/stylesheets'
+  end
 end
