@@ -42,6 +42,7 @@ steps:
 
 - script: |
     $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_ruby"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_scss"
   displayName: 'Execute linters'
   env:
     DOCKER_OVERRIDE: $(dockerOverride)
