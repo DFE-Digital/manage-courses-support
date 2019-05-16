@@ -6,11 +6,11 @@ class Base < JsonApiClient::Resource
     def run(request_method, path, params: nil, headers: {}, body: nil)
       authorization = "Bearer #{Thread.current.fetch(:manage_courses_backend_token)}"
       super(
-          request_method,
-          path,
-          params: params,
-          headers: headers.update('Authorization' => authorization),
-          body: body
+        request_method,
+        path,
+        params: params,
+        headers: headers.update('Authorization' => authorization),
+        body: body
       )
     end
   end

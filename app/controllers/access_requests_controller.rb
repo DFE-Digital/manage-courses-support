@@ -1,6 +1,6 @@
 class AccessRequestsController < ApplicationController
   def index
-    @access_requests = AccessRequest.unapproved.order(request_date_utc: :asc)
+    @access_requests = AccessRequestAPI.includes("requester")
   end
 
   def approve
@@ -19,7 +19,7 @@ class AccessRequestsController < ApplicationController
   end
 
   def inform_publisher
-    @recipient_email_address = AccessRequest.find(params[:id]).recipient.email
+    @recipient_email_address = AccessRequestAPI.find(params[:id]).first.recipient.email
   end
 
   def new
@@ -40,7 +40,6 @@ class AccessRequestsController < ApplicationController
 
   def create
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
-
     begin
       build_access_request
       @access_request.approve
