@@ -42,11 +42,8 @@ class AccessRequestsController < ApplicationController
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
 
     begin
-      access_request_params = emailed_access_request_params.to_h
-      access_request_params[:email_address] = access_request_params.delete(:target_email)
-      access_request = AccessRequestAPI.new(access_request_params)
-      access_request.save
-      access_request.approve
+      build_access_request
+      @access_request.approve
       flash[:notice] = "Successfully approved request"
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
@@ -68,5 +65,12 @@ private
 
   def emailed_access_request_params
     params.fetch(:emailed_access_request, {}).permit(:requester_email, :target_email, :first_name, :last_name)
+  end
+
+  def build_access_request
+    access_request_params = emailed_access_request_params.to_h
+    access_request_params[:email_address] = access_request_params.delete(:target_email)
+    @access_request = AccessRequestAPI.new(access_request_params)
+    @access_request.save
   end
 end
