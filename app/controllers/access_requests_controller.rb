@@ -42,11 +42,16 @@ class AccessRequestsController < ApplicationController
     @emailed_access_request = EmailedAccessRequest.new(emailed_access_request_params)
 
     begin
-      @emailed_access_request.manually_approve!
+      access_request_params = emailed_access_request_params.to_h
+      access_request_params[:email_address] = access_request_params.delete(:target_email)
+      access_request = AccessRequestAPI.new(access_request_params)
+      access_request.save
+      access_request.approve
       flash[:notice] = "Successfully approved request"
       @recipient_email_address = @emailed_access_request.target_email
       render 'inform_publisher'
-    rescue ManageCoursesAPI::AccessRequestInternalFailure => e
+    rescue StandardError => e
+      Raven.capture(e)
       set_flash_on_error_given(e)
       render 'preview'
     end
