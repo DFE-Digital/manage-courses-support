@@ -72,8 +72,8 @@ steps:
     imageName: "$(docker_path):$(Build.BuildNumber)"
 
 - task: Docker@1
-  displayName: Push this build with latest tag
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/implement_layer_caching'))
+  displayName: Push tagged image (latest) if master
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: Push an image
     imageName: "$(docker_path):latest"
