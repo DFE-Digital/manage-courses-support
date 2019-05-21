@@ -1,2 +1,2 @@
 manage_backend:
-  base_url: https://bat-qa-mcbe-as.azurewebsites.net/
+  base_url: https://bat-dev-manage-courses-backend-app.azurewebsites.net/
