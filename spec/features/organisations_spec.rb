@@ -9,12 +9,12 @@ RSpec.describe "Organisations", type: :feature do
                         name: "Stellar Alliance / Stellar SCITT",
                         org_id: '12345',
                         nctl_organisations_count: 0,
-                        users: [
-                          FactoryBot.create(:user,
+                        userdbs: [
+                          FactoryBot.create(:userdb,
                                             email: 'awatson@stellar.org',
                                             first_name: 'Alice',
                                             last_name: 'Watson'),
-                          FactoryBot.create(:user,
+                          FactoryBot.create(:userdb,
                                             email: 'bsmith@stellar.org',
                                             first_name: 'Betty',
                                             last_name: 'Smith',
@@ -39,8 +39,8 @@ RSpec.describe "Organisations", type: :feature do
       FactoryBot.create(:organisation,
                         name: "University of Duncree",
                         org_id: '67890',
-                        users: [
-                          FactoryBot.create(:user,
+                        userdbs: [
+                          FactoryBot.create(:userdb,
                                             email: 'jbrady@duncree.ac.uk',
                                             first_name: 'James',
                                             last_name: 'Brady')
@@ -81,8 +81,8 @@ RSpec.describe "Organisations", type: :feature do
       FactoryBot.create(:organisation,
                         name: "University of Duncree",
                         org_id: '67890',
-                        users: [
-                          FactoryBot.create(:user,
+                        userdbs: [
+                          FactoryBot.create(:userdb,
                                             email: 'johnny.admin@education.gov.uk',
                                             first_name: 'Johnny',
                                             last_name: 'Admin')
@@ -100,16 +100,16 @@ RSpec.describe "Organisations", type: :feature do
     it "lists only organisations without active users" do
       FactoryBot.create(:organisation,
                         name: "Stellar Alliance / Stellar SCITT",
-                        users: [
-                          FactoryBot.create(:user, :inactive),
-                          FactoryBot.create(:user, :active)
+                        userdbs: [
+                          FactoryBot.create(:userdb, :inactive),
+                          FactoryBot.create(:userdb, :active)
                         ])
 
       FactoryBot.create(:organisation,
                         name: "University of Duncree",
                         org_id: '67890',
-                        users: [
-                          FactoryBot.create(:user, :inactive,
+                        userdbs: [
+                          FactoryBot.create(:userdb, :inactive,
                                             email: 'jbrady@duncree.ac.uk',
                                             first_name: 'James',
                                             last_name: 'Brady')

@@ -4,7 +4,7 @@ FactoryBot.define do
     last_name  { "Smoth" }
     email_address { "#{first_name}.#{last_name}@acme-scitt.org".downcase }
     organisation { 'Acme SCITT' }
-    association :requester, factory: :user
+    association :requester, factory: :userdb
     request_date_utc { Time.parse('12 July 2018 12:00:00') }
     reason { "Jane Smith is the ITT course administrator" }
     status { 0 }

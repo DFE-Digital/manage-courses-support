@@ -6,21 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin_user = User.create!(
+admin_user = Userdb.create!(
   first_name: 'Super',
   last_name: 'Admin',
   accept_terms_date_utc: Time.now.utc,
   email: 'super.admin@education.gov.uk', # matches authentication.rb
 )
 
-requester_user = User.create!(
+requester_user = Userdb.create!(
   first_name: 'Bob',
   last_name: 'Smith',
   accept_terms_date_utc: Time.now.utc,
   email: 'bob.smith@small-scitt.org.uk',
 )
 
-requester_user2 = User.create!(
+requester_user2 = Userdb.create!(
   first_name: 'Sally',
   last_name: 'Jones',
   accept_terms_date_utc: Time.now.utc,
@@ -34,8 +34,8 @@ acme = Organisation.create!(
     Provider.create!(provider_name: 'Acme SCITT', provider_code: 'A01'),
     Provider.create!(provider_name: 'Acme Alliance', provider_code: 'A02'),
   ],
-  users: [
-    User.create!(
+  userdbs: [
+    Userdb.create!(
       first_name: 'Jane',
       last_name: 'Able',
       email: 'jable@acme-scitt.org',
@@ -92,10 +92,10 @@ big_uni = Organisation.create!(
   providers: [
     Provider.create!(provider_name: 'Big Uni', provider_code: 'B01'),
   ],
-  users: [
-    User.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
-    User.create!(first_name: 'Ben', last_name: 'Dobbs', email: 'bdobbs@big-uni.ac.uk'),
-    User.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
+  userdbs: [
+    Userdb.create!(first_name: 'Alex', last_name: 'Cryer', email: 'acryer@big-uni.ac.uk'),
+    Userdb.create!(first_name: 'Ben', last_name: 'Dobbs', email: 'bdobbs@big-uni.ac.uk'),
+    Userdb.create!(first_name: 'Carol', last_name: 'Eames', email: 'ceames@big-uni.ac.uk'),
     admin_user,
   ],
 )
@@ -113,7 +113,7 @@ NctlOrganisation.create!(
 AccessRequest.create!(
   email_address: 'new.user@acme-scitt.org',
   first_name: 'New',
-  last_name: 'User',
+  last_name: 'Userdb',
   requester_id: requester_user.id,
   requester_email: requester_user.email,
   request_date_utc: Time.now - 1.week,
@@ -123,7 +123,7 @@ AccessRequest.create!(
 AccessRequest.create!(
   email_address: 'another.new.user@acme-scitt.org',
   first_name: 'Another new',
-  last_name: 'User',
+  last_name: 'Userdb',
   requester_id: requester_user2.id,
   requester_email: requester_user2.email,
   request_date_utc: Time.now - 2.weeks,

@@ -28,11 +28,11 @@ class EmailedAccessRequest
   end
 
   def requester
-    User.find_by(email: requester_email)
+    Userdb.find_by(email: requester_email)
   end
 
   def recipient
-    User.
+    Userdb.
       where(email: target_email).
       first_or_initialize(first_name: first_name, last_name: last_name)
   end
