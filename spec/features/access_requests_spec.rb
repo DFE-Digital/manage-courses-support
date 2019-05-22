@@ -78,7 +78,7 @@ describe "Access requests", type: :feature do
 
   describe "actioning emailed access requests" do
     before do
-      FactoryBot.create(:user,
+      FactoryBot.create(:userdb,
                         email: 'requester@email.com',
                         organisations: [
                           FactoryBot.create(:organisation, name: 'Org A'),
