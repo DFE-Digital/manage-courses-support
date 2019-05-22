@@ -1,8 +1,6 @@
 require "rails_helper"
 
-BASE_API_URL = "https://www.example.com".freeze
-
-RSpec.describe "Access requests", type: :feature do
+describe "Access requests", type: :feature do
   include_context 'when authenticated'
 
   let!(:unapproved_request) {
@@ -88,16 +86,42 @@ RSpec.describe "Access requests", type: :feature do
                         ])
     end
 
-    it "previews the change, calls the API and confirms success when the request is valid" do
-      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
-        .with(query: {
-          requesterEmail: 'requester@email.com',
-          targetEmail: 'target@email.com',
-          firstName: 'first',
-          lastName: 'last'
-        })
-        .to_return(status: 200)
+    let(:create_json_response) {
+      {
+        "data" =>
+          [{ "id" => "1",
+            "type" => "access_request",
+            "attributes" =>
+             { "email_address" => "andrew@brakus.biz",
+              "first_name" => "Gaylord",
+              "last_name" => "Torphy",
+              "organisation" => "#<Organisation:0x00007fa23e159360>",
+              "reason" => "Qui sequi culpa illo.",
+              "requester_id" => 1,
+              "status" => "requested",
+              "requester_email" => "hoyt@beer.net",
+              "request_date_utc" => "2019-05-20T13:17:32Z" },
+            "relationships" => { "requester" => { "meta" => { "included" => false } } } },
+           { "id" => "2",
+            "type" => "access_request",
+            "attributes" =>
+             { "email_address" => "freddiecrona@shields.biz",
+              "first_name" => "Emmett",
+              "last_name" => "Murphy",
+              "organisation" => "#<Organisation:0x00007fa246631060>",
+              "reason" => "Animi aperiam occaecati et.",
+              "requester_id" => 2,
+              "status" => "requested",
+              "requester_email" => "steven@stracke.net",
+              "request_date_utc" => "2019-05-20T13:17:32Z" },
+            "relationships" => { "requester" => { "meta" => { "included" => false } } } }],
+        "jsonapi" => { "version" => "1.0" }
+      }
+    }
 
+    it "previews the change, calls the API and confirms success when the request is valid" do
+      manage_backend_create_request = stub_api_v2_request "/access_requests", create_json_response, :post
+      manage_backend_approve_request = stub_api_v2_request "/access_requests/1/approve", nil, :post
       visit '/access-requests'
 
       click_link 'Create and approve an access request manually'
@@ -118,40 +142,14 @@ RSpec.describe "Access requests", type: :feature do
       click_button 'Approve'
 
       expect(page).to have_text('Successfully approved request')
-      expect(manage_courses_api_request).to have_been_made
+      expect(manage_backend_create_request).to have_been_made
+      expect(manage_backend_approve_request).to have_been_made
       expect(page).to have_text("Inform the publisher")
       expect(page).to have_text("send an email to target@email.com")
 
       click_link "Return to access requests"
 
       expect(page).to have_text("Open access requests")
-    end
-
-    it "lower-cases the recipient email because the API is case-sensitive" do
-      manage_courses_api_request = stub_request(:post, "#{BASE_API_URL}/api/admin/manual-access-request")
-        .with(query: {
-          requesterEmail: 'requester@email.com',
-          targetEmail: 'target.email@email.com',
-          firstName: 'first',
-          lastName: 'last'
-        })
-        .to_return(status: 200)
-
-      visit '/access-requests'
-
-      click_link 'Create and approve an access request manually'
-
-      fill_in 'Requester email', with: 'requester@email.com'
-      fill_in 'Target email', with: 'Target.Email@email.com'
-      fill_in 'First name', with: 'first'
-      fill_in 'Last name', with: 'last'
-
-      click_button 'Preview'
-      expect(page).to have_text('first last <target.email@email.com>')
-
-      click_button 'Approve'
-
-      expect(manage_courses_api_request).to have_been_made
     end
 
     it "stops the user support agent from proceeding if the requester email doesn't exist" do
@@ -181,26 +179,6 @@ RSpec.describe "Access requests", type: :feature do
       expect(page).to have_text("Enter the email of the person who needs access")
       expect(page).to have_text("Enter the first name of the person who needs access")
       expect(page).to have_text("Enter the last name of the person who needs access")
-    end
-
-    it "informs the user support agent when the API call fails" do
-      manage_courses_api_request = stub_request(:post, %r{#{BASE_API_URL}/api/admin/manual-access-request})
-        .to_return(status: 503)
-
-      visit '/access-requests'
-
-      click_link 'Create and approve an access request manually'
-
-      fill_in 'Requester email', with: 'requester@email.com'
-      fill_in 'Target email', with: 'target@email.com'
-      fill_in 'First name', with: 'first'
-      fill_in 'Last name', with: 'last'
-
-      click_button 'Preview'
-      click_button 'Approve'
-
-      expect(manage_courses_api_request).to have_been_made
-      expect(page).to have_text("Problem approving request")
     end
   end
 end
