@@ -43,7 +43,7 @@ describe EmailedAccessRequest, type: :model do
   end
 
   it "can be manually approved" do
-    FactoryBot.create(:user, email: 'foo@bar.com')
+    FactoryBot.create(:userdb, email: 'foo@bar.com')
     request = stub_request(:post, "https://www.example.com/api/admin/manual-access-request")
       .with(query: {
         requesterEmail: 'foo@bar.com',
@@ -82,7 +82,7 @@ describe EmailedAccessRequest, type: :model do
   end
 
   it "fetches the existing recipient if they are already a user in the system" do
-    FactoryBot.create(:user,
+    FactoryBot.create(:userdb,
                       email: 'baz@qux.com', first_name: 'baz', last_name: 'qux')
 
     expect(emailed_request.recipient).to be_persisted
@@ -91,8 +91,8 @@ describe EmailedAccessRequest, type: :model do
   it "calculates which new organisations will be accessible after the request is actioned" do
     org_a, org_b, org_c = FactoryBot.create_list(:organisation, 3)
 
-    FactoryBot.create(:user, email: 'foo@bar.com', organisations: [org_a, org_c])
-    FactoryBot.create(:user, email: 'baz@qux.com', organisations: [org_a, org_b])
+    FactoryBot.create(:userdb, email: 'foo@bar.com', organisations: [org_a, org_c])
+    FactoryBot.create(:userdb, email: 'baz@qux.com', organisations: [org_a, org_b])
 
     expect(emailed_request.new_organisations_granted).to eq([org_c])
   end

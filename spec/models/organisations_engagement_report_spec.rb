@@ -20,13 +20,13 @@ describe OrganisationsEngagementReport, type: :model do
   end
 
   it "tracks the number of organisations with active, external users" do
-    users = FactoryBot.create_list(:user, 3, :active)
-    god_user = FactoryBot.create(:user, :god_user, :active)
+    users = FactoryBot.create_list(:userdb, 3, :active)
+    god_user = FactoryBot.create(:userdb, :god_user, :active)
 
     # attach users to orgs
     orgs[0..2].zip(users) do |org, user|
-      org.users << user
-      org.users << god_user
+      org.userdbs << user
+      org.userdbs << god_user
     end
 
     expect(report[:orgs_with_active_users]).to eq(3)
