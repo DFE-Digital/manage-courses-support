@@ -11,7 +11,7 @@
         "serviceName": {
             "type": "string",
             "metadata": {
-                "description": "The abbriviation of the service name to be used when naming a resource."
+                "description": "The abbreviation of the service name to be used when naming a resource."
             }
         },
         "keyVaultName": {
@@ -132,13 +132,20 @@
         "settingsManageBackendSecret": {
             "type": "string",
             "metadata": {
-              "description": "Auth secret for manage backend."
+                "description": "Auth secret for manage backend."
             }
         },
         "sentryDSN": {
             "type": "string",
             "metadata": {
                 "description": "Connection string for Sentry monitoring."
+            }
+        },
+        "databaseServiceName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "The abbreviation of the service that contains the database used by this application."
             }
         }
     },
@@ -148,7 +155,10 @@
         "keyvaultCertificateName": "[if(greater(length(parameters('certificateName')),0), parameters('certificateName'), replace(parameters('customHostName'), '.', '-'))]",
         "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]",
         "appServicePlanName": "[concat(variables('resourceNamePrefix'), '-asp')]",
-        "appServiceRuntimeStack": "[concat('DOCKER|', parameters('dockerHubUsername'), '/', parameters('containerImageReference'))]"
+        "appServiceRuntimeStack": "[concat('DOCKER|', parameters('dockerHubUsername'), '/', parameters('containerImageReference'))]",
+        "databaseResourceNamePrefix": "[toLower(concat('bat-', parameters('resourceEnvironmentName'),'-', parameters('databaseServiceName')))]",
+        "databaseServerName": "[concat(variables('databaseResourceNamePrefix'), '-psql')]",
+        "databaseResourceGroup": "[concat(variables('databaseResourceNamePrefix'), '-rg')]"
     },
     "resources": [
         {
@@ -314,6 +324,32 @@
                     }
                 }
             }
+        },
+        {
+            "condition": "[greater(length(parameters('databaseServiceName')),0)]",
+            "apiVersion": "2017-05-10",
+            "name": "mcspt-postgresql-server-firewall-rules",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[variables('databaseResourceGroup')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'postgresql-server-firewall-rules.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "firewallRuleNamePrefix": {
+                        "value": "[concat(variables('appServicePlanName'),'-AZURE_IP-')]"
+                    },
+                    "ipAddresses": {
+                        "value": "[reference('app-service').outputs.possibleOutboundIpAddresses.value]"
+                    },
+                    "serverName": {
+                        "value": "[variables('databaseServerName')]"
+                    }
+                }
+            },
+            "dependsOn": []
         }
     ],
     "outputs": {
