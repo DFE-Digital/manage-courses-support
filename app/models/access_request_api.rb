@@ -4,7 +4,7 @@ class AccessRequestAPI < Base
   end
 
   def recipient
-    User.new(first_name: first_name, last_name: last_name, email: requester_email)
+    User.new(first_name: first_name, last_name: last_name, email: email_address)
   end
 
   custom_endpoint :approve, on: :member, request_method: :post
