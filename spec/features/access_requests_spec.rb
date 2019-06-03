@@ -64,7 +64,7 @@ describe "Access requests", type: :feature do
 
       expect(page).to have_text("Successfully approved request")
       expect(page).to have_text("Inform the publisher")
-      expect(page).to have_text("send an email to joanie@yost.name")
+      expect(page).to have_text("send an email to beverlee@waters.io")
 
       click_link "Return to access requests"
 
