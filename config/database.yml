@@ -27,6 +27,10 @@ staging:
   <<: *default
   database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_staging' %>
 
+new_staging:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_staging' %>  
+
 production:
   <<: *default
   database: <%= ENV['DB_DATABASE'] %>

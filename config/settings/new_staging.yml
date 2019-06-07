@@ -1,0 +1,2 @@
+manage_backend:
+  base_url: https://bat-stg-mcbe-as.azurewebsites.net/
