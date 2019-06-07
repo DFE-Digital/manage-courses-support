@@ -93,6 +93,9 @@ production: &production
 staging:
   <<: *production
 
+new_staging:
+  <<: *production
+
 qa:
   <<: *production
 
