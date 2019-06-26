@@ -1,2 +1,2 @@
 manage_backend:
-  base_url: https://bat-stg-mcbe-as.azurewebsites.net/
+  base_url: https://api2.staging.publish-teacher-training-courses.service.gov.uk/
