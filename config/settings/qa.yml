@@ -1,4 +1,4 @@
 manage_backend:
   base_url: https://bat-qa-mcbe-as.azurewebsites.net/
-publish:
+manage_frontend:
   base_url: https://bat-qa-mcfe-as.azurewebsites.net/

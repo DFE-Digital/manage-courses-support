@@ -4,7 +4,7 @@ RSpec.describe "Organisations", type: :feature do
   include_context 'when authenticated'
 
   before do
-    allow(Settings.publish).to(receive(:base_url)).and_return("https://example.org")
+    allow(Settings.manage_frontend).to(receive(:base_url)).and_return("https://example.org")
   end
 
   context "when accessing #index" do
