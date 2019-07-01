@@ -53,7 +53,7 @@ class EmailedAccessRequest
 private
 
   def requester_exists
-    unless requester.present?
+    if requester.blank?
       errors.add(:requester_email, "Enter the email of somebody already in the system")
     end
   end
