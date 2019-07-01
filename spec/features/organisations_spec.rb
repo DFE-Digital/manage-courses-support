@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe "Organisations", type: :feature do
   include_context 'when authenticated'
 
+  before do
+    allow(Settings.manage_frontend).to(receive(:base_url)).and_return("https://example.org")
+  end
+
   context "when accessing #index" do
     it "lists all organisations with their associated users and UCAS providers" do
       FactoryBot.create(:organisation,
@@ -72,7 +76,7 @@ RSpec.describe "Organisations", type: :feature do
         expect(page).to have_text("James Brady <jbrady@duncree.ac.uk>")
         expect(page).to have_link(
           "University of Duncree [D07]",
-          href: "https://publish-teacher-training-courses.education.gov.uk/organisation/d07"
+          href: "https://example.org/organisation/d07"
         )
       end
     end

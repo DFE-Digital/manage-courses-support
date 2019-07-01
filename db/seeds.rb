@@ -116,7 +116,7 @@ AccessRequest.create!(
   last_name: 'Userdb',
   requester_id: requester_user.id,
   requester_email: requester_user.email,
-  request_date_utc: Time.now - 1.week,
+  request_date_utc: Time.zone.now - 1.week,
   status: :requested,
 )
 
@@ -126,6 +126,6 @@ AccessRequest.create!(
   last_name: 'Userdb',
   requester_id: requester_user2.id,
   requester_email: requester_user2.email,
-  request_date_utc: Time.now - 2.weeks,
+  request_date_utc: Time.zone.now - 2.weeks,
   status: :actioned,
 )

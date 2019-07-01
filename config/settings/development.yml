@@ -1,3 +1,5 @@
 manage_backend:
   base_url: http://localhost:3001
   secret: secret
+manage_frontend:
+  base_url: https://localhost:3000
