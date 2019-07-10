@@ -36,3 +36,7 @@ production:
   database: <%= ENV['DB_DATABASE'] %>
   username: <%= ENV['DB_USERNAME'] || 'postgres' %>
   password: <%= ENV['DB_PASSWORD'] %>
+
+new_prod:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_prod' %>  
