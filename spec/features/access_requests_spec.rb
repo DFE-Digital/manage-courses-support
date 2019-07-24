@@ -10,7 +10,7 @@ describe "Access requests", type: :feature do
          { "email_address" => "beverlee@waters.io",
           "first_name" => "August",
           "last_name" => "Wilderman",
-          "organisation" => "#<Organisation:0x00007feb2a7c0520>",
+          "organisation" => "Foo Org",
           "reason" => "Aut veritatis magnam veniam.",
           "requester_id" => 2,
           "status" => "requested",
@@ -50,6 +50,7 @@ describe "Access requests", type: :feature do
 
       expect(page).to have_text("Otto")
       expect(page).to have_text("Hyatt")
+      expect(page).to have_text("Foo Org")
     end
   end
 
