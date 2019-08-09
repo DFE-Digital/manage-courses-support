@@ -14,6 +14,6 @@ module OrganisationHelper
   end
 
   def provider_url_on_publish_teacher_training_courses(provider)
-    "#{Settings.manage_frontend.base_url}/organisation/#{provider.provider_code.downcase}"
+    "#{Settings.manage_frontend.base_url}organisations/#{provider.provider_code.downcase}"
   end
 end
