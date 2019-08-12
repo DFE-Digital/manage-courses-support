@@ -1,4 +1,4 @@
 manage_backend:
-  base_url: https://bat-qa-mcbe-as.azurewebsites.net/
+  base_url: https://api2.qa.publish-teacher-training-courses.service.gov.uk/
 manage_frontend:
-  base_url: https://bat-qa-mcfe-as.azurewebsites.net/
+  base_url: https://www2.qa.publish-teacher-training-courses.service.gov.uk/

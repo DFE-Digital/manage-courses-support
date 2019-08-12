@@ -1,4 +1,4 @@
 manage_backend:
   base_url: https://api2.dev.publish-teacher-training-courses.service.gov.uk/
 manage_frontend:
-  base_url: https://www.dev.publish-teacher-training-courses.service.gov.uk/
+  base_url: https://www2.dev.publish-teacher-training-courses.service.gov.uk/
