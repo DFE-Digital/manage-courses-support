@@ -69,6 +69,8 @@ private
   def build_access_request
     access_request_params = emailed_access_request_params.to_h
     access_request_params[:email_address] = access_request_params.delete(:target_email)
+    access_request_params[:reason] = 'manual creation by user support agent'
+    access_request_params[:organisation] = Userdb.find_by!(email: params["emailed_access_request"]['requester_email']).organisations
     @access_request = AccessRequestAPI.new(access_request_params)
     @access_request.save
   end
