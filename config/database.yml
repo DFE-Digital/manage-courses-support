@@ -29,7 +29,7 @@ staging:
 
 new_staging:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_staging' %>  
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_staging' %>
 
 production:
   <<: *default
@@ -39,4 +39,8 @@ production:
 
 new_prod:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_prod' %>  
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_prod' %>
+
+prod:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] || 'publish_courses_support_new_prod' %>
