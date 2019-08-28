@@ -1,4 +1,0 @@
-manage_backend:
-  base_url: https://api2.staging.publish-teacher-training-courses.service.gov.uk/
-manage_frontend:
-  base_url: https://www2.staging.publish-teacher-training-courses.service.gov.uk/

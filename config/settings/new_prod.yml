@@ -1,4 +1,0 @@
-manage_backend:
-  base_url: https://bat-prod-mcbe-as.azurewebsites.net/
-manage_frontend:
-  base_url: https://bat-prod-mcfe-as.azurewebsites.net/
