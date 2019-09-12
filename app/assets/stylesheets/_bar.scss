@@ -6,7 +6,7 @@
 }
 
 .bar-progress {
-  background: govuk-colour("green");
+  background: govuk-colour("yellow");
   box-sizing: border-box;
   height: govuk-spacing(7);
   line-height: govuk-spacing(7);
@@ -15,6 +15,5 @@
 }
 
 .bar-progress-text {
-  color: govuk-colour("white");
   font-weight: bold
 }
