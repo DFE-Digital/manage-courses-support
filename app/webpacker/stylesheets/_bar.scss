@@ -1,19 +1,19 @@
 .bar {
   border: 5px solid $govuk-border-colour;
-  width: 100%;
-  position: relative;
   font-weight: bold;
+  position: relative;
+  width: 100%;
 }
 
 .bar-progress {
   background: govuk-colour("yellow");
+  box-sizing: border-box;
   height: govuk-spacing(7);
   line-height: govuk-spacing(7);
   padding: 0 govuk-spacing(2);
-  box-sizing: border-box;
   white-space: nowrap;
 }
 
 .bar-progress-text {
-  font-weight: bold;
+  font-weight: bold
 }

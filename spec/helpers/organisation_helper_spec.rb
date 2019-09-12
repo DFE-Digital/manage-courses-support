@@ -19,7 +19,7 @@ describe OrganisationHelper do
                                sign_in_user_id: 'a-uuid')
 
       expect(helper.user_details(user, dfe_signin_deeplink: true)).to eq(
-        '<a href="https://support.signin.education.gov.uk/users/a-uuid/audit">Jane Smith &lt;jsmith@acme-scitt.org&gt;</a>'
+        '<a class="govuk-link" href="https://support.signin.education.gov.uk/users/a-uuid/audit">Jane Smith &lt;jsmith@acme-scitt.org&gt;</a>'
       )
     end
   end
