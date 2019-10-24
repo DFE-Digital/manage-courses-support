@@ -29,7 +29,7 @@ gem 'foreman'
 gem 'bootsnap', '>= 1.1.0'
 gem 'jbuilder', '~> 2.9'
 gem 'json'
-gem 'pkg-config', '~> 1.3'
+gem 'pkg-config', '~> 1.4'
 gem 'rake'
 
 # Parsing JSON from an API
