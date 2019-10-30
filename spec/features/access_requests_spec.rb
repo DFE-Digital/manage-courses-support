@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Access requests", type: :feature do
-  include_context 'when authenticated'
+  include_context "when authenticated"
   let(:backend_json_response) {
     { "data" =>
       [{ "id" => "1",
@@ -33,7 +33,7 @@ describe "Access requests", type: :feature do
     FactoryBot.create(:access_request, :unapproved,
                       first_name: "Jane",
                       last_name: "Smith",
-                      email_address: 'jane.smith@acme-scitt.org')
+                      email_address: "jane.smith@acme-scitt.org")
   }
 
   describe "index" do
@@ -106,10 +106,10 @@ describe "Access requests", type: :feature do
   describe "actioning emailed access requests" do
     before do
       FactoryBot.create(:userdb,
-                        email: 'requester@email.com',
+                        email: "requester@email.com",
                         organisations: [
-                          FactoryBot.create(:organisation, name: 'Org A'),
-                          FactoryBot.create(:organisation, name: 'Org B'),
+                          FactoryBot.create(:organisation, name: "Org A"),
+                          FactoryBot.create(:organisation, name: "Org B"),
                         ])
     end
 
@@ -117,26 +117,26 @@ describe "Access requests", type: :feature do
       stub_api_v2_request "/access_requests?include=requester", backend_json_response, :get
       stub_api_v2_request "/access_requests", backend_json_response, :post
       stub_api_v2_request "/access_requests/1/approve", nil, :post
-      visit '/access-requests'
+      visit "/access-requests"
 
-      click_link 'Create and approve an access request manually'
-      expect(page).to have_text('Create access request')
+      click_link "Create and approve an access request manually"
+      expect(page).to have_text("Create access request")
 
-      fill_in 'Requester email', with: 'requester@email.com'
-      fill_in 'Target email', with: 'target@email.com'
-      fill_in 'First name', with: 'first'
-      fill_in 'Last name', with: 'last'
+      fill_in "Requester email", with: "requester@email.com"
+      fill_in "Target email", with: "target@email.com"
+      fill_in "First name", with: "first"
+      fill_in "Last name", with: "last"
 
-      click_button 'Preview'
+      click_button "Preview"
 
-      expect(page).to have_text('Approve new access for first last')
-      expect(page).to have_text('first last <target@email.com>')
-      expect(page).to have_text('Org A')
-      expect(page).to have_text('Org B')
+      expect(page).to have_text("Approve new access for first last")
+      expect(page).to have_text("first last <target@email.com>")
+      expect(page).to have_text("Org A")
+      expect(page).to have_text("Org B")
 
-      click_button 'Approve'
+      click_button "Approve"
 
-      expect(page).to have_text('Successfully approved request')
+      expect(page).to have_text("Successfully approved request")
       expect(page).to have_text("Inform the publisher")
       expect(page).to have_text("send an email to target@email.com")
 
@@ -147,16 +147,16 @@ describe "Access requests", type: :feature do
 
     it "stops the user support agent from proceeding if the requester email doesn't exist" do
       stub_api_v2_request "/access_requests?include=requester", backend_json_response, :get
-      visit '/access-requests'
+      visit "/access-requests"
 
-      click_link 'Create and approve an access request manually'
+      click_link "Create and approve an access request manually"
 
-      fill_in 'Requester email', with: 'nonexistent@email.com'
-      fill_in 'Target email', with: 'target@email.com'
-      fill_in 'First name', with: 'first'
-      fill_in 'Last name', with: 'last'
+      fill_in "Requester email", with: "nonexistent@email.com"
+      fill_in "Target email", with: "target@email.com"
+      fill_in "First name", with: "first"
+      fill_in "Last name", with: "last"
 
-      click_button 'Preview'
+      click_button "Preview"
 
       expect(page).to have_text("There is a problem")
       expect(page).to have_text("Enter the email of somebody already in the system")
@@ -164,10 +164,10 @@ describe "Access requests", type: :feature do
 
     it "stops the user support agent from entering blank fields" do
       stub_api_v2_request "/access_requests?include=requester", backend_json_response, :get
-      visit '/access-requests'
+      visit "/access-requests"
 
-      click_link 'Create and approve an access request manually'
-      click_button 'Preview'
+      click_link "Create and approve an access request manually"
+      click_button "Preview"
 
       expect(page).to have_text("There is a problem")
       expect(page).to have_text("Enter the email of someone already in the system")

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :organisation do
-    name  { 'ACME SCITT' }
+    name  { "ACME SCITT" }
     org_id { rand(1000000).to_s }
 
     transient do
