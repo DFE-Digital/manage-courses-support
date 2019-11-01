@@ -2,7 +2,8 @@
   "dependencies": {
     "@rails/webpacker": "~4.0.7",
     "govuk-frontend": "^3.3.0",
-    "rails-ujs": "^5.2.3"
+    "rails-ujs": "^5.2.3",
+    "set-value": "^3.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "3.9.0"
