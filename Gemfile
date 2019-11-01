@@ -59,6 +59,8 @@ group :test do
   gem 'capybara'
   gem "rspec_junit_formatter"
   gem 'webmock'
+  # Show test coverage
+  gem "simplecov", require: false
 end
 
 group :development do
