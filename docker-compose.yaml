@@ -11,8 +11,8 @@ services:
     build:
       context: .
       cache_from:
-        - batdevcontainerregistry.azurecr.io/manage-courses-support:latest
-    image: batdevcontainerregistry.azurecr.io/manage-courses-support:latest
+        - ${dockerHubUsername:-dfedigital}/manage-courses-support-poc:latest
+    image: ${dockerHubUsername:-dfedigital}/manage-courses-support-poc:latest
     ports:
       - "3000:3000"
     volumes:
