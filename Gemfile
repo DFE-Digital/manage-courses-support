@@ -50,7 +50,7 @@ gem 'sentry-raven'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'govuk-lint', '~> 4.1'
+  gem 'govuk-lint', '~> 4.2'
   gem 'pry-byebug'
   gem 'rspec-rails'
 end
