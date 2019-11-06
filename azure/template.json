@@ -160,6 +160,13 @@
         "appServicePlanInstances": {
             "type": "int",
             "defaultValue": 1
+        },
+        "databaseResourceGroup": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "The resource group name of PSQL DB server"
+            }
         }
     },
     "variables": {
@@ -170,8 +177,7 @@
         "appServicePlanName": "[concat(variables('resourceNamePrefix'), '-asp')]",
         "appServiceRuntimeStack": "[concat('DOCKER|', parameters('dockerHubUsername'), '/', parameters('containerImageReference'))]",
         "databaseResourceNamePrefix": "[toLower(concat(parameters('resourceEnvironmentName'),'-', parameters('databaseServiceName')))]",
-        "databaseServerName": "[concat(variables('databaseResourceNamePrefix'), '-psql')]",
-        "databaseResourceGroup": "[concat(variables('databaseResourceNamePrefix'), '-rg')]"
+        "databaseServerName": "[concat(variables('databaseResourceNamePrefix'), '-psql')]"
     },
     "resources": [
         {
@@ -311,8 +317,8 @@
                                 "value": "[parameters('sentryDSN')]"
                             },
                             {
-                              "name": "WEBSITE_SLOT_POLL_WORKER_FOR_CHANGE_NOTIFICATION",
-                              "value": "0"
+                                "name": "WEBSITE_SLOT_POLL_WORKER_FOR_CHANGE_NOTIFICATION",
+                                "value": "0"
                             }
                         ]
                     },
@@ -376,7 +382,7 @@
             "apiVersion": "2017-05-10",
             "name": "mcspt-postgresql-server-firewall-rules",
             "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "[variables('databaseResourceGroup')]",
+            "resourceGroup": "[parameters('databaseResourceGroup')]",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -395,7 +401,8 @@
                     }
                 }
             },
-            "dependsOn": []
+            "dependsOn": [
+            ]
         }
     ],
     "outputs": {
