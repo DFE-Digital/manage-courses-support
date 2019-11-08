@@ -14,7 +14,7 @@ gem 'rails'
 gem 'pg'
 
 # Use Puma as the app server
-gem 'puma', '~> 4.2'
+gem 'puma', '~> 4.3'
 
 # Use SCSS for stylesheets
 gem 'autoprefixer-rails'
