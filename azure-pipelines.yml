@@ -37,7 +37,11 @@ steps:
     dockerHubImageName: $(imageName)
 
 - script: |
-    $DOCKER_OVERRIDE exec -T web /bin/sh -c 'bundle exec rake spec SPEC_OPTS="--format RspecJunitFormatter --out ./rspec-results.xml"'
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c 'bundle exec rake spec SPEC_OPTS="--format RspecJunitFormatter"' >rspec-results.xml
+    test_result=$?
+    cat rspec-results.xml
+    sed -i '$d;1,5d' rspec-results.xml
+    if [ "$test_result" == "0" ] ; then true ; else false ; fi
   displayName: 'Execute tests'
   env:
     DOCKER_OVERRIDE: $(dockerOverride)
@@ -46,7 +50,8 @@ steps:
 
 - script: |
     $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_ruby"
-    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_scss"
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_scss" > lint-results.xml
+    cat lint-results.xml
   displayName: 'Execute linters'
   env:
     DOCKER_OVERRIDE: $(dockerOverride)
