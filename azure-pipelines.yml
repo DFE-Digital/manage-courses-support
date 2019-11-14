@@ -50,7 +50,8 @@ steps:
 
 - script: |
     $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_ruby"
-    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_scss" > lint-results.xml
+    $DOCKER_OVERRIDE exec -T web /bin/sh -c "bundle exec rake lint_scss" >lint-results.xml
+    echo ------lintoutput------
     cat lint-results.xml
   displayName: 'Execute linters'
   env:
